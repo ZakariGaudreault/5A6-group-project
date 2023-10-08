@@ -1,14 +1,15 @@
 # PROJECT NAME
 
 ## Goal
-A brief description of your application. Should answer, as concisely as you can: what is it? what is its purpose?
+Our project does not have a goal yet because we are still working on the design but we will have one soon
 
 ## Quick-start
-How to install and launch your application. These should include instructions for:
-- (by Sprint 1) building and running your release from source code (i.e. your github repo)
+Start the project on android studio
+click on the green arrow
 
 ## Screenshots of application
-- (by Sprint 1): Screenshots from each of the main screens of your application.
+- (by Sprint 1): On root level
 
 ## Team members
-List each person's name and email address.
+Zakari Gaudreault St-Jean
+Kui hua Wang
