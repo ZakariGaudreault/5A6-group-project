@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    branches:
+      
+main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+name: Checkout Code
+      uses: actions/checkout@v2
+
+      
+name: Setup Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+      
+name: Install Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        sdk-version: '30'
+
+      
+name: Build Release Artifact
+      run: |./gradlew assembleRelease
+      working-directory: your/android/project/directory
+
+      
+name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-artifact
+        path: your/android/project/directory/app/build/outputs/apk/release/app-release.apk
