@@ -8,8 +8,10 @@ Start the project on android studio
 click on the green arrow
 
 ## Screenshots of application
-- (by Sprint 1): On root level
+![Contact](https://i.imgur.com/oWDWIZP.jpg)
+![Help](https://i.imgur.com/CYuP8xK.jpg)
+![Help](https://i.imgur.com/Ygan0ss.jpg)
 
 ## Team members
-Zakari Gaudreault St-Jean
-Kui hua Wang
+Zakari Gaudreault St-Jean|zakarigaudreault@hotmail.com
+Kui hua Wang|wang.kuihua2003@gmail.com
