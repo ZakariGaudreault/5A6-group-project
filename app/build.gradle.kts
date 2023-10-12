@@ -1,8 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
 }
 
+allprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+}
 android {
     namespace = "com.example.assignment3"
     compileSdk = 34
