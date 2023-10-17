@@ -1,6 +1,5 @@
 package com.example.assignment3.components
 
-import android.media.Image
 import java.io.Serializable
 
 /**
@@ -9,5 +8,4 @@ import java.io.Serializable
  * @param name  The name of the death
  * @param image The id of the image, since the painterResource takes in an id of type int
  */
-data class Cause(val name:String, val image: Int):Serializable{
-}
+data class Cause(val name: String, val image: Int) : Serializable

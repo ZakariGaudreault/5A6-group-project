@@ -1,6 +1,5 @@
 package com.example.assignment3.components
 
-import android.os.Parcelable
 import java.io.Serializable
 
 /**
@@ -9,7 +8,8 @@ import java.io.Serializable
  * @param lastName The last name of the victim
  * @param causeOfDeath The cause of death of the victim
  */
-data class DeathBed(val firstName: String, val lastName: String, val causeOfDeath:Cause,) : Serializable {
+data class DeathBed(val firstName: String, val lastName: String, val causeOfDeath: Cause) :
+    Serializable {
     val fullName: String = "$firstName $lastName"
-    val id:String = "$firstName$lastName"
+    val id: String = "$firstName$lastName"
 }
