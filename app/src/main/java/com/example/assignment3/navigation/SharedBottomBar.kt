@@ -1,15 +1,11 @@
 package com.example.assignment3.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,8 +25,7 @@ fun SharedBottomBar() {
         val currentDestination = navBackStackEntry?.destination
 
         data class NavBarIcon(
-            val route: String,
-            val icon: ImageVector
+            val route: String, val icon: ImageVector
         )
 
         // List of items routes in a NavBarIcon class, to be used in the bottom navbar
@@ -42,17 +37,11 @@ fun SharedBottomBar() {
 
         // The loop that enables the display of all the nav items from the list above
         items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.route) },
+            NavigationBarItem(icon = { Icon(item.icon, contentDescription = item.route) },
                 selected = currentDestination?.hierarchy?.any {
-                    currentDestination.route?.substringBefore('/') ==
-                            item.route.substringBefore('/')
+                    currentDestination.route?.substringBefore('/') == item.route.substringBefore('/')
                 } == true,
-                onClick = { navController.navigate(item.route) }
-            )
+                onClick = { navController.navigate(item.route) })
         }
-
     }
-
-
 }
