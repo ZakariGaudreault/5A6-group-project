@@ -21,8 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.assignment3.R
-import com.example.assignment3.components.DisplayDeathBeds
-import com.example.assignment3.rememberMutableStateListOf
 
 /**
  * The main screen of the app, which displays the list of all the potential deathbeds
@@ -31,32 +29,33 @@ import com.example.assignment3.rememberMutableStateListOf
 fun MainScreen() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.background),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = "Home Page",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 16.dp),
                 )
 
                 Text(
@@ -64,11 +63,12 @@ fun MainScreen() {
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 8.dp),
                 )
 
                 Text(
-                    text = "Lorem ipsum dolor sit amet, consectetuer adipiscing" +
+                    text =
+                        "Lorem ipsum dolor sit amet, consectetuer adipiscing" +
                             " elit. Maecenas porttitor congue massa. Fusce posuere," +
                             " magna sed pulvinar ultricies, purus lectus malesuada " +
                             "libero, sit amet commodo magna eros quis urna. Nunc viverra" +
@@ -79,10 +79,9 @@ fun MainScreen() {
                             " purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget" +
                             " neque at sem venenatis eleifend. Ut nonummy.",
                     fontSize = 16.sp,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
         }
     }
 }
-

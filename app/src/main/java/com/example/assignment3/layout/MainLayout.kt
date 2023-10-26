@@ -9,13 +9,11 @@ import androidx.compose.ui.Modifier
 import com.example.assignment3.navigation.SharedBottomBar
 import com.example.assignment3.navigation.SharedTopBar
 
-
 /**
  * The main/default layout of the screen, with a top and bottom bar
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
 fun MainLayout(content: @Composable () -> Unit) {
     Scaffold(
         topBar = { SharedTopBar("App name") },

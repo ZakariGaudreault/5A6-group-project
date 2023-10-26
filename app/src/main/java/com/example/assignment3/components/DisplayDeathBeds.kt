@@ -36,17 +36,19 @@ fun DisplayDeathBeds() {
 
             // Clickable column to go into a specific death bed
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-                    .background(
-                        color = md_theme_light_secondaryContainer, shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(8.dp)
-                    .clickable {
-                        navController.navigate(Routes.SingleDeathBed.go(deathBed.id))
-                    },
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                        .background(
+                            color = md_theme_light_secondaryContainer,
+                            shape = RoundedCornerShape(8.dp),
+                        )
+                        .padding(8.dp)
+                        .clickable {
+                            navController.navigate(Routes.SingleDeathBed.go(deathBed.id))
+                        },
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = "Name of the victim: ${deathBed.fullName}",

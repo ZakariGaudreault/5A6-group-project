@@ -25,23 +25,28 @@ fun SharedBottomBar() {
         val currentDestination = navBackStackEntry?.destination
 
         data class NavBarIcon(
-            val route: String, val icon: ImageVector
+            val route: String,
+            val icon: ImageVector,
         )
 
         // List of items routes in a NavBarIcon class, to be used in the bottom navbar
-        val items = listOf(
-            NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
-            NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
-            NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.Phone),
-        )
+        val items =
+            listOf(
+                NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
+                NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
+                NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.Phone),
+            )
 
         // The loop that enables the display of all the nav items from the list above
         items.forEachIndexed { index, item ->
-            NavigationBarItem(icon = { Icon(item.icon, contentDescription = item.route) },
-                selected = currentDestination?.hierarchy?.any {
-                    currentDestination.route?.substringBefore('/') == item.route.substringBefore('/')
-                } == true,
-                onClick = { navController.navigate(item.route) })
+            NavigationBarItem(
+                icon = { Icon(item.icon, contentDescription = item.route) },
+                selected =
+                    currentDestination?.hierarchy?.any {
+                        currentDestination.route?.substringBefore('/') == item.route.substringBefore('/')
+                    } == true,
+                onClick = { navController.navigate(item.route) },
+            )
         }
     }
 }

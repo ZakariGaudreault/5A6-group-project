@@ -42,7 +42,6 @@ import com.example.kotlinwithcompose.screens.LocalNavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInput() {
-
     val deathBeds = LocalDeathBeds.current
     val navController = LocalNavController.current
     var firstName by rememberSaveable { mutableStateOf("") }
@@ -51,20 +50,24 @@ fun FormInput() {
     var causeOfDeath by rememberSaveable { mutableStateOf(CAUSES_OF_DEATH.random()) }
 
     // Modifier used for the selected column, to provide a visual of it.
-    val selectedModifier: Modifier = Modifier
-        .padding(5.dp)
-        .border(
-            BorderStroke(
-                2.dp, color = md_theme_light_secondaryContainer
-            ), shape = RoundedCornerShape(8.dp)
-        )
-        .padding(5.dp)
+    val selectedModifier: Modifier =
+        Modifier
+            .padding(5.dp)
+            .border(
+                BorderStroke(
+                    2.dp,
+                    color = md_theme_light_secondaryContainer,
+                ),
+                shape = RoundedCornerShape(8.dp),
+            )
+            .padding(5.dp)
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 25.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 25.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Item containing the input fields for the first and last name of the user.
         item {
@@ -72,23 +75,25 @@ fun FormInput() {
                 value = firstName,
                 placeholder = { Text("Victim's first name", textAlign = TextAlign.Center) },
                 onValueChange = { firstName = it },
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(8.dp),
             )
             Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-                    .width(20.dp)
+                modifier =
+                    Modifier
+                        .height(20.dp)
+                        .width(20.dp),
             )
             TextField(
                 value = lastName,
                 placeholder = { Text("Victim's last name", textAlign = TextAlign.Center) },
                 onValueChange = { lastName = it },
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(8.dp),
             )
             Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-                    .width(20.dp)
+                modifier =
+                    Modifier
+                        .height(20.dp)
+                        .width(20.dp),
             )
         }
 
@@ -99,26 +104,29 @@ fun FormInput() {
                 items(CAUSES_OF_DEATH) { item ->
                     Column(
                         // Conditional modifier
-                        modifier = if (item.name == causeOfDeath.name) {
-                            selectedModifier
-                        } else {
-                            Modifier
+                        modifier =
+                            if (item.name == causeOfDeath.name) {
+                                selectedModifier
+                            } else {
+                                Modifier
+                                    .padding(5.dp)
+                                    .border(
+                                        BorderStroke(
+                                            2.dp,
+                                            color = md_theme_light_primary,
+                                        ),
+                                        shape = RoundedCornerShape(8.dp),
+                                    )
+                            }
                                 .padding(5.dp)
-                                .border(
-                                    BorderStroke(
-                                        2.dp, color = md_theme_light_primary
-                                    ), shape = RoundedCornerShape(8.dp)
-                                )
-                        }
-                            .padding(5.dp)
-                            .clickable { causeOfDeath = item },
-                        horizontalAlignment = Alignment.CenterHorizontally
+                                .clickable { causeOfDeath = item },
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(text = item.name)
                         Image(
                             painterResource(id = item.image),
                             contentDescription = item.name,
-                            modifier = Modifier.size(100.dp)
+                            modifier = Modifier.size(100.dp),
                         )
                     }
                 }
@@ -128,17 +136,21 @@ fun FormInput() {
         // Item containing the button that will submit the form
         item {
             Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-                    .width(20.dp)
+                modifier =
+                    Modifier
+                        .height(20.dp)
+                        .width(20.dp),
             )
             // A button that only activates if all the fields have been filled
             Button(onClick = {
                 deathBeds.add(
                     DeathBed(
-                        firstName, lastName, causeOfDeath
-                    )
-                ); navController.navigate(Routes.Main.route)
+                        firstName,
+                        lastName,
+                        causeOfDeath,
+                    ),
+                )
+                navController.navigate(Routes.Main.route)
             }, enabled = isEnabled(firstName, lastName)) {
                 Text("Add to death list")
             }
@@ -149,7 +161,10 @@ fun FormInput() {
 // Checks for the parameters to make sure they are not empty. Since causeOfDeath has a default
 // starting value, it is never null. It also checks that the user has not been added to the death list already
 @Composable
-private fun isEnabled(firstName: String, lastName: String): Boolean {
+private fun isEnabled(
+    firstName: String,
+    lastName: String,
+): Boolean {
     val deathBeds = LocalDeathBeds.current
     return firstName.isNotEmpty() && lastName.isNotEmpty() && deathBeds.find { it.id == "$firstName$lastName" } == null
 }
