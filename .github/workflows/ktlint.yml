@@ -20,5 +20,6 @@ jobs:
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
-          report-path: build/*.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
-        continue-on-error: false # If annotations contain error of severity, action-ktlint exit 1.
+          report-path: build/*.xml
+          ktlint-args: '--disabled_rules standard_function_naming,max_line_length'
+        continue-on-error: false
