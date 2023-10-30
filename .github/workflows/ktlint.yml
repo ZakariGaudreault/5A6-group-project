@@ -12,14 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      #downloads and moves the ktlint to the folder
       - run: |
           curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.0.1/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
       - name: run ktlint
+
+      #runs the command
         run: |
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
           report-path: build/*.xml
-          ktlint-args: '--disabled_rules standard_function_naming,max_line_length'
         continue-on-error: false
