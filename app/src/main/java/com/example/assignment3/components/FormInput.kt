@@ -166,5 +166,7 @@ private fun isEnabled(
     lastName: String,
 ): Boolean {
     val deathBeds = LocalDeathBeds.current
-    return firstName.isNotEmpty() && lastName.isNotEmpty() && deathBeds.find { it.id == "$firstName$lastName" } == null
+    return firstName.isNotEmpty() && lastName.isNotEmpty() && deathBeds.find {
+        it.id == "$firstName$lastName"
+    } == null
 }

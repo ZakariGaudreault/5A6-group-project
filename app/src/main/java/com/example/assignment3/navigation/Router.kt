@@ -28,13 +28,18 @@ fun Router() {
     val deathBeds = rememberMutableStateListOf<DeathBed>()
 
     // Two providers, so I can also access the list of deathbeds
-    CompositionLocalProvider(LocalNavController provides navController, LocalDeathBeds provides deathBeds) {
+    CompositionLocalProvider(
+        LocalNavController provides navController,
+        LocalDeathBeds provides deathBeds,
+    ) {
         MainLayout {
             NavHost(navController = navController, startDestination = "MainScreenRoute") {
                 composable(Routes.Main.route) { MainScreen() }
                 composable(Routes.About.route) { AboutScreen() }
                 composable(Routes.AddSingleDeathBed.route) { AddSingleDeathBedScreen() }
-                composable(Routes.SingleDeathBed.route) { ViewSingleDeathBedScreen(it.arguments?.getString("id") ?: "") }
+                composable(Routes.SingleDeathBed.route) {
+                    ViewSingleDeathBedScreen(it.arguments?.getString("id") ?: "")
+                }
             }
         }
     }
