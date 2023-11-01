@@ -37,7 +37,7 @@ fun ProfileScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Progress",
+            text = "Profile",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
