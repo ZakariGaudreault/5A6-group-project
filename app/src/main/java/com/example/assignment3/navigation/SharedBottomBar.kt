@@ -1,6 +1,7 @@
 package com.example.assignment3.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Phone
@@ -32,9 +33,9 @@ fun SharedBottomBar() {
         // List of items routes in a NavBarIcon class, to be used in the bottom navbar
         val items =
             listOf(
-                NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
                 NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
-                NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.Phone),
+                NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
+                NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.AccountCircle),
             )
 
         // The loop that enables the display of all the nav items from the list above
