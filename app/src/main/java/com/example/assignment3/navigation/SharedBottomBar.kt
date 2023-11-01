@@ -34,7 +34,7 @@ fun SharedBottomBar() {
             listOf(
                 NavBarIcon(route = Routes.Profile.route, icon = Icons.Filled.Build),
                 NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
-                NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.Phone),
+                NavBarIcon(route = Routes.Workouts.route, icon = Icons.Filled.Phone),
             )
 
         // The loop that enables the display of all the nav items from the list above

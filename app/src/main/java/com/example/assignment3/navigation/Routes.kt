@@ -9,9 +9,7 @@ sealed class Routes(val route: String) {
 
     object Profile : Routes("ProfileScreenRoute")
 
-    object SingleDeathBed : Routes("SingleDeathBedRoute/{id}") {
-        fun go(id: String) = "SingleDeathBedRoute/$id"
-    }
+    object Workouts : Routes("WorkoutsScreen")
 
-    object AddSingleDeathBed : Routes("AddSingleDeathBedRoute")
+    object Exercises : Routes("ExercisesScreen")
 }

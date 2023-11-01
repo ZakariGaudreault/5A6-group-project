@@ -25,7 +25,7 @@ import com.example.assignment3.R
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun AddSingleDeathBedScreen() {
+fun WorkoutsScreen() {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
