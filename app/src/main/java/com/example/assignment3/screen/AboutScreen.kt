@@ -1,16 +1,28 @@
 package com.example.assignment3.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,58 +38,93 @@ import com.example.assignment3.R
  */
 @Composable
 fun AboutScreen() {
-    Surface(
+    Column(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
+        Text(
+            text = "Progress",
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
+        )
+
+        Row {
+
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
+                Text(text = "History of Workouts")
+
+            }
+
+
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Snaps")
+            }
+
+
+
+        }
+
+        Row {
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
+                Text(text = "Upload")
+            }
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
+                Text(text = "Graph")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        CardList()
+    }
+}
+
+@Composable
+fun CardList() {
+    val cards by remember { mutableStateOf(generateDummyCards()) }
+
+    LazyColumn {
+        items(cards) { card ->
+            CardItem(card = card)
+        }
+    }
+}
+
+data class CardItem(val text: String, val imageUrl: String)
+
+fun generateDummyCards(): List<CardItem> {
+    return List(5) { index ->
+        CardItem(
+            text = "Card $index",
+            imageUrl = "https://dummyimage.com/200x200/000/fff"
+        )
+    }
+}
+
+@Composable
+fun CardItem(card: CardItem) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
+            Text(text = card.text, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(8.dp))
             Image(
-                painter = painterResource(id = R.drawable.background),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
             )
-
-            Column(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = "Help Page",
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 16.dp),
-                )
-
-                Text(
-                    text = "To get you started with how to use this application please read the following",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 8.dp),
-                )
-
-                Text(
-                    text =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-                            " Maecenas porttitor congue massa. Fusce posuere, magna sed " +
-                            "pulvinar ultricies, purus lectus malesuada libero, sit amet commodo " +
-                            "magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a " +
-                            "tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada " +
-                            "fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec" +
-                            " lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque " +
-                            "at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut" + " nonummy.",
-                    fontSize = 16.sp,
-                    color = Color.White,
-                )
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Delete")
             }
         }
     }
