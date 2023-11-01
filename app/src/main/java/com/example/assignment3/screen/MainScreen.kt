@@ -1,6 +1,5 @@
 package com.example.assignment3.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -22,17 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.assignment3.R
-import com.example.assignment3.components.DisplayDeathBeds
-import com.example.assignment3.rememberMutableStateListOf
 
 /**
  * The main screen of the app, which displays the list of all the potential deathbeds
@@ -41,100 +35,110 @@ import com.example.assignment3.rememberMutableStateListOf
 fun MainScreen() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
     ) {
         Box {
-
-
             Column(
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = "Hello User",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 16.dp),
                 )
 
                 Text(
                     text = "Let's check your activity",
                     fontSize = 18.sp,
                     color = Color.Black,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 8.dp),
                 )
 
-
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                 ) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
                     ) {
                         Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
+                            modifier =
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight(),
                         ) {
                             Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(310.dp)
-                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black
-                                )) {
-
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(310.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
+                                colors =
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
+                            ) {
                                 Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally
+                                    horizontalAlignment = Alignment.CenterHorizontally,
                                 ) {
                                     Text(
                                         text = "\uD83D\uDCAA" + "FINISHED",
                                         fontSize = 26.sp,
                                         fontWeight = FontWeight.Bold,
-
-                                        )
+                                    )
 
                                     Text(
                                         text = "17",
                                         fontSize = 100.sp,
                                         fontWeight = FontWeight.Bold,
                                         modifier = Modifier.padding(16.dp),
-
-                                        )
+                                    )
 
                                     Text(
                                         text = "\u200E \u200E Workout",
                                         fontSize = 30.sp,
                                         modifier = Modifier.padding(16.dp),
-
-                                        )
+                                    )
                                 }
                             }
                         }
 
                         Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                                .padding(8.dp)
+                            modifier =
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .padding(8.dp),
                         ) {
                             Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(150.dp)
-                                    .padding(bottom = 8.dp)
-                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black)
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                        .padding(bottom = 8.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
+                                colors =
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
                             ) {
-
                                 Text(
                                     buildAnnotatedString {
                                         append("\uD83C\uDFC6 You lost ")
@@ -149,13 +153,20 @@ fun MainScreen() {
                             }
 
                             Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(150.dp)
-                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black)
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
+                                colors =
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
                             ) {
                                 Text(
                                     buildAnnotatedString {
@@ -172,23 +183,22 @@ fun MainScreen() {
                                 )
                             }
                         }
-
-
-
                     }
                     Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 340.dp)
-                            .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White,
-                            contentColor = Color.Black
-                        )
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(top = 340.dp)
+                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Black,
+                            ),
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding(16.dp),
                         ) {
                             Text(
                                 text = "Quote of the Day",
@@ -202,13 +212,8 @@ fun MainScreen() {
                             )
                         }
                     }
-
                 }
-
-
             }
-
         }
     }
 }
-
