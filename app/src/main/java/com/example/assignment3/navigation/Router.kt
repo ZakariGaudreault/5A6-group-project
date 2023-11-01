@@ -13,6 +13,7 @@ import com.example.assignment3.navigation.Routes
 import com.example.assignment3.rememberMutableStateListOf
 import com.example.assignment3.screen.AboutScreen
 import com.example.assignment3.screen.AddSingleDeathBedScreen
+import com.example.assignment3.screen.LoginScreen
 import com.example.assignment3.screen.MainScreen
 import com.example.assignment3.screen.StartUpScreen
 import com.example.assignment3.screen.ViewSingleDeathBedScreen
@@ -37,6 +38,7 @@ fun Router() {
             NavHost(navController = navController, startDestination = "StartUpRoute") {
                 composable(Routes.Main.route) { MainScreen() }
                 composable(Routes.About.route) { AboutScreen() }
+                composable(Routes.Login.route) { LoginScreen() }
                 composable(Routes.StartUp.route) { StartUpScreen() }
                 composable(Routes.AddSingleDeathBed.route) { AddSingleDeathBedScreen() }
                 composable(Routes.SingleDeathBed.route) {

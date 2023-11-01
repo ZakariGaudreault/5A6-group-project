@@ -9,6 +9,8 @@ sealed class Routes(val route: String) {
 
     object StartUp : Routes("StartUpRoute")
 
+    object Login : Routes("LoginScreen")
+
     object About : Routes("AboutScreenRoute")
 
     object SingleDeathBed : Routes("SingleDeathBedRoute/{id}") {
