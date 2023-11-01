@@ -4,7 +4,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
@@ -34,8 +35,8 @@ fun SharedBottomBar() {
         val items =
             listOf(
                 NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
-                NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
-                NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.AccountCircle),
+                NavBarIcon(route = Routes.Workouts.route, icon = Icons.Filled.Star),
+                NavBarIcon(route = Routes.Profile.route, icon = Icons.Filled.Person),
             )
 
         // The loop that enables the display of all the nav items from the list above

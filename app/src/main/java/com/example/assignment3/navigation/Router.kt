@@ -7,20 +7,18 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.assignment3.components.DeathBed
 import com.example.assignment3.layout.MainLayout
 import com.example.assignment3.navigation.Routes
 import com.example.assignment3.rememberMutableStateListOf
-import com.example.assignment3.screen.AboutScreen
-import com.example.assignment3.screen.AddSingleDeathBedScreen
+import com.example.assignment3.screen.ExercisesScreen
 import com.example.assignment3.screen.LoginScreen
 import com.example.assignment3.screen.MainScreen
+import com.example.assignment3.screen.ProfileScreen
 import com.example.assignment3.screen.SignUpScreen
 import com.example.assignment3.screen.StartUpScreen
-import com.example.assignment3.screen.ViewSingleDeathBedScreen
+import com.example.assignment3.screen.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
-val LocalDeathBeds = compositionLocalOf<MutableList<DeathBed>> { error("No deathbed list found") }
 
 /**
  * The router used to navigate the different routes. Defaults to the MainScreen
@@ -28,24 +26,19 @@ val LocalDeathBeds = compositionLocalOf<MutableList<DeathBed>> { error("No death
 @Composable
 fun Router() {
     val navController = rememberNavController()
-    val deathBeds = rememberMutableStateListOf<DeathBed>()
-
-    // Two providers, so I can also access the list of deathbeds
     CompositionLocalProvider(
         LocalNavController provides navController,
-        LocalDeathBeds provides deathBeds,
     ) {
+        //TODO add the routes for login and sign up
         MainLayout {
             NavHost(navController = navController, startDestination = "StartUpRoute") {
                 composable(Routes.Main.route) { MainScreen() }
-                composable(Routes.About.route) { AboutScreen() }
                 composable(Routes.Login.route) { LoginScreen() }
                 composable(Routes.SignUp.route) { SignUpScreen() }
                 composable(Routes.StartUp.route) { StartUpScreen() }
-                composable(Routes.AddSingleDeathBed.route) { AddSingleDeathBedScreen() }
-                composable(Routes.SingleDeathBed.route) {
-                    ViewSingleDeathBedScreen(it.arguments?.getString("id") ?: "")
-                }
+                composable(Routes.Profile.route) { ProfileScreen() }
+                composable(Routes.Exercises.route) { ExercisesScreen() }
+                composable(Routes.Workouts.route) { WorkoutsScreen() }
             }
         }
     }
