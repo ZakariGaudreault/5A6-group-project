@@ -16,7 +16,7 @@ import com.example.assignment3.navigation.SharedTopBar
 @Composable
 fun MainLayout(content: @Composable () -> Unit) {
     Scaffold(
-        topBar = { SharedTopBar("App name") },
+        topBar = { SharedTopBar("SnapFit") },
         bottomBar = { SharedBottomBar() },
     ) {
         Column(modifier = Modifier.padding(it)) {
