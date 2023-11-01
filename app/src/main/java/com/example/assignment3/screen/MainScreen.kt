@@ -2,12 +2,19 @@ package com.example.assignment3.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -17,10 +24,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.assignment3.R
+import com.example.assignment3.components.DisplayDeathBeds
+import com.example.assignment3.rememberMutableStateListOf
 
 /**
  * The main screen of the app, which displays the list of all the potential deathbeds
@@ -29,59 +41,174 @@ import com.example.assignment3.R
 fun MainScreen() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.background
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.background),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize(),
-            )
+        Box {
+
 
             Column(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Home Page",
+                    text = "Hello User",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    color = Color.Black,
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
 
                 Text(
-                    text = "Welcome!!!",
+                    text = "Let's check your activity",
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    color = Color.Black,
+                    modifier = Modifier.padding(bottom = 8.dp)
                 )
 
-                Text(
-                    text =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing" +
-                            " elit. Maecenas porttitor congue massa. Fusce posuere," +
-                            " magna sed pulvinar ultricies, purus lectus malesuada " +
-                            "libero, sit amet commodo magna eros quis urna. Nunc viverra" +
-                            " imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque " +
-                            "habitant morbi tristique senectus et netus et malesuada fames ac" +
-                            " turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean" +
-                            " nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui" +
-                            " purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget" +
-                            " neque at sem venenatis eleifend. Ut nonummy.",
-                    fontSize = 16.sp,
-                    color = Color.White,
-                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight()
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                        ) {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(310.dp)
+                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black
+                                )) {
+
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "\uD83D\uDCAA" + "FINISHED",
+                                        fontSize = 26.sp,
+                                        fontWeight = FontWeight.Bold,
+
+                                        )
+
+                                    Text(
+                                        text = "17",
+                                        fontSize = 100.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier.padding(16.dp),
+
+                                        )
+
+                                    Text(
+                                        text = "\u200E \u200E Workout",
+                                        fontSize = 30.sp,
+                                        modifier = Modifier.padding(16.dp),
+
+                                        )
+                                }
+                            }
+                        }
+
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .padding(8.dp)
+                        ) {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(150.dp)
+                                    .padding(bottom = 8.dp)
+                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black)
+                            ) {
+
+                                Text(
+                                    buildAnnotatedString {
+                                        append("\uD83C\uDFC6 You lost ")
+                                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                            append("6")
+                                        }
+                                        append(" pounds so far")
+                                    },
+                                    modifier = Modifier.padding(16.dp),
+                                    fontSize = 24.sp,
+                                )
+                            }
+
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(150.dp)
+                                    .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black)
+                            ) {
+                                Text(
+                                    buildAnnotatedString {
+                                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                            append("⏱️ Time Spent \n\n\n")
+                                        }
+                                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                            append("\u200E \u200E \u200E \u200E 27.3")
+                                        }
+                                        append(" hours ")
+                                    },
+                                    modifier = Modifier.padding(4.dp),
+                                    fontSize = 20.sp,
+                                )
+                            }
+                        }
+
+
+
+                    }
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 340.dp)
+                            .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White,
+                            contentColor = Color.Black
+                        )
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            Text(
+                                text = "Quote of the Day",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+
+                            Text(
+                                text = "Fitness is not about competing with others. It's about competing with yourself and working to be better than you were yesterday",
+                                fontSize = 16.sp,
+                            )
+                        }
+                    }
+
+                }
+
+
             }
+
         }
     }
 }
+
