@@ -32,7 +32,7 @@ fun SharedBottomBar() {
         // List of items routes in a NavBarIcon class, to be used in the bottom navbar
         val items =
             listOf(
-                NavBarIcon(route = Routes.About.route, icon = Icons.Filled.Build),
+                NavBarIcon(route = Routes.Profile.route, icon = Icons.Filled.Build),
                 NavBarIcon(route = Routes.Main.route, icon = Icons.Filled.Home),
                 NavBarIcon(route = Routes.AddSingleDeathBed.route, icon = Icons.Filled.Phone),
             )

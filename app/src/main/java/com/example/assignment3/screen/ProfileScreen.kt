@@ -1,9 +1,7 @@
 package com.example.assignment3.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,10 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,8 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,11 +30,11 @@ import com.example.assignment3.R
  * The about screen of the app, to display the use of the app.
  */
 @Composable
-fun AboutScreen() {
+fun ProfileScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = "Progress",
@@ -50,19 +43,13 @@ fun AboutScreen() {
         )
 
         Row {
-
             Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "History of Workouts")
-
             }
-
 
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "Snaps")
             }
-
-
-
         }
 
         Row {
@@ -97,7 +84,7 @@ fun generateDummyCards(): List<CardItem> {
     return List(5) { index ->
         CardItem(
             text = "Card $index",
-            imageUrl = "https://dummyimage.com/200x200/000/fff"
+            imageUrl = "https://dummyimage.com/200x200/000/fff",
         )
     }
 }
@@ -105,23 +92,26 @@ fun generateDummyCards(): List<CardItem> {
 @Composable
 fun CardItem(card: CardItem) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             Text(text = card.text, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
             )
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "Delete")

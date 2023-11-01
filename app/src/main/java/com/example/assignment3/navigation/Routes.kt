@@ -7,7 +7,7 @@ package com.example.assignment3.navigation
 sealed class Routes(val route: String) {
     object Main : Routes("MainScreenRoute")
 
-    object About : Routes("AboutScreenRoute")
+    object Profile : Routes("ProfileScreenRoute")
 
     object SingleDeathBed : Routes("SingleDeathBedRoute/{id}") {
         fun go(id: String) = "SingleDeathBedRoute/$id"
