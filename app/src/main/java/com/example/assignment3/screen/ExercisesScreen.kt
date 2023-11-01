@@ -6,14 +6,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-/**
- * A screen that views a single death bed in more details
- */
+
 @Composable
 fun ExercisesScreen() {
     Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("")
+        Text(
+            text = "Exercises",
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
