@@ -1,7 +1,5 @@
 package com.example.assignment3.screen
 
-package com.example.assignment3.screen
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -54,12 +52,12 @@ import com.example.kotlinwithcompose.screens.LocalNavController
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun SignUpScreen() {
     val navController = LocalNavController.current
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 80.dp), // Add top padding of 16dp
+            .padding(top = 50.dp), // Add top padding of 16dp
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var username by remember { mutableStateOf("") }
@@ -67,12 +65,12 @@ fun LoginScreen() {
 
 
         Text(
-            text = "Loging",
+            text = "Sign Up",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
 
-        Spacer(modifier = Modifier.height(70.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
 
         TextField(
@@ -105,9 +103,35 @@ fun LoginScreen() {
             ),
             placeholder = { Text("Enter Password", color = Color.Gray) }
         )
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            modifier = Modifier
+                .size(250.dp, 90.dp)
+                .padding(8.dp)
+                .border(3.dp, Color.Black)
+                .padding(8.dp),
+            textStyle = TextStyle(fontSize = 16.sp),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password
+            ),
+            placeholder = { Text("Enter Password", color = Color.Gray) }
+        )
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            modifier = Modifier
+                .size(250.dp, 90.dp)
+                .padding(8.dp)
+                .border(3.dp, Color.Black)
+                .padding(8.dp),
+            textStyle = TextStyle(fontSize = 16.sp),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password
+            ),
+            placeholder = { Text("Enter Password", color = Color.Gray) }
+        )
 
-
-        // Login Button
         Button(
             onClick = {
                 navController.navigate(Routes.Main.route)
@@ -116,7 +140,7 @@ fun LoginScreen() {
                 .padding(end = 8.dp)
                 .size(180.dp, 60.dp)
         ) {
-            Text("Login")
+            Text("Sign Up")
         }
     }
 }

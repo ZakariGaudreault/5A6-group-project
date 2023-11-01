@@ -11,6 +11,9 @@ sealed class Routes(val route: String) {
 
     object Login : Routes("LoginScreen")
 
+
+    object SignUp : Routes("SignUpRoute")
+
     object About : Routes("AboutScreenRoute")
 
     object SingleDeathBed : Routes("SingleDeathBedRoute/{id}") {

@@ -80,10 +80,10 @@ fun StartUpScreen() {
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /* Handle the button click */ },
+            onClick = {  navController.navigate(Routes.SignUp.route) },
             modifier = Modifier
                 .padding(end = 8.dp)
-                .size(180.dp, 60.dp) // Set the button size to 180dp in width and 60dp in height
+                .size(180.dp, 60.dp)
         ) {
             Text(text = "SignUp")
         }

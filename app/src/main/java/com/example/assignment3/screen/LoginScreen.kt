@@ -57,7 +57,7 @@ fun LoginScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 80.dp), // Add top padding of 16dp
+            .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var username by remember { mutableStateOf("") }
@@ -105,7 +105,6 @@ fun LoginScreen() {
         )
 
 
-        // Login Button
         Button(
             onClick = {
                 navController.navigate(Routes.Main.route)

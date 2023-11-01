@@ -15,6 +15,7 @@ import com.example.assignment3.screen.AboutScreen
 import com.example.assignment3.screen.AddSingleDeathBedScreen
 import com.example.assignment3.screen.LoginScreen
 import com.example.assignment3.screen.MainScreen
+import com.example.assignment3.screen.SignUpScreen
 import com.example.assignment3.screen.StartUpScreen
 import com.example.assignment3.screen.ViewSingleDeathBedScreen
 
@@ -39,6 +40,7 @@ fun Router() {
                 composable(Routes.Main.route) { MainScreen() }
                 composable(Routes.About.route) { AboutScreen() }
                 composable(Routes.Login.route) { LoginScreen() }
+                composable(Routes.SignUp.route) { SignUpScreen() }
                 composable(Routes.StartUp.route) { StartUpScreen() }
                 composable(Routes.AddSingleDeathBed.route) { AddSingleDeathBedScreen() }
                 composable(Routes.SingleDeathBed.route) {
