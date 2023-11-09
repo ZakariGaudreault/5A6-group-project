@@ -1,4 +1,4 @@
-package com.example.assignment3.navigation
+package com.example.SnapFit.navigation
 
 /**
  * The different possible routes of the navigation

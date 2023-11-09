@@ -1,4 +1,4 @@
-package com.example.kotlinwithcompose.screens
+package com.example.SnapFit.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -7,16 +7,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.assignment3.layout.MainLayout
-import com.example.assignment3.navigation.Routes
-import com.example.assignment3.rememberMutableStateListOf
-import com.example.assignment3.screen.ExercisesScreen
-import com.example.assignment3.screen.LoginScreen
-import com.example.assignment3.screen.MainScreen
-import com.example.assignment3.screen.ProfileScreen
-import com.example.assignment3.screen.SignUpScreen
-import com.example.assignment3.screen.StartUpScreen
-import com.example.assignment3.screen.WorkoutsScreen
+import com.example.SnapFit.layout.MainLayout
+import com.example.SnapFit.screen.ExercisesScreen
+import com.example.SnapFit.screen.LoginScreen
+import com.example.SnapFit.screen.MainScreen
+import com.example.SnapFit.screen.ProfileScreen
+import com.example.SnapFit.screen.SignUpScreen
+import com.example.SnapFit.screen.StartUpScreen
+import com.example.SnapFit.screen.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 

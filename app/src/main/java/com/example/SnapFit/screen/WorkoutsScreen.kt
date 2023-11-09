@@ -1,4 +1,4 @@
-package com.example.assignment3.screen
+package com.example.SnapFit.screen
 
 import WorkoutCard
 import androidx.compose.foundation.layout.Arrangement

@@ -22,9 +22,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.assignment3.R
+import com.example.SnapFit.R
 import com.example.compose.md_theme_light_primary
-import com.example.kotlinwithcompose.screens.LocalNavController
+import com.example.SnapFit.navigation.LocalNavController
 
 @Composable
 fun ExerciseCard() {

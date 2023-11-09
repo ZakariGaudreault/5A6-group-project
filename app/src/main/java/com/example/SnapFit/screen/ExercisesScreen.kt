@@ -1,4 +1,4 @@
-package com.example.assignment3.screen
+package com.example.SnapFit.screen
 
 import ExerciseCard
 import androidx.compose.foundation.background
