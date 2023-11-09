@@ -1,4 +1,4 @@
-package com.example.SnapFit.screen
+package com.example.snapfit.screen
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

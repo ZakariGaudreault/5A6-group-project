@@ -17,26 +17,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.SnapFit.R
-import com.example.SnapFit.navigation.Routes
-import com.example.SnapFit.navigation.LocalNavController
+import com.example.snapfit.R
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 
 @Composable
 fun WorkoutCard() {
     val navController = LocalNavController.current
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp)
-            .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
-            .padding(5.dp)
-            .clickable { navController.navigate(Routes.Exercises.route) },
-
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(5.dp)
+                .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
+                .padding(5.dp)
+                .clickable { navController.navigate(Routes.Exercises.route) },
     ) {
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = "Yoga",

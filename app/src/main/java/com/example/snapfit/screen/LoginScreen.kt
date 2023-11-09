@@ -1,4 +1,4 @@
-package com.example.SnapFit.screen
+package com.example.snapfit.screen
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -25,8 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.SnapFit.navigation.Routes
-import com.example.SnapFit.navigation.LocalNavController
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 
 /**
  * The about screen of the app, to display the use of the app.
@@ -36,14 +36,14 @@ import com.example.SnapFit.navigation.LocalNavController
 fun LoginScreen() {
     val navController = LocalNavController.current
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 80.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(top = 80.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         var username by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
-
 
         Text(
             text = "Loging",
@@ -53,49 +53,50 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(70.dp))
 
-
         TextField(
             value = username,
             onValueChange = { username = it },
-            modifier = Modifier
-                .size(250.dp, 90.dp)
-                .padding(8.dp)
-                .border(3.dp, Color.Black)
-                .padding(8.dp),
+            modifier =
+                Modifier
+                    .size(250.dp, 90.dp)
+                    .padding(8.dp)
+                    .border(3.dp, Color.Black)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Text
-            ),
-            placeholder = { Text("Enter UserName", color = Color.Gray) }
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Text,
+                ),
+            placeholder = { Text("Enter UserName", color = Color.Gray) },
         )
-
 
         TextField(
             value = password,
             onValueChange = { password = it },
-            modifier = Modifier
-                .size(250.dp, 90.dp)
-                .padding(8.dp)
-                .border(3.dp, Color.Black)
-                .padding(8.dp),
+            modifier =
+                Modifier
+                    .size(250.dp, 90.dp)
+                    .padding(8.dp)
+                    .border(3.dp, Color.Black)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Password
-            ),
-            placeholder = { Text("Enter Password", color = Color.Gray) }
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Password,
+                ),
+            placeholder = { Text("Enter Password", color = Color.Gray) },
         )
-
 
         Button(
             onClick = {
                 navController.navigate(Routes.Main.route)
             },
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .size(180.dp, 60.dp)
+            modifier =
+                Modifier
+                    .padding(end = 8.dp)
+                    .size(180.dp, 60.dp),
         ) {
             Text("Login")
         }
     }
 }
-

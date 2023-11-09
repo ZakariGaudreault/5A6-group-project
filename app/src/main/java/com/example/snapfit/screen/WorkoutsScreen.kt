@@ -1,4 +1,4 @@
-package com.example.SnapFit.screen
+package com.example.snapfit.screen
 
 import WorkoutCard
 import androidx.compose.foundation.layout.Arrangement
@@ -22,14 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 @Composable
 fun WorkoutsScreen() {
     var sliderPosition by remember { mutableFloatStateOf(0f) }
     Column(
-        modifier = Modifier
-            .padding(10.dp)
-            .verticalScroll(rememberScrollState())
+        modifier =
+            Modifier
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState()),
     ) {
         Text(
             text = "Workouts",
@@ -39,32 +39,36 @@ fun WorkoutsScreen() {
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
-            colors = SliderDefaults.colors(
-                thumbColor = MaterialTheme.colorScheme.secondary,
-                activeTrackColor = MaterialTheme.colorScheme.secondary,
-                inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
+            colors =
+                SliderDefaults.colors(
+                    thumbColor = MaterialTheme.colorScheme.secondary,
+                    activeTrackColor = MaterialTheme.colorScheme.secondary,
+                    inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
+                ),
             steps = 2,
-            valueRange = 15f..60f
+            valueRange = 15f..60f,
         )
         Text(text = "${sliderPosition.toInt()} minutes")
 
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(vertical = 10.dp)
+            modifier = Modifier.padding(vertical = 10.dp),
         ) {
             Button(
-                onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)
+                onClick = { /*TODO*/ },
+                modifier = Modifier.weight(1f),
             ) {
                 Text("Home")
             }
             Button(
-                onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)
+                onClick = { /*TODO*/ },
+                modifier = Modifier.weight(1f),
             ) {
                 Text("Gym")
             }
             Button(
-                onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)
+                onClick = { /*TODO*/ },
+                modifier = Modifier.weight(1f),
             ) {
                 Text("Outdoor")
             }

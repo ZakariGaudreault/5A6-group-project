@@ -1,4 +1,4 @@
-package com.example.SnapFit.layout
+package com.example.snapfit.layout
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -6,8 +6,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.SnapFit.navigation.SharedBottomBar
-import com.example.SnapFit.navigation.SharedTopBar
+import com.example.snapfit.navigation.SharedBottomBar
+import com.example.snapfit.navigation.SharedTopBar
 
 /**
  * The main/default layout of the screen, with a top and bottom bar
@@ -16,7 +16,7 @@ import com.example.SnapFit.navigation.SharedTopBar
 @Composable
 fun MainLayout(content: @Composable () -> Unit) {
     Scaffold(
-        topBar = { SharedTopBar("SnapFit") },
+        topBar = { SharedTopBar("snapfit") },
         bottomBar = { SharedBottomBar() },
     ) {
         Column(modifier = Modifier.padding(it)) {

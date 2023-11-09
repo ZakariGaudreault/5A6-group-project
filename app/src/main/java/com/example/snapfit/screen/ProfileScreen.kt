@@ -1,4 +1,4 @@
-package com.example.SnapFit.screen
+package com.example.snapfit.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.SnapFit.R
+import com.example.snapfit.R
 
 /**
  * The about screen of the app, to display the use of the app.

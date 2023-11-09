@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.SnapFit"
+    namespace = "com.example.snapfit"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.SnapFit"
+        applicationId = "com.example.snapfit"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
