@@ -19,6 +19,13 @@ jobs:
         run: |
           ktlint -F
         continue-on-error: true
+        
+      - name: run ktlintCheck
+
+      #runs the command
+        run: |
+          ktlint -F
+        continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
           report-path: build/*.xml
