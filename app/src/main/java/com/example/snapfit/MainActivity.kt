@@ -1,4 +1,4 @@
-package com.example.assignment3
+package com.example.snapfit
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import com.example.compose.AppTheme
-import com.example.kotlinwithcompose.screens.Router
+import com.example.snapfit.navigation.Router
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.assignment3
+package com.example.snapfit
 
 import junit.framework.TestCase.assertEquals
 import org.junit.Test

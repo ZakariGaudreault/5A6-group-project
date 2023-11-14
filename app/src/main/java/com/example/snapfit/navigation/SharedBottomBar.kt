@@ -1,8 +1,6 @@
-package com.example.assignment3.navigation
+package com.example.snapfit.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
@@ -14,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.kotlinwithcompose.screens.LocalNavController
 
 /**
  * The default bottom nav bar with three elements : Home button(which is the list of the deathbeds), about button, and an add option button
