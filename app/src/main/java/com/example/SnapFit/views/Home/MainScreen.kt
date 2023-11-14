@@ -1,4 +1,4 @@
-package com.example.snapfit.views
+package com.example.snapfit.views.home
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

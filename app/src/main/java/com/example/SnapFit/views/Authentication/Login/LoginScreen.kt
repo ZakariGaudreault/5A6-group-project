@@ -1,4 +1,4 @@
-package com.example.snapfit.views
+package com.example.snapfit.views.authentication.login
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -33,26 +33,25 @@ import com.example.snapfit.navigation.Routes
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen() {
+fun LoginScreen() {
     val navController = LocalNavController.current
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
-                .padding(top = 50.dp),
-        // Add top padding of 16dp
+                .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         var username by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
 
         Text(
-            text = "Sign Up",
+            text = "Loging",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(70.dp))
 
         TextField(
             value = username,
@@ -87,38 +86,6 @@ fun SignUpScreen() {
                 ),
             placeholder = { Text("Enter Password", color = Color.Gray) },
         )
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                ),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
-        )
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                ),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
-        )
 
         Button(
             onClick = {
@@ -129,7 +96,7 @@ fun SignUpScreen() {
                     .padding(end = 8.dp)
                     .size(180.dp, 60.dp),
         ) {
-            Text("Sign Up")
+            Text("Login")
         }
     }
 }

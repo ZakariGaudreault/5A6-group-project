@@ -1,4 +1,4 @@
-package com.example.snapfit.views
+package com.example.snapfit.views.authentication.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

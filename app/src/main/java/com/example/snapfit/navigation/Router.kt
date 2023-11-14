@@ -9,13 +9,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
-import com.example.snapfit.views.AuthScreen
-import com.example.snapfit.views.ExercisesScreen
-import com.example.snapfit.views.LoginScreen
-import com.example.snapfit.views.MainScreen
-import com.example.snapfit.views.ProfileScreen
-import com.example.snapfit.views.SignUpScreen
-import com.example.snapfit.views.WorkoutsScreen
+import com.example.snapfit.views.authentication.home.AuthScreen
+import com.example.snapfit.views.exercise.ExercisesScreen
+import com.example.snapfit.views.authentication.login.LoginScreen
+import com.example.snapfit.views.home.MainScreen
+import com.example.snapfit.views.profile.ProfileScreen
+import com.example.snapfit.views.authentication.signup.SignUpScreen
+import com.example.snapfit.views.workout.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 

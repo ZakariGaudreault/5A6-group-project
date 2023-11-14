@@ -1,4 +1,4 @@
-package com.example.snapfit.views
+package com.example.snapfit.views.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
