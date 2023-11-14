@@ -1,11 +1,8 @@
 name: ktlint
 
 on:
-  pull_request:
-    paths:
-      - .github/workflows/ktlint.yml
-      - 'src/**/*.kt'
-      - '**.kts'
+   pull_request:
+    branches: [ "main" ]
 
 jobs:
   ktlint:
@@ -20,7 +17,7 @@ jobs:
 
       #runs the command
         run: |
-          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+          ktlint -F
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
