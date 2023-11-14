@@ -1,4 +1,4 @@
-package com.example.snapfit.views.authentication.home
+package com.example.snapfit.views.profile
 
 import androidx.lifecycle.ViewModel
 
