@@ -1,4 +1,4 @@
-package com.example.snapfit.screen
+package com.example.snapfit.views.authentication.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,28 +21,17 @@ import com.example.snapfit.navigation.Routes
  * The about screen of the app, to display the use of the app.
  */
 @Composable
-fun StartUpScreen() {
+fun AuthScreen() {
     val navController = LocalNavController.current
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
                 .padding(top = 80.dp),
-        // Add top padding of 16dp
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Welcome",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "To",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "snapfit!",
+            text = "SnapFit",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
