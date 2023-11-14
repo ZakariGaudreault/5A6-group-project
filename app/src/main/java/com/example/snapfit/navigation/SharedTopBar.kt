@@ -1,4 +1,4 @@
-package com.example.assignment3.navigation
+package com.example.snapfit.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.kotlinwithcompose.screens.LocalNavController
 
 /**
  * The top bar that stays in the MainLayout. Has a back button that disappears if it's on

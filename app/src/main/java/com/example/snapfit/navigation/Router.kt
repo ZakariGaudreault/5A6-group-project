@@ -1,4 +1,4 @@
-package com.example.kotlinwithcompose.screens
+package com.example.snapfit.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -7,16 +7,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.assignment3.layout.MainLayout
-import com.example.assignment3.navigation.Routes
-import com.example.assignment3.rememberMutableStateListOf
-import com.example.assignment3.screen.ExercisesScreen
-import com.example.assignment3.screen.LoginScreen
-import com.example.assignment3.screen.MainScreen
-import com.example.assignment3.screen.ProfileScreen
-import com.example.assignment3.screen.SignUpScreen
-import com.example.assignment3.screen.StartUpScreen
-import com.example.assignment3.screen.WorkoutsScreen
+import com.example.snapfit.layout.MainLayout
+import com.example.snapfit.screen.ExercisesScreen
+import com.example.snapfit.screen.LoginScreen
+import com.example.snapfit.screen.MainScreen
+import com.example.snapfit.screen.ProfileScreen
+import com.example.snapfit.screen.SignUpScreen
+import com.example.snapfit.screen.StartUpScreen
+import com.example.snapfit.screen.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 
@@ -29,7 +27,7 @@ fun Router() {
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {
-        //TODO add the routes for login and sign up
+        // TODO add the routes for login and sign up
         MainLayout {
             NavHost(navController = navController, startDestination = "StartUpRoute") {
                 composable(Routes.Main.route) { MainScreen() }

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Assignment3"
+rootProject.name = "snapfit"
 include(":app")
