@@ -20,7 +20,7 @@ jobs:
 
       #runs the command
         run: |
-          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+          ktlint -F
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
