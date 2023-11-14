@@ -1,4 +1,4 @@
-# PROJECT NAME
+# SnapFit
 
 ## Goal
 Our project does not have a goal yet because we are still working on the design but we will have one soon
