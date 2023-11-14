@@ -8,13 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.snapfit.layout.MainLayout
-import com.example.snapfit.screen.ExercisesScreen
-import com.example.snapfit.screen.LoginScreen
-import com.example.snapfit.screen.MainScreen
-import com.example.snapfit.screen.ProfileScreen
-import com.example.snapfit.screen.SignUpScreen
-import com.example.snapfit.screen.StartUpScreen
-import com.example.snapfit.screen.WorkoutsScreen
+import com.example.snapfit.views.AuthScreen
+import com.example.snapfit.views.ExercisesScreen
+import com.example.snapfit.views.LoginScreen
+import com.example.snapfit.views.MainScreen
+import com.example.snapfit.views.ProfileScreen
+import com.example.snapfit.views.SignUpScreen
+import com.example.snapfit.views.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 
@@ -27,16 +27,35 @@ fun Router() {
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {
-        // TODO add the routes for login and sign up
-        MainLayout {
-            NavHost(navController = navController, startDestination = "StartUpRoute") {
-                composable(Routes.Main.route) { MainScreen() }
-                composable(Routes.Login.route) { LoginScreen() }
-                composable(Routes.SignUp.route) { SignUpScreen() }
-                composable(Routes.StartUp.route) { StartUpScreen() }
-                composable(Routes.Profile.route) { ProfileScreen() }
-                composable(Routes.Exercises.route) { ExercisesScreen() }
-                composable(Routes.Workouts.route) { WorkoutsScreen() }
+        NavHost(navController = navController, startDestination = Routes.Auth.route) {
+            composable(Routes.Main.route) {
+                MainLayout {
+                    MainScreen()
+                }
+            }
+            composable(Routes.Login.route) {
+                LoginScreen()
+            }
+            composable(Routes.SignUp.route) {
+                SignUpScreen()
+            }
+            composable(Routes.Auth.route) {
+                AuthScreen()
+            }
+            composable(Routes.Profile.route) {
+                MainLayout {
+                    ProfileScreen()
+                }
+            }
+            composable(Routes.Exercises.route) {
+                MainLayout {
+                    ExercisesScreen()
+                }
+            }
+            composable(Routes.Workouts.route) {
+                MainLayout {
+                    WorkoutsScreen()
+                }
             }
         }
     }

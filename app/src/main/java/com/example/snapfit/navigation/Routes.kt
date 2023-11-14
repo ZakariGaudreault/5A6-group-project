@@ -7,7 +7,7 @@ package com.example.snapfit.navigation
 sealed class Routes(val route: String) {
     object Main : Routes("MainScreenRoute")
 
-    object StartUp : Routes("StartUpRoute")
+    object Auth : Routes("AuthRoute")
 
     object Login : Routes("LoginScreen")
 
