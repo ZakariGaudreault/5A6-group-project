@@ -22,7 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SharedTopBar(title: String) {
+fun SharedTopBar(title: String, route: String = Routes.Main.route) {
     val navController = LocalNavController.current
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -39,7 +39,7 @@ fun SharedTopBar(title: String) {
         },
         // Logic for showing/hiding the back button
         navigationIcon = {
-            if (currentDestination?.route !== Routes.Main.route) {
+            if (currentDestination?.route !== route) {
                 IconButton(onClick = { navController.navigateUp() }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,

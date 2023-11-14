@@ -28,21 +28,10 @@ fun AuthScreen() {
             Modifier
                 .fillMaxSize()
                 .padding(top = 80.dp),
-        // Add top padding of 16dp
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Welcome",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "To",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "snapfit!",
+            text = "SnapFit",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )

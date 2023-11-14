@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.AuthScreen
 import com.example.snapfit.views.ExercisesScreen
@@ -34,13 +35,19 @@ fun Router() {
                 }
             }
             composable(Routes.Login.route) {
-                LoginScreen()
+                AuthLayout {
+                    LoginScreen()
+                }
             }
             composable(Routes.SignUp.route) {
-                SignUpScreen()
+                AuthLayout {
+                    SignUpScreen()
+                }
             }
             composable(Routes.Auth.route) {
-                AuthScreen()
+               AuthLayout {
+                   AuthScreen()
+               }
             }
             composable(Routes.Profile.route) {
                 MainLayout {
