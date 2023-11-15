@@ -39,6 +39,7 @@ fun MainScreen(
     profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory()),
 ) {
     val userState = profileViewModel.activeProfile.collectAsState()
+    println(userState.value.email)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,

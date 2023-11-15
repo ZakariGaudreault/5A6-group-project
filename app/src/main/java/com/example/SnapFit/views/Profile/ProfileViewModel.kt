@@ -24,7 +24,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
         viewModelScope.launch {
             profileRepository.getProfile(email).collect { profile ->
                 _activeProfile.value = profile
-                println(profile)
+                println(activeProfile.value)
             }
         }
     }
