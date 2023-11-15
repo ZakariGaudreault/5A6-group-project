@@ -20,4 +20,6 @@ sealed class Routes(val route: String) {
     object Exercises : Routes("ExercisesRoute")
 
     object Upload : Routes("UploadRoute")
+
+    object DeepLink : Routes("DeepLinkScreen")
 }

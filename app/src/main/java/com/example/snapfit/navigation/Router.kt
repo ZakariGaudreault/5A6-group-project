@@ -7,12 +7,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.SnapFit.views.Upload.UploadScreen
+import androidx.navigation.navDeepLink
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.authentication.home.AuthScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
 import com.example.snapfit.views.authentication.signup.SignUpScreen
+import com.example.snapfit.views.exercise.DeepLink
 import com.example.snapfit.views.exercise.ExercisesScreen
 import com.example.snapfit.views.home.MainScreen
 import com.example.snapfit.views.profile.ProfileScreen
@@ -65,11 +66,16 @@ fun Router() {
                     WorkoutsScreen()
                 }
             }
-            composable(Routes.Upload.route) {
-                MainLayout {
-                    UploadScreen()
-                }
+
+
+            composable("deeplink",
+                // Note that this navDeepLink pattern has no relation to the route itself
+                deepLinks = listOf(navDeepLink { uriPattern = "example://compose.deeplink" })
+            ) {
+                DeepLink()
             }
+
+
 
         }
     }
