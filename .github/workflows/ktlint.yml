@@ -24,7 +24,7 @@ jobs:
 
       #runs the command
         run: |
-          ktlint -F
+           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
