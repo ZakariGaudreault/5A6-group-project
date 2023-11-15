@@ -25,12 +25,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @Composable
 fun ProfileScreen() {
+    val navController = LocalNavController.current
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -53,7 +56,7 @@ fun ProfileScreen() {
         }
 
         Row {
-            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
+            Button(onClick = { navController.navigate(Routes.Upload.route)}, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Upload")
             }
             Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {

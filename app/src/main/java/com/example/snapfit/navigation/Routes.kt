@@ -18,4 +18,6 @@ sealed class Routes(val route: String) {
     object Workouts : Routes("WorkoutsScreen")
 
     object Exercises : Routes("ExercisesScreen")
+
+    object Upload : Routes("UploadScreen")
 }
