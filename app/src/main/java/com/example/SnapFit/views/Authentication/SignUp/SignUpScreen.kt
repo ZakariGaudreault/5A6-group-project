@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.home.AuthViewModel
 import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 
@@ -41,6 +42,9 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
 
+    if (userState.value != null) {
+        navController.navigate(Routes.Main.route)
+    }
     Column(
         modifier =
             Modifier
@@ -117,7 +121,6 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
         Button(
             onClick = {
                 authViewModel.signUp(email, password)
-                println("hello this is " + userState.value)
             },
             modifier =
                 Modifier

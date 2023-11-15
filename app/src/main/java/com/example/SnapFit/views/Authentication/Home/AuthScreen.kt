@@ -25,8 +25,9 @@ import com.example.snapfit.navigation.Routes
 @Composable
 fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
     val navController = LocalNavController.current
-    if(authViewModel.currentUser().collectAsState().value != null ){
-        println(authViewModel.currentUser().collectAsState().value)
+    val userState = authViewModel.currentUser().collectAsState()
+
+    if(userState.value != null ){
         navController.navigate(Routes.Main.route)
     }
 

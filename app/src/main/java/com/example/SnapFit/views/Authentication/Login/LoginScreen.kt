@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.home.AuthViewModel
 import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 
@@ -37,7 +39,13 @@ import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
+
     val navController = LocalNavController.current
+    val userState = authViewModel.currentUser().collectAsState()
+    if (userState.value != null) {
+        navController.navigate(Routes.Main.route)
+    }
+
     Column(
         modifier =
             Modifier

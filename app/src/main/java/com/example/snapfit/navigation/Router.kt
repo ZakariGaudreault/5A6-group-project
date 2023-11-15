@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.SnapFit.views.Upload.UploadScreen
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.authentication.home.AuthScreen
@@ -65,11 +64,11 @@ fun Router() {
                     WorkoutsScreen()
                 }
             }
-            composable(Routes.Upload.route) {
-                MainLayout {
-                    UploadScreen()
-                }
-            }
+//            composable(Routes.Upload.route) {
+//                MainLayout {
+//                    UploadScreen()
+//                }
+//            }
         }
     }
 }
