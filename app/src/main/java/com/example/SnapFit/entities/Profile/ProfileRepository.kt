@@ -1,4 +1,4 @@
-package com.example.snapfit.entities.Profile
+package com.example.snapfit.entities.profile
 
 import kotlinx.coroutines.flow.Flow
 

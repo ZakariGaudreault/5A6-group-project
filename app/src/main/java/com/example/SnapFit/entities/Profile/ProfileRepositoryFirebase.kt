@@ -1,4 +1,4 @@
-package com.example.snapfit.entities.Profile
+package com.example.snapfit.entities.profile
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow

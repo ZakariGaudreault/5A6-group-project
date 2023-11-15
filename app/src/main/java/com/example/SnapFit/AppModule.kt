@@ -3,12 +3,10 @@ package com.example.snapfit
 import android.content.Context
 import com.example.snapfit.entities.authentication.AuthRepository
 import com.example.snapfit.entities.authentication.AuthRepositoryFirebase
-import com.example.snapfit.entities.Profile.ProfileRepository
-import com.example.snapfit.entities.Profile.ProfileRepositoryFirebase
+import com.example.snapfit.entities.profile.ProfileRepository
+import com.example.snapfit.entities.profile.ProfileRepositoryFirebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 /** This module provides the specific object(s) we will inject */
 class AppModule(
@@ -22,6 +20,6 @@ class AppModule(
         ProfileRepositoryFirebase(firestore)
     }
     val authRepository: AuthRepository by lazy {
-        AuthRepositoryFirebase(Firebase.auth) // inject Firebase auth
+        AuthRepositoryFirebase(auth) // inject Firebase auth
     }
 }
