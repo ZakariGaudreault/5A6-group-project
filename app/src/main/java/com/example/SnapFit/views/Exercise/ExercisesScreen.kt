@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.md_theme_light_primary
+import com.example.snapfit.ui.theme.md_theme_light_primary
 
 @Composable
 fun ExercisesScreen() {
