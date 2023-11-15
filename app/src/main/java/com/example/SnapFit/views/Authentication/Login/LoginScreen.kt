@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,70 +34,84 @@ import com.example.snapfit.navigation.Routes
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(loginViewModel: LoginViewModel = remember { LoginViewModel() }) {
     val navController = LocalNavController.current
+
     Column(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(top = 80.dp),
+        Modifier
+            .fillMaxSize()
+            .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-
         Text(
-            text = "Loging",
+            text = "Login",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
+        val errorMessage by loginViewModel.errorMessage.collectAsState()
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp // Adjust the size as needed
+                )
+            )
+        }
+
 
         Spacer(modifier = Modifier.height(70.dp))
 
+        val usernameState by loginViewModel.usernameState.collectAsState()
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = usernameState,
+            onValueChange = { loginViewModel.setUsername(it) },
             modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
+            Modifier
+                .size(250.dp, 90.dp)
+                .padding(8.dp)
+                .border(3.dp, Color.Black)
+                .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Text,
-                ),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text,
+            ),
             placeholder = { Text("Enter UserName", color = Color.Gray) },
         )
 
+        val passwordState by loginViewModel.passwordState.collectAsState()
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = passwordState,
+            onValueChange = { loginViewModel.setPassword(it) },
             modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
+            Modifier
+                .size(250.dp, 90.dp)
+                .padding(8.dp)
+                .border(3.dp, Color.Black)
+                .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                ),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+            ),
             placeholder = { Text("Enter Password", color = Color.Gray) },
         )
 
         Button(
-            onClick = {
-                navController.navigate(Routes.Main.route)
-            },
+            onClick = { loginViewModel.loginUser() },
             modifier =
-                Modifier
-                    .padding(end = 8.dp)
-                    .size(180.dp, 60.dp),
+            Modifier
+                .padding(end = 8.dp)
+                .size(180.dp, 60.dp),
         ) {
             Text("Login")
+        }
+
+        val navigateToMain by loginViewModel.navigateToMain.collectAsState()
+        if (navigateToMain) {
+            navController.navigate(Routes.Main.route)
+            loginViewModel.setNavigateToMain(false)
         }
     }
 }
