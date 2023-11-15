@@ -19,5 +19,5 @@ sealed class Routes(val route: String) {
 
     object Exercises : Routes("ExercisesScreen")
 
-    object Upload : Routes("UploadScreen")
+    object Upload : Routes("UploadsScreen")
 }

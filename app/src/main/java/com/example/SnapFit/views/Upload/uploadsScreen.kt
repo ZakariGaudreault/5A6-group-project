@@ -72,7 +72,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UploadScreen() {
+fun UploadSscreen() {
 
     val navController = LocalNavController.current
     var sliderPosition by remember { mutableStateOf(0f) }
