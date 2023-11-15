@@ -35,7 +35,9 @@ import com.example.snapfit.views.profile.ProfileViewModelFactory
  * The main screen of the app, which displays the list of all the potential deathbeds
  */
 @Composable
-fun MainScreen(profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory())) {
+fun MainScreen(
+    profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory()),
+) {
     val userState = profileViewModel.activeProfile.collectAsState()
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -62,9 +64,9 @@ fun MainScreen(profileViewModel: ProfileViewModel = viewModel(factory = ProfileV
 
                 Box(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                 ) {
                     Row(
                         modifier =
@@ -147,7 +149,9 @@ fun MainScreen(profileViewModel: ProfileViewModel = viewModel(factory = ProfileV
                                     buildAnnotatedString {
                                         append("\uD83C\uDFC6 You lost ")
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("${userState.value.currentWeight - userState.value.originalWeight}")
+                                            append(
+                                                "${userState.value.currentWeight - userState.value.originalWeight}",
+                                            )
                                         }
                                         append(" pounds so far")
                                     },

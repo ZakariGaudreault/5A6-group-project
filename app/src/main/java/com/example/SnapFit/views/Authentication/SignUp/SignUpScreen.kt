@@ -41,15 +41,19 @@ import com.example.snapfit.views.profile.ProfileViewModelFactory
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),profileViewModel: ProfileViewModel =
-    viewModel(
-        factory =
-        ProfileViewModelFactory(),
-    )) {
+fun SignUpScreen(
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+    profileViewModel: ProfileViewModel =
+        viewModel(
+            factory =
+                ProfileViewModelFactory(),
+        ),
+) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
 
     if (userState.value != null) {
+        profileViewModel.getProfile(userState.value!!.email)
         navController.navigate(Routes.Main.route)
     }
     Column(
@@ -128,7 +132,7 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
         Button(
             onClick = {
                 authViewModel.signUp(email, password)
-                profileViewModel.setProfile(Profile(email = email,name="email"))
+                profileViewModel.setProfile(Profile(email = email, name = "email"))
             },
             modifier =
                 Modifier

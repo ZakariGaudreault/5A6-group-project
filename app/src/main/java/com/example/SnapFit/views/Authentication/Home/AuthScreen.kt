@@ -27,10 +27,9 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelF
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
 
-    if (userState.value != null)
-        {
-            navController.navigate(Routes.Main.route)
-        }
+    if (userState.value != null) {
+        navController.navigate(Routes.Main.route)
+    }
 
     Column(
         modifier =

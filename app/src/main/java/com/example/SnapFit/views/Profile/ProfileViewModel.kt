@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /** Simple view model that keeps track of a single value (count in this case) */
-class ProfileViewModel(private val userProfileRepository: ProfileRepository) : ViewModel() {
+class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
     // private UI state (MutableStateFlow)
     private val _activeProfile = MutableStateFlow(Profile())
 
@@ -22,14 +22,16 @@ class ProfileViewModel(private val userProfileRepository: ProfileRepository) : V
     /** Changes the active profile to the profile with the indicated name */
     fun getProfile(email: String) {
         viewModelScope.launch {
-            userProfileRepository.getProfile(email).collect { profile ->
+            profileRepository.getProfile(email).collect { profile ->
                 _activeProfile.value = profile
+                println(profile)
             }
         }
     }
+
     fun setProfile(profile: Profile) {
         viewModelScope.launch {
-            userProfileRepository.saveProfile(profile)
+            profileRepository.saveProfile(profile)
             _activeProfile.value = profile
         }
     }

@@ -32,16 +32,26 @@ import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.home.AuthViewModel
 import com.example.snapfit.views.authentication.home.AuthViewModelFactory
+import com.example.snapfit.views.profile.ProfileViewModel
+import com.example.snapfit.views.profile.ProfileViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
+fun LoginScreen(
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+    profileViewModel: ProfileViewModel =
+        viewModel(
+            factory =
+                ProfileViewModelFactory(),
+        ),
+) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
     if (userState.value != null) {
+        profileViewModel.getProfile(userState.value!!.email)
         navController.navigate(Routes.Main.route)
     }
 
