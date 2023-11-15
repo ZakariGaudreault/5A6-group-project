@@ -14,8 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-
-
 class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     private val _signInResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
     private val _signUpResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
@@ -37,7 +35,10 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         authRepository.currentUser() != null
     }
 
-    fun signUp(email: String, password: String) {
+    fun signUp(
+        email: String,
+        password: String,
+    ) {
         _signUpResult.value = ResultAuth.InProgress
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -53,7 +54,11 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
             }
         }
     }
-    fun signIn(email: String, password: String) {
+
+    fun signIn(
+        email: String,
+        password: String,
+    ) {
         _signInResult.value = ResultAuth.InProgress
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -69,6 +74,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
             }
         }
     }
+
     fun signOut() {
         _signOutResult.value = ResultAuth.InProgress
         try {
@@ -83,6 +89,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
             _deleteAccountResult.value = ResultAuth.Inactive
         }
     }
+
     fun delete() {
         _deleteAccountResult.value = ResultAuth.InProgress
         viewModelScope.launch(Dispatchers.IO) {

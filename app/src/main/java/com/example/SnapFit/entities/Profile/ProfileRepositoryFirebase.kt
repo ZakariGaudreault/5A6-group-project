@@ -3,8 +3,7 @@ package com.example.snapfit.entities.profile
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 
-class ProfileRepositoryFirebase (val db: FirebaseFirestore) : ProfileRepository {
-
+class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
     override suspend fun saveProfile(profile: Profile) {
         TODO("Not yet implemented")
     }
@@ -18,5 +17,4 @@ class ProfileRepositoryFirebase (val db: FirebaseFirestore) : ProfileRepository 
     override suspend fun clear() {
         TODO("Not yet implemented")
     }
-
 }

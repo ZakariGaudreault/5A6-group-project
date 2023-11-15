@@ -82,16 +82,16 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
             value = password,
             onValueChange = { password = it },
             modifier =
-            Modifier
-                .size(250.dp, 90.dp)
-                .padding(8.dp)
-                .border(3.dp, Color.Black)
-                .padding(8.dp),
+                Modifier
+                    .size(250.dp, 90.dp)
+                    .padding(8.dp)
+                    .border(3.dp, Color.Black)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
             keyboardOptions =
-            KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Password,
-            ),
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Password,
+                ),
             visualTransformation = PasswordVisualTransformation(),
             placeholder = { Text("Enter Password (minimum 6)", color = Color.Gray) },
         )
@@ -123,7 +123,7 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
                 Modifier
                     .padding(end = 8.dp)
                     .size(180.dp, 60.dp),
-            enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword
+            enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword,
         ) {
             Text("Sign Up")
         }

@@ -11,8 +11,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 /** This module provides the specific object(s) we will inject */
 class AppModule(
     private val appContext: Context,
-    private val auth:FirebaseAuth,
-    private val firestore:FirebaseFirestore
+    private val auth: FirebaseAuth,
+    private val firestore: FirebaseFirestore,
 ) {
     /* Create appropriate repository (backed by a DataStore) on first use.
        Only one copy will be created during lifetime of the application. */

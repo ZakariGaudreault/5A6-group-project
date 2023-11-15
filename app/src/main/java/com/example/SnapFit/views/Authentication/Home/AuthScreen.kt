@@ -26,9 +26,9 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelF
     val navController = LocalNavController.current
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(top = 80.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
