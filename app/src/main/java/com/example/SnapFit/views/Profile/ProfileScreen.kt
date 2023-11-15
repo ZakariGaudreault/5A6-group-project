@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,20 +25,35 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.R
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
+import com.example.snapfit.views.authentication.home.AuthViewModel
+import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+    profileViewModel: ProfileViewModel =
+        viewModel(
+            factory =
+                ProfileViewModelFactory
+                (),
+        ),
+) {
+    val navController = LocalNavController.current
+    val profileState = profileViewModel.activeProfile.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Profile",
+            text = profileState.value.email,
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
@@ -58,6 +74,12 @@ fun ProfileScreen() {
             }
             Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Graph")
+            }
+            Button(onClick = {
+                authViewModel.signOut()
+                navController.navigate(Routes.Auth.route)
+            }, modifier = Modifier.padding(end = 8.dp)) {
+                Text(text = "Log out")
             }
         }
 

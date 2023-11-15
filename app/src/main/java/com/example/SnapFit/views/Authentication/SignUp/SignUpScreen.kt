@@ -28,19 +28,34 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.snapfit.entities.profile.Profile
 import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.home.AuthViewModel
 import com.example.snapfit.views.authentication.home.AuthViewModelFactory
+import com.example.snapfit.views.profile.ProfileViewModel
+import com.example.snapfit.views.profile.ProfileViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
+fun SignUpScreen(
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+    profileViewModel: ProfileViewModel =
+        viewModel(
+            factory =
+                ProfileViewModelFactory(),
+        ),
+) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
 
+    if (userState.value != null) {
+        profileViewModel.getProfile(userState.value!!.email)
+        navController.navigate(Routes.Main.route)
+    }
     Column(
         modifier =
             Modifier
@@ -117,7 +132,7 @@ fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMode
         Button(
             onClick = {
                 authViewModel.signUp(email, password)
-                println("hello this is " + userState.value)
+                profileViewModel.setProfile(Profile(email = email, name = "email"))
             },
             modifier =
                 Modifier

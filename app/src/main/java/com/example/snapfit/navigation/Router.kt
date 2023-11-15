@@ -64,6 +64,11 @@ fun Router() {
                     WorkoutsScreen()
                 }
             }
+//            composable(Routes.Upload.route) {
+//                MainLayout {
+//                    UploadScreen()
+//                }
+//            }
         }
     }
 }

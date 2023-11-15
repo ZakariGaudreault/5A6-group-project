@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,12 +27,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.snapfit.views.profile.ProfileViewModel
+import com.example.snapfit.views.profile.ProfileViewModelFactory
 
 /**
  * The main screen of the app, which displays the list of all the potential deathbeds
  */
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory()),
+) {
+    val userState = profileViewModel.activeProfile.collectAsState()
+    println(userState.value.email)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -41,7 +49,7 @@ fun MainScreen() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Hello User",
+                    text = "Hello ${userState.value.email}",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
@@ -99,7 +107,7 @@ fun MainScreen() {
                                     )
 
                                     Text(
-                                        text = "17",
+                                        text = "${userState.value.currentWeight}",
                                         fontSize = 100.sp,
                                         fontWeight = FontWeight.Bold,
                                         modifier = Modifier.padding(16.dp),
@@ -142,7 +150,9 @@ fun MainScreen() {
                                     buildAnnotatedString {
                                         append("\uD83C\uDFC6 You lost ")
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("6")
+                                            append(
+                                                "${userState.value.currentWeight - userState.value.originalWeight}",
+                                            )
                                         }
                                         append(" pounds so far")
                                     },

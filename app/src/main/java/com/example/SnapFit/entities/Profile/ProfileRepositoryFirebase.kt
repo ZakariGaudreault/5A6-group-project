@@ -1,18 +1,46 @@
 package com.example.snapfit.entities.profile
 
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
+    private val dbProfile = db.collection("Profiles")
+
     override suspend fun saveProfile(profile: Profile) {
-        TODO("Not yet implemented")
+        // We are storing only a single profile at a time, so use a unique document name to refer to it
+        dbProfile.document(profile.email).set(profile)
+            .addOnSuccessListener {
+                println("Profile saved.")
+            }
+            .addOnFailureListener { e ->
+                println("Error saving profile: $e")
+            }
     }
 
-    override fun getProfile(): Flow<Profile> {
-        // Access a Cloud Firestore instance from your Activity
+    override fun getProfile(email: String): Flow<Profile> =
+        callbackFlow {
+            val docRef = dbProfile.document(email)
+            val subscription =
+                docRef.addSnapshotListener { snapshot, error ->
+                    if (error != null) {
+                        // An error occurred
+                        println("Listen failed: $error")
+                        return@addSnapshotListener
+                    }
+                    if (snapshot != null && snapshot.exists()) {
+                        // The user document has data
+                        val profile = snapshot.toObject(Profile::class.java)
 
-        TODO("Not yet implemented")
-    }
+                        if (profile != null) {
+                            println("Real-time update to profile")
+                            trySend(profile)
+                        }
+                    }
+                }
+            awaitClose { subscription.remove() }
+        }
 
     override suspend fun clear() {
         TODO("Not yet implemented")

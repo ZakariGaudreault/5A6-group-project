@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +25,12 @@ import com.example.snapfit.navigation.Routes
 @Composable
 fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
     val navController = LocalNavController.current
+    val userState = authViewModel.currentUser().collectAsState()
+
+    if (userState.value != null) {
+        navController.navigate(Routes.Main.route)
+    }
+
     Column(
         modifier =
             Modifier
@@ -50,7 +57,9 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelF
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { navController.navigate(Routes.SignUp.route) },
+            onClick = {
+                navController.navigate(Routes.SignUp.route)
+            },
             modifier =
                 Modifier
                     .padding(end = 8.dp)
