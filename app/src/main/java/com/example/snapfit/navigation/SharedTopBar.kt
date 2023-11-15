@@ -22,7 +22,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SharedTopBar(title: String, route: String = Routes.Main.route) {
+fun SharedTopBar(
+    title: String,
+    route: String = Routes.Main.route,
+) {
     val navController = LocalNavController.current
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

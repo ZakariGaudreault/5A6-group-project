@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,18 +24,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
-import com.example.snapfit.navigation.Routes
+import com.example.snapfit.views.authentication.home.AuthViewModel
+import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
     val navController = LocalNavController.current
+    val userState = authViewModel.currentUser().collectAsState()
+
     Column(
         modifier =
             Modifier
@@ -43,8 +49,9 @@ fun SignUpScreen() {
         // Add top padding of 16dp
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        var username by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
+        var confirmPassword by remember { mutableStateOf("") }
 
         Text(
             text = "Sign Up",
@@ -55,8 +62,8 @@ fun SignUpScreen() {
         Spacer(modifier = Modifier.height(30.dp))
 
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = email,
+            onValueChange = { email = it },
             modifier =
                 Modifier
                     .size(250.dp, 90.dp)
@@ -68,7 +75,7 @@ fun SignUpScreen() {
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Text,
                 ),
-            placeholder = { Text("Enter UserName", color = Color.Gray) },
+            placeholder = { Text("Enter email", color = Color.Gray) },
         )
 
         TextField(
@@ -85,11 +92,13 @@ fun SignUpScreen() {
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
                 ),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
+            visualTransformation = PasswordVisualTransformation(),
+            placeholder = { Text("Enter Password (minimum 6)", color = Color.Gray) },
         )
+
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
             modifier =
                 Modifier
                     .size(250.dp, 90.dp)
@@ -101,33 +110,20 @@ fun SignUpScreen() {
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
                 ),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
-        )
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                ),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
+            visualTransformation = PasswordVisualTransformation(),
+            placeholder = { Text("Confirm password", color = Color.Gray) },
         )
 
         Button(
             onClick = {
-                navController.navigate(Routes.Main.route)
+                authViewModel.signUp(email, password)
+                println("hello this is " + userState.value)
             },
             modifier =
                 Modifier
                     .padding(end = 8.dp)
                     .size(180.dp, 60.dp),
+            enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword,
         ) {
             Text("Sign Up")
         }

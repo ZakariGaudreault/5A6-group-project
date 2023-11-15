@@ -10,11 +10,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.authentication.home.AuthScreen
-import com.example.snapfit.views.exercise.ExercisesScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
+import com.example.snapfit.views.authentication.signup.SignUpScreen
+import com.example.snapfit.views.exercise.ExercisesScreen
 import com.example.snapfit.views.home.MainScreen
 import com.example.snapfit.views.profile.ProfileScreen
-import com.example.snapfit.views.authentication.signup.SignUpScreen
 import com.example.snapfit.views.workout.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
@@ -45,9 +45,9 @@ fun Router() {
                 }
             }
             composable(Routes.Auth.route) {
-               AuthLayout {
-                   AuthScreen()
-               }
+                AuthLayout {
+                    AuthScreen()
+                }
             }
             composable(Routes.Profile.route) {
                 MainLayout {

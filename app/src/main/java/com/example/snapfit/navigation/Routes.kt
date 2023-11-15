@@ -9,13 +9,13 @@ sealed class Routes(val route: String) {
 
     object Auth : Routes("AuthRoute")
 
-    object Login : Routes("LoginScreen")
+    object Login : Routes("LoginRoute")
 
     object SignUp : Routes("SignUpRoute")
 
     object Profile : Routes("ProfileScreenRoute")
 
-    object Workouts : Routes("WorkoutsScreen")
+    object Workouts : Routes("WorkoutsRoute")
 
-    object Exercises : Routes("ExercisesScreen")
+    object Exercises : Routes("ExercisesRoute")
 }

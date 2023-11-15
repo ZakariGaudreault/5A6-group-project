@@ -23,17 +23,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
-import com.example.snapfit.navigation.Routes
+import com.example.snapfit.views.authentication.home.AuthViewModel
+import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
     val navController = LocalNavController.current
     Column(
         modifier =
@@ -42,11 +45,11 @@ fun LoginScreen() {
                 .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        var username by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
 
         Text(
-            text = "Loging",
+            text = "Login",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
@@ -54,8 +57,8 @@ fun LoginScreen() {
         Spacer(modifier = Modifier.height(70.dp))
 
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = email,
+            onValueChange = { email = it },
             modifier =
                 Modifier
                     .size(250.dp, 90.dp)
@@ -84,12 +87,13 @@ fun LoginScreen() {
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
                 ),
+            visualTransformation = PasswordVisualTransformation(),
             placeholder = { Text("Enter Password", color = Color.Gray) },
         )
 
         Button(
             onClick = {
-                navController.navigate(Routes.Main.route)
+                authViewModel.signIn(email, password)
             },
             modifier =
                 Modifier
