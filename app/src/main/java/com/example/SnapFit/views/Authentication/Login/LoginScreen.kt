@@ -39,7 +39,6 @@ import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
-
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
     if (userState.value != null) {

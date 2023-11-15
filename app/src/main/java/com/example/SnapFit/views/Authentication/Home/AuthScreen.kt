@@ -27,15 +27,16 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelF
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
 
-    if(userState.value != null ){
-        navController.navigate(Routes.Main.route)
-    }
+    if (userState.value != null)
+        {
+            navController.navigate(Routes.Main.route)
+        }
 
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(top = 80.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -59,7 +60,7 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelF
         Button(
             onClick = {
                 navController.navigate(Routes.SignUp.route)
-                      },
+            },
             modifier =
                 Modifier
                     .padding(end = 8.dp)

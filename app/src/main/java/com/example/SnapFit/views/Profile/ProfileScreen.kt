@@ -35,7 +35,15 @@ import com.example.snapfit.views.authentication.home.AuthViewModelFactory
  * The about screen of the app, to display the use of the app.
  */
 @Composable
-fun ProfileScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
+fun ProfileScreen(
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+    profileViewModel: ProfileViewModel =
+        viewModel(
+            factory =
+                ProfileViewModelFactory
+                (),
+        ),
+) {
     val navController = LocalNavController.current
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -65,7 +73,10 @@ fun ProfileScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewMod
             Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Graph")
             }
-            Button(onClick = { authViewModel.signOut() ; navController.navigate(Routes.Auth.route) }, modifier = Modifier.padding(end = 8.dp)) {
+            Button(onClick = {
+                authViewModel.signOut()
+                navController.navigate(Routes.Auth.route)
+            }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Log out")
             }
         }
