@@ -1,11 +1,12 @@
 package com.example.snapfit.entities.profile
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
+class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     private val dbProfile = db.collection("Profiles")
 
     override suspend fun saveProfile(profile: Profile) {
@@ -31,7 +32,7 @@ class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
                     }
                     if (snapshot != null && snapshot.exists()) {
                         // The user document has data
-                        val profile = snapshot.toObject(Profile::class.java)
+                        val profile = snapshot.toObject<Profile>()
 
                         if (profile != null) {
                             println("Real-time update to profile")
