@@ -28,18 +28,22 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.snapfit.views.profile.ProfileViewModel
-import com.example.snapfit.views.profile.ProfileViewModelFactory
+import com.example.snapfit.views.authentication.AuthViewModel
+import com.example.snapfit.views.authentication.AuthViewModelFactory
 
 /**
  * The main screen of the app, which displays the list of all the potential deathbeds
  */
 @Composable
 fun MainScreen(
-    profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory()),
+    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
+        mainScreenViewModel : MainScreenViewModel = viewModel (factory =
+        MainScreenViewModelFactory()),
 ) {
-    val userState = profileViewModel.activeProfile.collectAsState()
-    println(userState.value.email)
+    val loggedUser = authViewModel.currentUser().collectAsState()
+    mainScreenViewModel.getProfile(loggedUser.value!!.email)
+    val userState = mainScreenViewModel.activeProfile.collectAsState()
+    println("email:" + userState.value.email)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -65,32 +69,32 @@ fun MainScreen(
 
                 Box(
                     modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
+                    Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
                 ) {
                     Row(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(),
+                        Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
                     ) {
                         Column(
                             modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight(),
+                            Modifier
+                                .weight(1f)
+                                .fillMaxHeight(),
                         ) {
                             Card(
                                 modifier =
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .height(310.dp)
-                                        .border(
-                                            3.dp,
-                                            Color.Black,
-                                            shape = RoundedCornerShape(16.dp),
-                                        ),
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(310.dp)
+                                    .border(
+                                        3.dp,
+                                        Color.Black,
+                                        shape = RoundedCornerShape(16.dp),
+                                    ),
                                 colors =
                                     CardDefaults.cardColors(
                                         containerColor = Color.White,
@@ -124,10 +128,10 @@ fun MainScreen(
 
                         Column(
                             modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                                    .padding(8.dp),
+                            Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .padding(8.dp),
                         ) {
                             Card(
                                 modifier =

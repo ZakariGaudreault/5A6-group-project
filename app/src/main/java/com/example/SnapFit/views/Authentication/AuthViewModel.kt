@@ -1,10 +1,10 @@
-package com.example.snapfit.views.authentication.home
+package com.example.snapfit.views.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.snapfit.MyApp
-import com.example.snapfit.entities.authentication.AuthRepository
+import com.example.snapfit.entities.authentication.IAuthRepository
 import com.example.snapfit.entities.authentication.ResultAuth
 import com.example.snapfit.entities.authentication.User
 import com.google.firebase.auth.FirebaseAuthException
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class AuthViewModel(private val authRepository: IAuthRepository) : ViewModel() {
     private val _signInResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
     private val _signUpResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
     private val _signOutResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
@@ -109,11 +109,11 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     }
 }
 
-/* ViewModel Factory that will create our view model by injecting the
+/* ViewModel Factory that will create our view MainScreenViewModel by injecting the
       authRepository from the module.
  */
 class AuthViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AuthViewModel(MyApp.appModule.authRepository) as T
+        return AuthViewModel(MyApp.appModule.IAuthRepository) as T
     }
 }

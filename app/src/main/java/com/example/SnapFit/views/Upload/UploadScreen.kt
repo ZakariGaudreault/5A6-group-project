@@ -1,4 +1,4 @@
-package com.example.SnapFit.views.Upload
+package com.example.snapfit.views.Upload
 
 import android.app.DatePickerDialog
 import android.content.Context
