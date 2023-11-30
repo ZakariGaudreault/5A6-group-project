@@ -27,9 +27,10 @@ import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.ui.theme.md_theme_light_primary
 
 @Composable
-fun ExerciseCard() {
+fun ExerciseCard(type: String) {
     val navController = LocalNavController.current
     var isToggled by remember { mutableStateOf(false) }
+
 
     Row(
         modifier =
@@ -49,15 +50,28 @@ fun ExerciseCard() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Starfish",
+                text = type,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
             )
             Text(text = "3 sets")
             Text(text = "5 minutes each")
         }
+        val exerciseType: String = "pushup" // This should be dynamically set based on your logic
+
+        val painter = painterResource(id = when (type) {
+            "push up" -> R.drawable.pushup
+            "burpees" -> R.drawable.burpees
+            "crunch" -> R.drawable.crounch
+            "rest" -> R.drawable.rest
+            "high heels" -> R.drawable.highheels
+            "starfish" -> R.drawable.starfish
+            // Add more cases for other exercise types if needed
+            else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
+        })
+
         Image(
-            painter = painterResource(id = R.drawable.chocolate),
+            painter = painter,
             contentDescription = "Placeholder",
             contentScale = ContentScale.Fit,
             modifier = Modifier.weight(1f),

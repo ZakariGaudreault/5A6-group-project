@@ -1,6 +1,7 @@
 package com.example.snapfit.views.exercise
 
 import ExerciseCard
+import PushUpcard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,22 +19,17 @@ import androidx.compose.ui.unit.sp
 import com.example.snapfit.ui.theme.md_theme_light_primary
 
 @Composable
-fun ExercisesScreen() {
+fun ExercisesScreen(type: String) {
     Column(
         modifier =
-            Modifier
-                .padding(10.dp)
-                .verticalScroll(rememberScrollState()),
+        Modifier
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
     ) {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "Yoga",
+                text = type,
                 fontSize = 40.sp,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                text = "4 exercises",
-                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
             )
             Text(
@@ -45,9 +41,36 @@ fun ExercisesScreen() {
             )
         }
 
-        ExerciseCard()
-        ExerciseCard()
-        ExerciseCard()
-        ExerciseCard()
+        if(type == "strength") {
+            ExerciseCard("push up")
+            ExerciseCard("burpees")
+            ExerciseCard("rest")
+            ExerciseCard("crunch")
+        }
+        else if(type == "cardio") {
+            ExerciseCard("high heels")
+            ExerciseCard("burpees")
+            ExerciseCard("crunch")
+            ExerciseCard("starfish")
+        }
+        else if(type == "no equipment") {
+            ExerciseCard("push up")
+            ExerciseCard("burpees")
+            ExerciseCard("rest")
+            ExerciseCard("crunch")
+        }
+        else if(type == "flexibility") {
+            ExerciseCard("crunch")
+            ExerciseCard("burpees")
+            ExerciseCard("rest")
+            ExerciseCard("crunch")
+        }
+
+        else{
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
+    }
     }
 }

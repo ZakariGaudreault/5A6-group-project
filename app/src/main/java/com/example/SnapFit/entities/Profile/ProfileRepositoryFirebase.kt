@@ -4,7 +4,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-
 class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     private val dbProfile = db.collection("Profiles")
 
@@ -20,6 +19,7 @@ class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     }
 
     override suspend fun getProfile(email: String): Flow<Profile> =
+
         callbackFlow {
             val docRef = dbProfile.document(email)
             val subscription =
@@ -35,6 +35,7 @@ class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
 
                         if (profile != null) {
                             println("Real-time update to profile$profile")
+
                             trySend(profile)
                         }
                     }

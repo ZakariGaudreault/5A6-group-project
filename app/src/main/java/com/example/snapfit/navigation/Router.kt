@@ -54,21 +54,21 @@ fun Router() {
                     ProfileScreen()
                 }
             }
-            composable(Routes.Exercises.route) {
+            composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
+                val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
                 MainLayout {
-                    ExercisesScreen()
+                    ExercisesScreen(type = exerciseType)
                 }
             }
+
+
             composable(Routes.Workouts.route) {
                 MainLayout {
                     WorkoutsScreen()
                 }
             }
-//            composable(Routes.Upload.route) {
-//                MainLayout {
-//                    UploadScreen()
-//                }
-//            }
         }
     }
 }
+
+

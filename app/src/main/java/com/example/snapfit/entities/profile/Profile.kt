@@ -6,4 +6,5 @@ data class Profile(
     var timeSpent: Double = 5.0,
     var currentWeight: Double = 100.0,
     var originalWeight: Double = 20.0,
+    var amountWorkoutDone: Int = 0,
 )

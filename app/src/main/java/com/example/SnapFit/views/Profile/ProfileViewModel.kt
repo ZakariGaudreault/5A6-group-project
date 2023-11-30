@@ -57,7 +57,7 @@ class ProfileViewModel(private val profileRepository: IProfileRepository) : View
 //    }
 }
 
-/* ViewModel Factory that will create our view MainScreenViewModel by injecting the
+/* ViewModel Factory that will create our view model by injecting the
       ProfileDataStore from the module.
  */
 class ProfileViewModelFactory : ViewModelProvider.Factory {
