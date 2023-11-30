@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.SnapFit.views.Upload.UploadScreen
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.authentication.home.AuthScreen
@@ -55,22 +54,23 @@ fun Router() {
                     ProfileScreen()
                 }
             }
-            composable(Routes.Exercises.route) {
+            composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
+                val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
                 MainLayout {
-                    ExercisesScreen()
+                    ExercisesScreen(type = exerciseType)
                 }
             }
+
+
             composable(Routes.Workouts.route) {
                 MainLayout {
                     WorkoutsScreen()
                 }
             }
-            composable(Routes.Upload.route) {
-                MainLayout {
-                    UploadScreen()
-                }
-            }
+
 
         }
     }
 }
+
+

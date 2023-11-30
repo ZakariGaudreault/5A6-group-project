@@ -74,9 +74,9 @@ fun WorkoutsScreen() {
             }
         }
 
-        WorkoutCard()
-        WorkoutCard()
-        WorkoutCard()
-        WorkoutCard()
+        WorkoutCard("cardio")
+        WorkoutCard("strength")
+        WorkoutCard("no equipment")
+        WorkoutCard("flexibility")
     }
 }
