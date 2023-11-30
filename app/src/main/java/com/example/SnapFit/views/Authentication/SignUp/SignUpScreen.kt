@@ -21,10 +21,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,6 +38,9 @@ import com.example.snapfit.views.authentication.home.AuthViewModel
 import com.example.snapfit.views.authentication.home.AuthViewModelFactory
 import com.example.snapfit.views.profile.ProfileViewModel
 import com.example.snapfit.views.profile.ProfileViewModelFactory
+import kotlin.math.absoluteValue
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
 
 /**
  * The about screen of the app, to display the use of the app.
@@ -67,6 +73,7 @@ fun SignUpScreen(
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var confirmPassword by remember { mutableStateOf("") }
+        var orignalWeight by remember { mutableStateOf("") }
 
         Text(
             text = "Sign Up",
@@ -81,11 +88,11 @@ fun SignUpScreen(
             onValueChange = { email = it },
             modifier =
                 Modifier
-                    .size(250.dp, 90.dp)
+                    .size(300.dp, 90.dp)
                     .padding(8.dp)
                     .border(3.dp, Color.Black)
                     .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
+            textStyle = TextStyle(fontSize = 14.sp),
             keyboardOptions =
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Text,
@@ -98,11 +105,11 @@ fun SignUpScreen(
             onValueChange = { password = it },
             modifier =
                 Modifier
-                    .size(250.dp, 90.dp)
+                    .size(300.dp, 90.dp)
                     .padding(8.dp)
                     .border(3.dp, Color.Black)
                     .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
+            textStyle = TextStyle(fontSize = 14.sp),
             keyboardOptions =
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
@@ -116,11 +123,11 @@ fun SignUpScreen(
             onValueChange = { confirmPassword = it },
             modifier =
                 Modifier
-                    .size(250.dp, 90.dp)
+                    .size(300.dp, 90.dp)
                     .padding(8.dp)
                     .border(3.dp, Color.Black)
                     .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
+            textStyle = TextStyle(fontSize = 14.sp),
             keyboardOptions =
                 KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
@@ -129,18 +136,83 @@ fun SignUpScreen(
             placeholder = { Text("Confirm password", color = Color.Gray) },
         )
 
+        TextField(
+            value = orignalWeight,
+            onValueChange = { orignalWeight = it },
+            modifier =
+            Modifier
+                .size(300.dp, 90.dp)
+                .padding(8.dp)
+                .border(3.dp, Color.Black)
+                .padding(8.dp),
+            textStyle = TextStyle(fontSize = 14.sp),
+            keyboardOptions =
+            KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+            ),
+            placeholder = { Text("current Weight", color = Color.Gray) },
+        )
+
+        Text(
+            text = buildAnnotatedString {
+                if (email.isEmpty()) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Email field is empty\n")
+                    }
+
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Email not valid\n")
+                    }
+                } else if (password.isEmpty()) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Password field is empty\n")
+                    }
+                } else if (password.length < 6) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Password too short\n")
+                    }
+                } else if (confirmPassword.isEmpty()) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Confirm password field is empty\n")
+                    }
+                } else if (confirmPassword != password) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Passwords not matching\n")
+                    }
+                } else if (orignalWeight.isEmpty()) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Current weight field is empty\n")
+                    }
+                } else if (orignalWeight.toDoubleOrNull() == null) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Your weight has to be a number\n")
+                    }
+                } else {
+                    withStyle(style = SpanStyle(color = Color.Green)) {
+                        append("It's good\n")
+                    }
+                }
+            },
+            modifier = Modifier,
+            fontSize = 24.sp,
+        )
+
         Button(
             onClick = {
                 authViewModel.signUp(email, password)
-                profileViewModel.setProfile(Profile(email = email, name = "email"))
+                profileViewModel.setProfile(Profile(email = email, name = "email", currentWeight = orignalWeight.toDouble()))
             },
             modifier =
                 Modifier
                     .padding(end = 8.dp)
                     .size(180.dp, 60.dp),
-            enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword,
+            enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword && orignalWeight.length > 0 && orignalWeight.toDoubleOrNull() != null,
         ) {
+
             Text("Sign Up")
+
+
         }
     }
 }

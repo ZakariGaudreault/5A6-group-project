@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,13 +24,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
-import com.example.snapfit.navigation.Routes
+import com.example.snapfit.ui.theme.md_theme_light_primary
+
 
 @Composable
-fun WorkoutCard(type: String) {
-
-
+fun PushUpcard() {
     val navController = LocalNavController.current
+    var isToggled by remember { mutableStateOf(false) }
+
     Row(
         modifier =
             Modifier
@@ -33,7 +39,10 @@ fun WorkoutCard(type: String) {
                 .padding(5.dp)
                 .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
                 .padding(5.dp)
-                .clickable { navController.navigate("${Routes.Exercises.route}/$type") },
+                .background(
+                    if (!isToggled) Color.White else md_theme_light_primary,
+                )
+                .clickable { isToggled = !isToggled },
     ) {
         Column(
             modifier = Modifier.weight(1f),
@@ -41,23 +50,14 @@ fun WorkoutCard(type: String) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = type,
+                text = "Push ups",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
             )
-            Text(text = "16 exercises")
-            Text(text = "45 minutes")
+            Text(text = "20 reps")
         }
-        val painter = painterResource(id = when (type) {
-            "strength" -> R.drawable.pushup
-            "flexibility" -> R.drawable.starfish
-            "cardio" -> R.drawable.burpees
-            "no equipment" -> R.drawable.highheels
-            // Add more cases for other exercise types if needed
-            else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
-        })
         Image(
-            painter = painter,
+            painter = painterResource(id = R.drawable.pushup),
             contentDescription = "Placeholder",
             contentScale = ContentScale.Fit,
             modifier = Modifier.weight(1f),

@@ -1,5 +1,6 @@
 package com.example.snapfit.views.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,22 +26,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.views.profile.ProfileViewModel
 import com.example.snapfit.views.profile.ProfileViewModelFactory
+import kotlin.math.absoluteValue
 
-/**
- * The main screen of the app, which displays the list of all the potential deathbeds
- */
 @Composable
 fun MainScreen(
     profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory()),
 ) {
     val userState = profileViewModel.activeProfile.collectAsState()
-    println(userState.value.email)
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -65,37 +66,37 @@ fun MainScreen(
 
                 Box(
                     modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
+                    Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
                 ) {
                     Row(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(),
+                        Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
                     ) {
                         Column(
                             modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight(),
+                            Modifier
+                                .weight(1f)
+                                .fillMaxHeight(),
                         ) {
                             Card(
                                 modifier =
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .height(310.dp)
-                                        .border(
-                                            3.dp,
-                                            Color.Black,
-                                            shape = RoundedCornerShape(16.dp),
-                                        ),
-                                colors =
-                                    CardDefaults.cardColors(
-                                        containerColor = Color.White,
-                                        contentColor = Color.Black,
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(310.dp)
+                                    .border(
+                                        3.dp,
+                                        Color.Black,
+                                        shape = RoundedCornerShape(16.dp),
                                     ),
+                                colors =
+                                CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black,
+                                ),
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -104,19 +105,26 @@ fun MainScreen(
                                         text = "\uD83D\uDCAA" + "FINISHED",
                                         fontSize = 26.sp,
                                         fontWeight = FontWeight.Bold,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterHorizontally)
+
+
                                     )
 
                                     Text(
-                                        text = "${userState.value.currentWeight}",
-                                        fontSize = 100.sp,
+                                        text = "${userState.value.amountWorkoutDone}",
+                                        fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
-                                        modifier = Modifier.padding(16.dp),
+                                        modifier = Modifier
+                                            .padding(vertical = 50.dp)
+                                            .widthIn(max = 150.dp)
+                                            .align(Alignment.CenterHorizontally)
                                     )
 
                                     Text(
                                         text = "\u200E \u200E Workout",
                                         fontSize = 30.sp,
-                                        modifier = Modifier.padding(16.dp),
+                                        modifier = Modifier.padding(16.dp).padding(vertical = 20.dp)
                                     )
                                 }
                             }
@@ -124,35 +132,36 @@ fun MainScreen(
 
                         Column(
                             modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                                    .padding(8.dp),
+                            Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .padding(8.dp),
                         ) {
                             Card(
                                 modifier =
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .height(150.dp)
-                                        .padding(bottom = 8.dp)
-                                        .border(
-                                            3.dp,
-                                            Color.Black,
-                                            shape = RoundedCornerShape(16.dp),
-                                        ),
-                                colors =
-                                    CardDefaults.cardColors(
-                                        containerColor = Color.White,
-                                        contentColor = Color.Black,
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(150.dp)
+                                    .padding(bottom = 8.dp)
+                                    .border(
+                                        3.dp,
+                                        Color.Black,
+                                        shape = RoundedCornerShape(16.dp),
                                     ),
+                                colors =
+                                CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black,
+                                ),
                             ) {
                                 Text(
                                     buildAnnotatedString {
-                                        append("\uD83C\uDFC6 You lost ")
+                                        val weightDifference = userState.value.currentWeight - userState.value.originalWeight
+                                        val gainOrLostText = if (weightDifference >= 0) "gained" else "lost"
+
+                                        append("\uD83C\uDFC6 You $gainOrLostText ")
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append(
-                                                "${userState.value.currentWeight - userState.value.originalWeight}",
-                                            )
+                                            append("${weightDifference.absoluteValue}") // Using absolute value to ensure a positive difference
                                         }
                                         append(" pounds so far")
                                     },
@@ -163,19 +172,19 @@ fun MainScreen(
 
                             Card(
                                 modifier =
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .height(150.dp)
-                                        .border(
-                                            3.dp,
-                                            Color.Black,
-                                            shape = RoundedCornerShape(16.dp),
-                                        ),
-                                colors =
-                                    CardDefaults.cardColors(
-                                        containerColor = Color.White,
-                                        contentColor = Color.Black,
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(150.dp)
+                                    .border(
+                                        3.dp,
+                                        Color.Black,
+                                        shape = RoundedCornerShape(16.dp),
                                     ),
+                                colors =
+                                CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black,
+                                ),
                             ) {
                                 Text(
                                     buildAnnotatedString {
@@ -193,30 +202,49 @@ fun MainScreen(
                             }
                         }
                     }
+                    val fitnessQuotes = listOf(
+                        "Fitness is not about competing with others. It's about competing with yourself and working to be better than you were yesterday",
+                        "Your body can stand almost anything. It's your mind that you have to convince.",
+                        "The only bad workout is the one that didn't happen.",
+                        "The only way to achieve the impossible is to believe it is possible.",
+                        "Success is usually the culmination of controlling failure.",
+                        "The difference between a goal and a dream is a deadline.",
+                        "Strength does not come from the body. It comes from the will.",
+                        "The only place where success comes before work is in the dictionary.",
+                        "You don't have to be extreme, just consistent.",
+                        "Your body is a reflection of your lifestyle.",
+                        "The pain you feel today will be the strength you feel tomorrow.",
+                        "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+                        "Don't count the days, make the days count.",
+                        "The only bad workout is the one that didn't happen.",
+                        "Your only limit is you.",
+                    )
+
+                    val randomQuote = fitnessQuotes.random()
                     Card(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(top = 340.dp)
-                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 340.dp)
+                            .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
                         colors =
-                            CardDefaults.cardColors(
-                                containerColor = Color.White,
-                                contentColor = Color.Black,
-                            ),
+                        CardDefaults.cardColors(
+                            containerColor = Color.White,
+                            contentColor = Color.Black,
+                        ),
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier.padding(16.dp),
                         ) {
                             Text(
-                                text = "Quote of the Day",
+                                text = "Motivation quote",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                             )
 
                             Text(
-                                text = "Fitness is not about competing with others. It's about competing with yourself and working to be better than you were yesterday",
+                                text = randomQuote,
                                 fontSize = 16.sp,
                             )
                         }
@@ -225,4 +253,5 @@ fun MainScreen(
             }
         }
     }
+
 }
