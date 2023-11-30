@@ -194,6 +194,8 @@ fun UploadScreen() {
 
         Button(
             onClick = {
+
+
                 navController.navigate(Routes.Profile.route)
             },
             modifier =
