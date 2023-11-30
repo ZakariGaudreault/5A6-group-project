@@ -11,8 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainScreenViewModel(private val profileRepository: IProfileRepository) : ViewModel()
-{
+class MainScreenViewModel(private val profileRepository: IProfileRepository) : ViewModel() {
     private val _activeProfile = MutableStateFlow(Profile())
 
     // public getter for the state (StateFlow)
@@ -25,7 +24,6 @@ class MainScreenViewModel(private val profileRepository: IProfileRepository) : V
                 _activeProfile.value = profile
                 println("this is the profile" + _activeProfile.value.email)
             }
-
         }
     }
 }

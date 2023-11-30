@@ -61,7 +61,6 @@ fun Router() {
                 }
             }
 
-
             composable(Routes.Workouts.route) {
                 MainLayout {
                     WorkoutsScreen()
@@ -70,5 +69,3 @@ fun Router() {
         }
     }
 }
-
-

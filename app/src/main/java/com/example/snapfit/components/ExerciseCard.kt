@@ -31,7 +31,6 @@ fun ExerciseCard(type: String) {
     val navController = LocalNavController.current
     var isToggled by remember { mutableStateOf(false) }
 
-
     Row(
         modifier =
             Modifier
@@ -59,16 +58,20 @@ fun ExerciseCard(type: String) {
         }
         val exerciseType: String = "pushup" // This should be dynamically set based on your logic
 
-        val painter = painterResource(id = when (type) {
-            "push up" -> R.drawable.pushup
-            "burpees" -> R.drawable.burpees
-            "crunch" -> R.drawable.crounch
-            "rest" -> R.drawable.rest
-            "high heels" -> R.drawable.highheels
-            "starfish" -> R.drawable.starfish
-            // Add more cases for other exercise types if needed
-            else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
-        })
+        val painter =
+            painterResource(
+                id =
+                    when (type) {
+                        "push up" -> R.drawable.pushup
+                        "burpees" -> R.drawable.burpees
+                        "crunch" -> R.drawable.crounch
+                        "rest" -> R.drawable.rest
+                        "high heels" -> R.drawable.highheels
+                        "starfish" -> R.drawable.starfish
+                        // Add more cases for other exercise types if needed
+                        else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
+                    },
+            )
 
         Image(
             painter = painter,

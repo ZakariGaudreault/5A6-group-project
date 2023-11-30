@@ -1,6 +1,5 @@
 package com.example.snapfit.views.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,23 +25,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.snapfit.views.profile.ProfileViewModel
-import com.example.snapfit.views.profile.ProfileViewModelFactory
 import kotlin.math.absoluteValue
 
 @Composable
 fun MainScreen(
-    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
-        mainScreenViewModel : MainScreenViewModel = viewModel (factory =
-        MainScreenViewModelFactory()),
+    mainScreenViewModel: MainScreenViewModel =
+        viewModel(
+            factory =
+                MainScreenViewModelFactory(),
+        ),
 ) {
-    val loggedUser = authViewModel.currentUser().collectAsState()
-    mainScreenViewModel.getProfile(loggedUser.value!!.email)
     val userState = mainScreenViewModel.activeProfile.collectAsState()
     println("email:" + userState.value.email)
     Surface(
@@ -70,37 +66,37 @@ fun MainScreen(
 
                 Box(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                 ) {
                     Row(
                         modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(),
+                            Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
                     ) {
                         Column(
                             modifier =
-                            Modifier
-                                .weight(1f)
-                                .fillMaxHeight(),
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight(),
                         ) {
                             Card(
                                 modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .height(310.dp)
-                                    .border(
-                                        3.dp,
-                                        Color.Black,
-                                        shape = RoundedCornerShape(16.dp),
-                                    ),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(310.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
                                 colors =
-                                CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black,
-                                ),
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -109,26 +105,29 @@ fun MainScreen(
                                         text = "\uD83D\uDCAA" + "FINISHED",
                                         fontSize = 26.sp,
                                         fontWeight = FontWeight.Bold,
-                                        modifier = Modifier
-                                            .align(Alignment.CenterHorizontally)
-
-
+                                        modifier =
+                                            Modifier
+                                                .align(Alignment.CenterHorizontally),
                                     )
 
                                     Text(
                                         text = "${userState.value.amountWorkoutDone}",
                                         fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
-                                        modifier = Modifier
-                                            .padding(vertical = 50.dp)
-                                            .widthIn(max = 150.dp)
-                                            .align(Alignment.CenterHorizontally)
+                                        modifier =
+                                            Modifier
+                                                .padding(vertical = 50.dp)
+                                                .widthIn(max = 150.dp)
+                                                .align(Alignment.CenterHorizontally),
                                     )
 
                                     Text(
                                         text = "\u200E \u200E Workout",
                                         fontSize = 30.sp,
-                                        modifier = Modifier.padding(16.dp).padding(vertical = 20.dp)
+                                        modifier =
+                                            Modifier.padding(
+                                                16.dp,
+                                            ).padding(vertical = 20.dp),
                                     )
                                 }
                             }
@@ -136,27 +135,27 @@ fun MainScreen(
 
                         Column(
                             modifier =
-                            Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                                .padding(8.dp),
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .padding(8.dp),
                         ) {
                             Card(
                                 modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .height(150.dp)
-                                    .padding(bottom = 8.dp)
-                                    .border(
-                                        3.dp,
-                                        Color.Black,
-                                        shape = RoundedCornerShape(16.dp),
-                                    ),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                        .padding(bottom = 8.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
                                 colors =
-                                CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black,
-                                ),
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
                             ) {
                                 Text(
                                     buildAnnotatedString {
@@ -165,7 +164,9 @@ fun MainScreen(
 
                                         append("\uD83C\uDFC6 You $gainOrLostText ")
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("${weightDifference.absoluteValue}") // Using absolute value to ensure a positive difference
+                                            append(
+                                                "${weightDifference.absoluteValue}",
+                                            ) // Using absolute value to ensure a positive difference
                                         }
                                         append(" pounds so far")
                                     },
@@ -176,19 +177,19 @@ fun MainScreen(
 
                             Card(
                                 modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .height(150.dp)
-                                    .border(
-                                        3.dp,
-                                        Color.Black,
-                                        shape = RoundedCornerShape(16.dp),
-                                    ),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                        .border(
+                                            3.dp,
+                                            Color.Black,
+                                            shape = RoundedCornerShape(16.dp),
+                                        ),
                                 colors =
-                                CardDefaults.cardColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black,
-                                ),
+                                    CardDefaults.cardColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color.Black,
+                                    ),
                             ) {
                                 Text(
                                     buildAnnotatedString {
@@ -206,36 +207,37 @@ fun MainScreen(
                             }
                         }
                     }
-                    val fitnessQuotes = listOf(
-                        "Fitness is not about competing with others. It's about competing with yourself and working to be better than you were yesterday",
-                        "Your body can stand almost anything. It's your mind that you have to convince.",
-                        "The only bad workout is the one that didn't happen.",
-                        "The only way to achieve the impossible is to believe it is possible.",
-                        "Success is usually the culmination of controlling failure.",
-                        "The difference between a goal and a dream is a deadline.",
-                        "Strength does not come from the body. It comes from the will.",
-                        "The only place where success comes before work is in the dictionary.",
-                        "You don't have to be extreme, just consistent.",
-                        "Your body is a reflection of your lifestyle.",
-                        "The pain you feel today will be the strength you feel tomorrow.",
-                        "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
-                        "Don't count the days, make the days count.",
-                        "The only bad workout is the one that didn't happen.",
-                        "Your only limit is you.",
-                    )
+                    val fitnessQuotes =
+                        listOf(
+                            "Fitness is not about competing with others. It's about competing with yourself and working to be better than you were yesterday",
+                            "Your body can stand almost anything. It's your mind that you have to convince.",
+                            "The only bad workout is the one that didn't happen.",
+                            "The only way to achieve the impossible is to believe it is possible.",
+                            "Success is usually the culmination of controlling failure.",
+                            "The difference between a goal and a dream is a deadline.",
+                            "Strength does not come from the body. It comes from the will.",
+                            "The only place where success comes before work is in the dictionary.",
+                            "You don't have to be extreme, just consistent.",
+                            "Your body is a reflection of your lifestyle.",
+                            "The pain you feel today will be the strength you feel tomorrow.",
+                            "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+                            "Don't count the days, make the days count.",
+                            "The only bad workout is the one that didn't happen.",
+                            "Your only limit is you.",
+                        )
 
                     val randomQuote = fitnessQuotes.random()
                     Card(
                         modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(top = 340.dp)
-                            .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(top = 340.dp)
+                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
                         colors =
-                        CardDefaults.cardColors(
-                            containerColor = Color.White,
-                            contentColor = Color.Black,
-                        ),
+                            CardDefaults.cardColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Black,
+                            ),
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -257,5 +259,4 @@ fun MainScreen(
             }
         }
     }
-
 }

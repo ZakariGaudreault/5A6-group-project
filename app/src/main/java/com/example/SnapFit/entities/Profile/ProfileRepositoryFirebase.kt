@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+
 class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     private val dbProfile = db.collection("Profiles")
 

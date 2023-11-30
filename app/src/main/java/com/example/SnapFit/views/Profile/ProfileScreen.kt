@@ -69,7 +69,9 @@ fun ProfileScreen(
         }
 
         Row {
-            Button(onClick = { navController.navigate(Routes.Upload.route) }, modifier = Modifier.padding(end = 8.dp)) {
+            Button(onClick = {
+                navController.navigate(Routes.Upload.route)
+            }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Upload")
             }
             Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(end = 8.dp)) {

@@ -22,9 +22,8 @@ class ProfileViewModel(private val profileRepository: IProfileRepository) : View
     /** Changes the active profile to the profile with the indicated name */
     fun getProfile(email: String) {
         viewModelScope.launch {
-            profileRepository.getProfile(email).collect { profile:Profile ->
+            profileRepository.getProfile(email).collect { profile: Profile ->
                 _activeProfile.value = profile
-                println("this is the profile" + _activeProfile.value.email)
             }
         }
     }

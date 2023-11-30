@@ -23,8 +23,6 @@ import com.example.snapfit.navigation.Routes
 
 @Composable
 fun WorkoutCard(type: String) {
-
-
     val navController = LocalNavController.current
     Row(
         modifier =
@@ -48,14 +46,18 @@ fun WorkoutCard(type: String) {
             Text(text = "16 exercises")
             Text(text = "45 minutes")
         }
-        val painter = painterResource(id = when (type) {
-            "strength" -> R.drawable.pushup
-            "flexibility" -> R.drawable.starfish
-            "cardio" -> R.drawable.burpees
-            "no equipment" -> R.drawable.highheels
-            // Add more cases for other exercise types if needed
-            else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
-        })
+        val painter =
+            painterResource(
+                id =
+                    when (type) {
+                        "strength" -> R.drawable.pushup
+                        "flexibility" -> R.drawable.starfish
+                        "cardio" -> R.drawable.burpees
+                        "no equipment" -> R.drawable.highheels
+                        // Add more cases for other exercise types if needed
+                        else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
+                    },
+            )
         Image(
             painter = painter,
             contentDescription = "Placeholder",

@@ -9,7 +9,6 @@ import com.example.snapfit.entities.authentication.ResultAuth
 import com.example.snapfit.entities.authentication.User
 import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -93,7 +92,6 @@ class AuthViewModel(private val authRepository: IAuthRepository) : ViewModel() {
     fun delete() {
         _deleteAccountResult.value = ResultAuth.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            delay(3000) // TODO: Remove.  Only here to demonstrate inprogress snackbar
             try {
                 val success = authRepository.delete()
                 _deleteAccountResult.value = ResultAuth.Success(success)
