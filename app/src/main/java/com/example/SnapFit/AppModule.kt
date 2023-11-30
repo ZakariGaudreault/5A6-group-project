@@ -1,9 +1,9 @@
 package com.example.snapfit
 
 import android.content.Context
-import com.example.snapfit.entities.authentication.AuthRepository
-import com.example.snapfit.entities.authentication.AuthRepositoryFirebase
-import com.example.snapfit.entities.profile.ProfileRepository
+import com.example.snapfit.entities.authentication.IAuthRepository
+import com.example.snapfit.entities.authentication.IAuthRepositoryFirebase
+import com.example.snapfit.entities.profile.IProfileRepository
 import com.example.snapfit.entities.profile.ProfileRepositoryFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,10 +16,10 @@ class AppModule(
 ) {
     /* Create appropriate repository (backed by a DataStore) on first use.
        Only one copy will be created during lifetime of the application. */
-    val profileRepository: ProfileRepository by lazy {
+    val profileRepository: IProfileRepository by lazy {
         ProfileRepositoryFirebase(firestore)
     }
-    val authRepository: AuthRepository by lazy {
-        AuthRepositoryFirebase(auth) // inject Firebase auth
+    val IAuthRepository: IAuthRepository by lazy {
+        IAuthRepositoryFirebase(auth) // inject Firebase auth
     }
 }

@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
+import com.example.snapfit.views.authentication.AuthViewModel
+import com.example.snapfit.views.authentication.AuthViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.

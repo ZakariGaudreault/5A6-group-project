@@ -4,15 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.snapfit.MyApp
+import com.example.snapfit.entities.profile.IProfileRepository
 import com.example.snapfit.entities.profile.Profile
-import com.example.snapfit.entities.profile.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** Simple view model that keeps track of a single value (count in this case) */
-class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
+/** Simple view MainScreenViewModel that keeps track of a single value (count in this case) */
+class ProfileViewModel(private val profileRepository: IProfileRepository) : ViewModel() {
     // private UI state (MutableStateFlow)
     private val _activeProfile = MutableStateFlow(Profile())
 
@@ -22,9 +22,8 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
     /** Changes the active profile to the profile with the indicated name */
     fun getProfile(email: String) {
         viewModelScope.launch {
-            profileRepository.getProfile(email).collect { profile ->
+            profileRepository.getProfile(email).collect { profile: Profile ->
                 _activeProfile.value = profile
-                println(activeProfile.value)
             }
         }
     }

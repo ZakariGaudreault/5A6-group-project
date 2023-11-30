@@ -1,7 +1,6 @@
 package com.example.snapfit.views.exercise
 
 import ExerciseCard
-import PushUpcard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,9 +21,9 @@ import com.example.snapfit.ui.theme.md_theme_light_primary
 fun ExercisesScreen(type: String) {
     Column(
         modifier =
-        Modifier
-            .padding(10.dp)
-            .verticalScroll(rememberScrollState()),
+            Modifier
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState()),
     ) {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -41,36 +40,31 @@ fun ExercisesScreen(type: String) {
             )
         }
 
-        if(type == "strength") {
+        if (type == "strength") {
             ExerciseCard("push up")
             ExerciseCard("burpees")
             ExerciseCard("rest")
             ExerciseCard("crunch")
-        }
-        else if(type == "cardio") {
+        } else if (type == "cardio") {
             ExerciseCard("high heels")
             ExerciseCard("burpees")
             ExerciseCard("crunch")
             ExerciseCard("starfish")
-        }
-        else if(type == "no equipment") {
+        } else if (type == "no equipment") {
             ExerciseCard("push up")
             ExerciseCard("burpees")
             ExerciseCard("rest")
             ExerciseCard("crunch")
-        }
-        else if(type == "flexibility") {
+        } else if (type == "flexibility") {
             ExerciseCard("crunch")
             ExerciseCard("burpees")
             ExerciseCard("rest")
             ExerciseCard("crunch")
+        } else {
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
+            ExerciseCard("pushup")
         }
-
-        else{
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
-    }
     }
 }

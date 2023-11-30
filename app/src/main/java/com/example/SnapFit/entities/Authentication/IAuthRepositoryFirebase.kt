@@ -9,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 /*
 https://firebase.google.com/docs/auth
  */
-class AuthRepositoryFirebase(private val auth: FirebaseAuth) : AuthRepository {
+class IAuthRepositoryFirebase(private val auth: FirebaseAuth) : IAuthRepository {
     private val currentUserStateFlow = MutableStateFlow(auth.currentUser?.toUser())
 
     init {

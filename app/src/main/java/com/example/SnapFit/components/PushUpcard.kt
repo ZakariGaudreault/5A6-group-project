@@ -26,7 +26,6 @@ import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.ui.theme.md_theme_light_primary
 
-
 @Composable
 fun PushUpcard() {
     val navController = LocalNavController.current

@@ -5,7 +5,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
+class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     private val dbProfile = db.collection("Profiles")
 
     override suspend fun saveProfile(profile: Profile) {
@@ -19,7 +19,8 @@ class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
             }
     }
 
-    override fun getProfile(email: String): Flow<Profile> =
+    override suspend fun getProfile(email: String): Flow<Profile> =
+
         callbackFlow {
             val docRef = dbProfile.document(email)
             val subscription =
@@ -34,7 +35,8 @@ class ProfileRepositoryFirebase(val db: FirebaseFirestore) : ProfileRepository {
                         val profile = snapshot.toObject(Profile::class.java)
 
                         if (profile != null) {
-                            println("Real-time update to profile")
+                            println("Real-time update to profile$profile")
+
                             trySend(profile)
                         }
                     }
