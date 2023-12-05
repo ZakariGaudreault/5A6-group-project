@@ -94,7 +94,8 @@ fun SignUpScreen(
 
             TextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = {if(!it.contains("\n")) email = it }
+                ,
                 modifier =
                     Modifier
                         .size(300.dp, 90.dp)
@@ -110,7 +111,8 @@ fun SignUpScreen(
             )
             TextField(
                 value = username,
-                onValueChange = { username = it },
+                onValueChange = {if(!it.contains("\n")) username = it }
+                ,
                 modifier =
                     Modifier
                         .size(300.dp, 90.dp)
@@ -127,7 +129,8 @@ fun SignUpScreen(
 
             TextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {if(!it.contains("\n")) password = it }
+                ,
                 modifier =
                     Modifier
                         .size(300.dp, 90.dp)
@@ -145,7 +148,8 @@ fun SignUpScreen(
 
             TextField(
                 value = confirmPassword,
-                onValueChange = { confirmPassword = it },
+                onValueChange = {if(!it.contains("\n")) confirmPassword = it }
+                ,
                 modifier =
                     Modifier
                         .size(300.dp, 90.dp)
@@ -163,7 +167,8 @@ fun SignUpScreen(
 
             TextField(
                 value = orignalWeight,
-                onValueChange = { orignalWeight = it },
+                onValueChange = {if(!it.contains("\n")) orignalWeight = it }
+                ,
                 modifier =
                     Modifier
                         .size(300.dp, 90.dp)
@@ -173,7 +178,7 @@ fun SignUpScreen(
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Password,
+                        keyboardType = KeyboardType.Number,
                     ),
                 placeholder = { Text("current Weight", color = Color.Gray) },
             )

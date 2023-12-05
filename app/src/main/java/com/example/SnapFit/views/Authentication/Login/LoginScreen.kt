@@ -97,7 +97,7 @@ fun LoginScreen(
 
             TextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = {if(!it.contains("\n")) email = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -114,7 +114,8 @@ fun LoginScreen(
 
             TextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {if(!it.contains("\n")) password = it }
+                ,
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
