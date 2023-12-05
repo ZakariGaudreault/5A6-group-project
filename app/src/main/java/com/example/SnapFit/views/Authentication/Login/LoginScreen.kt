@@ -1,15 +1,21 @@
 package com.example.snapfit.views.authentication.login
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -21,19 +27,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
-import com.example.snapfit.views.authentication.AuthViewModelFactory
 import com.example.snapfit.views.profile.ProfileViewModel
-import com.example.snapfit.views.profile.ProfileViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
@@ -41,12 +50,8 @@ import com.example.snapfit.views.profile.ProfileViewModelFactory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
-    profileViewModel: ProfileViewModel =
-        viewModel(
-            factory =
-                ProfileViewModelFactory(),
-        ),
+    authViewModel: AuthViewModel,
+    profileViewModel: ProfileViewModel,
 ) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
@@ -55,69 +60,116 @@ fun LoginScreen(
         navController.navigate(Routes.Main.route)
     }
 
-    Column(
+    Box(
         modifier =
             Modifier
-                .fillMaxSize()
-                .padding(top = 80.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+                .fillMaxSize(),
     ) {
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-
-        Text(
-            text = "Login",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-
-        Spacer(modifier = Modifier.height(70.dp))
-
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            modifier =
-                Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Text,
+        // Background Image
+        Image(
+            painter =
+                painterResource(
+                    id = R.drawable.backgroundpink,
                 ),
-            placeholder = { Text("Enter UserName", color = Color.Gray) },
+            // Replace with your actual resource ID
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
         )
 
-        TextField(
-            value = password,
-            onValueChange = { password = it },
+        Column(
             modifier =
                 Modifier
-                    .size(250.dp, 90.dp)
-                    .padding(8.dp)
-                    .border(3.dp, Color.Black)
-                    .padding(8.dp),
-            textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions =
-                KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                ),
-            visualTransformation = PasswordVisualTransformation(),
-            placeholder = { Text("Enter Password", color = Color.Gray) },
-        )
-
-        Button(
-            onClick = {
-                authViewModel.signIn(email, password)
-            },
-            modifier =
-                Modifier
-                    .padding(end = 8.dp)
-                    .size(180.dp, 60.dp),
+                    .fillMaxSize()
+                    .padding(top = 200.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text("Login")
+            var email by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
+
+            Text(
+                text = "Welcome back",
+                fontSize = 40.sp,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Spacer(modifier = Modifier.height(140.dp))
+
+            TextField(
+                value = email,
+                onValueChange = { email = it },
+                modifier =
+                    Modifier
+                        .size(325.dp, 90.dp)
+                        .padding(8.dp)
+                        .border(3.dp, Color.Black)
+                        .padding(8.dp),
+                textStyle = TextStyle(fontSize = 16.sp),
+                keyboardOptions =
+                    KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Text,
+                    ),
+                placeholder = { Text("Enter UserName", color = Color.Black) },
+            )
+
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                modifier =
+                    Modifier
+                        .size(325.dp, 90.dp)
+                        .padding(8.dp)
+                        .border(3.dp, Color.Black)
+                        .padding(8.dp),
+                textStyle = TextStyle(fontSize = 16.sp),
+                keyboardOptions =
+                    KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                    ),
+                visualTransformation = PasswordVisualTransformation(),
+                placeholder = { Text("Enter Password", color = Color.Black) },
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Button(
+                onClick = {
+                    authViewModel.signIn(email, password)
+                    profileViewModel.getProfile(email)
+                },
+                modifier =
+                    Modifier
+                        .padding(end = 8.dp)
+                        .size(325.dp, 40.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape =
+                                MaterialTheme.shapes.medium.copy(
+                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomEnd = CornerSize(16.dp),
+                                    topStart = CornerSize(16.dp),
+                                    topEnd = CornerSize(16.dp),
+                                ),
+                        ),
+            ) {
+                Text("Login")
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text("━━━━━━━━━ OR ━━━━━━━━━")
+            val signUpText = "Need an account? Sign up"
+
+            ClickableText(
+                text =
+                    buildAnnotatedString {
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append(signUpText)
+                        }
+                    },
+                onClick = { offset ->
+                    if (offset < signUpText.length) {
+                        navController.navigate(Routes.SignUp.route)
+                    }
+                },
+            )
         }
     }
 }

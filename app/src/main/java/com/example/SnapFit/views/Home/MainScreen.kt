@@ -19,6 +19,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,19 +29,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.snapfit.views.profile.ProfileViewModel
 import kotlin.math.absoluteValue
 
 @Composable
-fun MainScreen(
-    mainScreenViewModel: MainScreenViewModel =
-        viewModel(
-            factory =
-                MainScreenViewModelFactory(),
-        ),
-) {
-    val userState = mainScreenViewModel.activeProfile.collectAsState()
-    println("email:" + userState.value.email)
+fun MainScreen(profileViewModel: ProfileViewModel) {
+    val userState by profileViewModel.activeProfile.collectAsState()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -50,7 +44,7 @@ fun MainScreen(
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Hello ${userState.value.email}",
+                    text = "Hello ${userState.name}",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
@@ -111,7 +105,7 @@ fun MainScreen(
                                     )
 
                                     Text(
-                                        text = "${userState.value.amountWorkoutDone}",
+                                        text = "${userState.amountWorkoutDone}",
                                         fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
                                         modifier =
@@ -159,7 +153,7 @@ fun MainScreen(
                             ) {
                                 Text(
                                     buildAnnotatedString {
-                                        val weightDifference = userState.value.currentWeight - userState.value.originalWeight
+                                        val weightDifference = userState.currentWeight - userState.originalWeight
                                         val gainOrLostText = if (weightDifference >= 0) "gained" else "lost"
 
                                         append("\uD83C\uDFC6 You $gainOrLostText ")
