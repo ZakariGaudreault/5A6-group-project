@@ -10,6 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
+import com.example.snapfit.views.Progress.ProgressViewModel
+import com.example.snapfit.views.Progress.ProgressViewModelFactory
+import com.example.snapfit.views.Workout.WorkoutViewModel
+import com.example.snapfit.views.Workout.WorkoutViewModelFactory
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.authentication.AuthViewModelFactory
 import com.example.snapfit.views.authentication.home.AuthScreen
@@ -31,10 +35,17 @@ val LocalNavController = compositionLocalOf<NavController> { error("No NavContro
 fun Router() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())
-    val profileViewModel: ProfileViewModel =
-        viewModel(
-            factory = ProfileViewModelFactory(),
-        )
+    val profileViewModel: ProfileViewModel = viewModel(
+        factory = ProfileViewModelFactory(),
+    )
+    val progressViewModel: ProgressViewModel = viewModel(
+        factory = ProgressViewModelFactory(),
+    )
+
+    val workoutViewModel: WorkoutViewModel = viewModel(
+        factory = WorkoutViewModelFactory(),
+    )
+
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {

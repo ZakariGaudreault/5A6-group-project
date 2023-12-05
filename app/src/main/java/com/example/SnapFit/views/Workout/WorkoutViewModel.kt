@@ -4,63 +4,43 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.snapfit.MyApp
-import com.example.snapfit.entities.profile.IProfileRepository
-import com.example.snapfit.entities.profile.Profile
+import com.example.snapfit.entities.Workout.IWorkoutRepository
+import com.example.snapfit.entities.Workout.Workout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** Simple view MainScreenViewModel that keeps track of a single value (count in this case) */
-class ProfileViewModel(private val profileRepository: IProfileRepository) : ViewModel() {
+class WorkoutViewModel(private val workoutRepository: IWorkoutRepository) : ViewModel() {
     // private UI state (MutableStateFlow)
-    private val _activeProfile = MutableStateFlow(Profile())
+    private val _activeWorkouts = MutableStateFlow<List<Workout>>(emptyList())
 
     // public getter for the state (StateFlow)
-    val activeProfile: StateFlow<Profile> = _activeProfile.asStateFlow()
+    val activeWorkouts: StateFlow<List<Workout>> = _activeWorkouts.asStateFlow()
 
-    /** Changes the active profile to the profile with the indicated name */
-    fun getProfile(email: String) {
+    /** Retrieves the list of all workouts */
+    fun getAllWorkouts() {
         viewModelScope.launch {
-            profileRepository.getProfile(email).collect { profile: Profile ->
-                _activeProfile.value = profile
+            workoutRepository.getAllWorkouts().collect { workouts: List<Workout> ->
+                _activeWorkouts.value = workouts
             }
         }
     }
 
-    fun setProfile(profile: Profile) {
+    /** Adds a new workout to the list */
+    fun addWorkout(workout: Workout) {
         viewModelScope.launch {
-            profileRepository.saveProfile(profile)
-            _activeProfile.value = profile
+            workoutRepository.saveWorkout(workout)
+            getAllWorkouts() // Refresh the list after adding a new workout
         }
     }
-
-//    fun setName(newName: String) {
-//        viewModelScope.launch {
-//            if (_activeProfile == null || _activeProfile.value.name.isEmpty()) {
-//                val newProfile = ProfileData(newName)
-//                _activeProfile.update { newProfile }
-//                userProfileRepository.saveProfile(newName, newProfile)
-//            } else {
-//                var oldName = _activeProfile.value.name
-//                _activeProfile.update { it.copy(name = newName) }
-//                userProfileRepository.saveProfile(oldName, _activeProfile.value)
-//            }
-//        }
-//    }
-
-//    fun deleteProfile(name: String) {
-//        viewModelScope.launch {
-//            userProfileRepository.delete(name)
-//        }
-//    }
 }
 
 /* ViewModel Factory that will create our view model by injecting the
-      ProfileDataStore from the module.
+      WorkoutRepository from the module.
  */
-class ProfileViewModelFactory : ViewModelProvider.Factory {
+class WorkoutViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ProfileViewModel(MyApp.appModule.profileRepository) as T
+        return WorkoutViewModel(MyApp.appModule.workoutRepository) as T
     }
 }
