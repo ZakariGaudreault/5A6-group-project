@@ -3,11 +3,12 @@ package com.example.snapfit.entities.profile
 import com.example.snapfit.entities.Progress.IProgressRepository
 import com.example.snapfit.entities.Progress.Progress
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-class ProgressRepositoryFirebase(db: FirebaseFirestore) : IProgressRepository {
+class ProgressRepositoryFirebase(db: FirebaseFirestore, storage: FirebaseStorage) : IProgressRepository {
     private val dbProgress = db.collection("Progress")
 
     override suspend fun addProgress(progress: Progress) {

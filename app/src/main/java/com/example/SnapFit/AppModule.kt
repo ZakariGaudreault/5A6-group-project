@@ -26,7 +26,7 @@ class AppModule(
         ProfileRepositoryFirebase(firestore)
     }
     val progressRepository: IProgressRepository by lazy {
-        ProgressRepositoryFirebase(firestore)
+        ProgressRepositoryFirebase(firestore,storage)
     }
     val workoutRepository: IWorkoutRepository by lazy {
         WorkoutRepositoryFirebase(firestore)
