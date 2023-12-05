@@ -38,8 +38,8 @@ import com.example.snapfit.views.profile.ProfileViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    authViewModel: AuthViewModel, profileViewModel: ProfileViewModel
-
+    authViewModel: AuthViewModel,
+    profileViewModel: ProfileViewModel,
 ) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
@@ -49,9 +49,10 @@ fun LoginScreen(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 80.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(top = 80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         var email by remember { mutableStateOf("") }
@@ -68,30 +69,34 @@ fun LoginScreen(
         TextField(
             value = email,
             onValueChange = { email = it },
-            modifier = Modifier
-                .size(250.dp, 90.dp)
-                .padding(8.dp)
-                .border(3.dp, Color.Black)
-                .padding(8.dp),
+            modifier =
+                Modifier
+                    .size(250.dp, 90.dp)
+                    .padding(8.dp)
+                    .border(3.dp, Color.Black)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Text,
-            ),
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Text,
+                ),
             placeholder = { Text("Enter UserName", color = Color.Gray) },
         )
 
         TextField(
             value = password,
             onValueChange = { password = it },
-            modifier = Modifier
-                .size(250.dp, 90.dp)
-                .padding(8.dp)
-                .border(3.dp, Color.Black)
-                .padding(8.dp),
+            modifier =
+                Modifier
+                    .size(250.dp, 90.dp)
+                    .padding(8.dp)
+                    .border(3.dp, Color.Black)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 16.sp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Password,
-            ),
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Password,
+                ),
             visualTransformation = PasswordVisualTransformation(),
             placeholder = { Text("Enter Password", color = Color.Gray) },
         )
@@ -101,9 +106,10 @@ fun LoginScreen(
                 authViewModel.signIn(email, password)
                 profileViewModel.getProfile(email)
             },
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .size(180.dp, 60.dp),
+            modifier =
+                Modifier
+                    .padding(end = 8.dp)
+                    .size(180.dp, 60.dp),
         ) {
             Text("Login")
         }

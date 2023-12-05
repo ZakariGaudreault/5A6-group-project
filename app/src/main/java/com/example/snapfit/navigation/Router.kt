@@ -31,51 +31,52 @@ val LocalNavController = compositionLocalOf<NavController> { error("No NavContro
 fun Router() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())
-    val profileViewModel: ProfileViewModel = viewModel(
-        factory = ProfileViewModelFactory(),
-    )
+    val profileViewModel: ProfileViewModel =
+        viewModel(
+            factory = ProfileViewModelFactory(),
+        )
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {
         NavHost(navController = navController, startDestination = Routes.Auth.route) {
             composable(Routes.Main.route) {
-                RedirectToAuth(authViewModel,profileViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     MainLayout {
                         MainScreen(profileViewModel)
                     }
                 }
             }
             composable(Routes.Login.route) {
-                RedirectToHome(authViewModel,profileViewModel) {
+                RedirectToHome(authViewModel, profileViewModel) {
                     AuthLayout {
-                        LoginScreen(authViewModel,profileViewModel)
+                        LoginScreen(authViewModel, profileViewModel)
                     }
                 }
             }
             composable(Routes.SignUp.route) {
-                RedirectToHome(authViewModel,profileViewModel) {
+                RedirectToHome(authViewModel, profileViewModel) {
                     AuthLayout {
-                        SignUpScreen(authViewModel,profileViewModel)
+                        SignUpScreen(authViewModel, profileViewModel)
                     }
                 }
             }
             composable(Routes.Auth.route) {
-                RedirectToHome(authViewModel,profileViewModel) {
+                RedirectToHome(authViewModel, profileViewModel) {
                     AuthLayout {
                         AuthScreen(authViewModel)
                     }
                 }
             }
             composable(Routes.Profile.route) {
-                RedirectToAuth(authViewModel,profileViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     MainLayout {
-                        ProfileScreen(authViewModel,profileViewModel)
+                        ProfileScreen(authViewModel, profileViewModel)
                     }
                 }
             }
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
                 val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
-                RedirectToAuth(authViewModel,profileViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     MainLayout {
                         ExercisesScreen(type = exerciseType)
                     }
@@ -83,7 +84,7 @@ fun Router() {
             }
 
             composable(Routes.Workouts.route) {
-                RedirectToAuth(authViewModel,profileViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     MainLayout {
                         WorkoutsScreen()
                     }
@@ -92,5 +93,3 @@ fun Router() {
         }
     }
 }
-
-

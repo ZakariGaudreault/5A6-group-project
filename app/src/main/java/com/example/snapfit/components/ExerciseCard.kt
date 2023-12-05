@@ -31,7 +31,6 @@ fun ExerciseCard(type: String) {
     val navController = LocalNavController.current
     var isToggled by remember { mutableStateOf(false) }
 
-
     Row(
         modifier =
             Modifier

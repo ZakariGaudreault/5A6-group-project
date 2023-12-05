@@ -18,7 +18,9 @@ fun RedirectToAuth(
 
     if (auth != null && auth!!.email == profile.email) {
         content()
-    } else navController.navigate(Routes.Auth.route)
+    } else {
+        navController.navigate(Routes.Auth.route)
+    }
 }
 
 @Composable
@@ -33,5 +35,7 @@ fun RedirectToHome(
 
     if (auth != null && auth!!.email == profile.email) {
         navController.navigate(Routes.Main.route)
-    } else content()
+    } else {
+        content()
+    }
 }

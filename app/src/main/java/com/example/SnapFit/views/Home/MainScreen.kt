@@ -33,9 +33,7 @@ import com.example.snapfit.views.profile.ProfileViewModel
 import kotlin.math.absoluteValue
 
 @Composable
-fun MainScreen(
-    profileViewModel: ProfileViewModel
-) {
+fun MainScreen(profileViewModel: ProfileViewModel) {
     val userState by profileViewModel.activeProfile.collectAsState()
     Surface(
         modifier = Modifier.fillMaxSize(),
