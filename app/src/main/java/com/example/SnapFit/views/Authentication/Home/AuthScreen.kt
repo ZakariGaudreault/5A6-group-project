@@ -26,7 +26,6 @@ import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
 
-
 @Composable
 fun AuthScreen(authViewModel: AuthViewModel) {
     val navController = LocalNavController.current
@@ -36,41 +35,46 @@ fun AuthScreen(authViewModel: AuthViewModel) {
     val logo: Painter = painterResource(id = R.drawable.logo)
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.Transparent), // Set the background color to transparent
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(color = Color.Transparent),
+        // Set the background color to transparent
     ) {
         Image(
             painter = backgroundPainter,
             contentDescription = null, // Set to null if it's a decorative image
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(MaterialTheme.shapes.medium),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop,
         )
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 80.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 80.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = "SnapFit",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                color = colorResource(R.color.purple_200)
+                color = colorResource(R.color.purple_200),
             )
             Spacer(modifier = Modifier.height(40.dp))
             Image(
                 painter = logo,
                 contentDescription = null,
-                modifier = Modifier
-                    .clip(MaterialTheme.shapes.medium)
-                    .sizeIn(
-                        maxWidth = 200.dp,
-                        maxHeight = 200.dp
-                    )
-                    .border(1.dp, Color.Black),
+                modifier =
+                    Modifier
+                        .clip(MaterialTheme.shapes.medium)
+                        .sizeIn(
+                            maxWidth = 200.dp,
+                            maxHeight = 200.dp,
+                        )
+                        .border(1.dp, Color.Black),
                 contentScale = ContentScale.Crop,
             )
 
@@ -79,18 +83,20 @@ fun AuthScreen(authViewModel: AuthViewModel) {
                 onClick = {
                     navController.navigate(Routes.Login.route)
                 },
-                modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(250.dp, 40.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = MaterialTheme.shapes.medium.copy(
-                            bottomStart = CornerSize(16.dp), // Adjust the radius as needed
-                            bottomEnd = CornerSize(16.dp),
-                            topStart = CornerSize(16.dp),
-                            topEnd = CornerSize(16.dp)
-                        )
-                    ),
+                modifier =
+                    Modifier
+                        .padding(end = 8.dp)
+                        .size(250.dp, 40.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape =
+                                MaterialTheme.shapes.medium.copy(
+                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomEnd = CornerSize(16.dp),
+                                    topStart = CornerSize(16.dp),
+                                    topEnd = CornerSize(16.dp),
+                                ),
+                        ),
             ) {
                 Text("Login")
             }
@@ -101,18 +107,20 @@ fun AuthScreen(authViewModel: AuthViewModel) {
                 onClick = {
                     navController.navigate(Routes.SignUp.route)
                 },
-                modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(250.dp, 40.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = MaterialTheme.shapes.medium.copy(
-                            bottomStart = CornerSize(16.dp), // Adjust the radius as needed
-                            bottomEnd = CornerSize(16.dp),
-                            topStart = CornerSize(16.dp),
-                            topEnd = CornerSize(16.dp)
-                        )
-                    ),
+                modifier =
+                    Modifier
+                        .padding(end = 8.dp)
+                        .size(250.dp, 40.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape =
+                                MaterialTheme.shapes.medium.copy(
+                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomEnd = CornerSize(16.dp),
+                                    topStart = CornerSize(16.dp),
+                                    topEnd = CornerSize(16.dp),
+                                ),
+                        ),
             ) {
                 Text(text = "SignUp")
             }
@@ -123,10 +131,11 @@ fun AuthScreen(authViewModel: AuthViewModel) {
 @Composable
 fun getGradientBrush(): Brush {
     return Brush.horizontalGradient(
-        colors = listOf(
-            Color(0xFFE3FAE4EF),
-            Color(0xFFA5D6A7),
-            Color(0xFF43A047)
-        )
+        colors =
+            listOf(
+                Color(0xFFE3FAE4EF),
+                Color(0xFFA5D6A7),
+                Color(0xFF43A047),
+            ),
     )
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -16,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,9 +33,10 @@ fun WorkoutCard(type: String) {
                 .padding(5.dp)
                 .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
                 .padding(5.dp)
-               .background(color = Color(0xE3FAE4EF))
-                .clickable { navController.navigate("${Routes.Exercises.route}/$type")
-                           },
+                .background(color = Color(0xE3FAE4EF))
+                .clickable {
+                    navController.navigate("${Routes.Exercises.route}/$type")
+                },
     ) {
         Column(
             modifier = Modifier.weight(1f),
@@ -88,15 +87,14 @@ fun WorkoutCard(type: String) {
             painter = painter,
             contentDescription = "Placeholder",
             contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .sizeIn(
-                    minHeight = 150.dp,
-                    minWidth = 200.dp,
-                    maxWidth = 150.dp,
-                    maxHeight = 100.dp
-                )
+            modifier =
+                Modifier
+                    .sizeIn(
+                        minHeight = 150.dp,
+                        minWidth = 200.dp,
+                        maxWidth = 150.dp,
+                        maxHeight = 100.dp,
+                    ),
         )
-        
-
     }
 }

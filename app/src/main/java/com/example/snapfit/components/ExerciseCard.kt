@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
-import com.example.snapfit.ui.theme.md_theme_light_primary
 
 @Composable
 fun ExerciseCard(type: String) {
@@ -40,7 +39,7 @@ fun ExerciseCard(type: String) {
                 .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
                 .padding(5.dp)
                 .background(
-                    if (!isToggled) Color(0xE3FAE4EF) else Color(0xE3FFADD7)
+                    if (!isToggled) Color(0xE3FAE4EF) else Color(0xE3FFADD7),
                 )
                 .clickable { isToggled = !isToggled },
     ) {
@@ -116,13 +115,14 @@ fun ExerciseCard(type: String) {
             painter = painter,
             contentDescription = "Placeholder",
             contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .sizeIn(
-                    minHeight = 150.dp,
-                    minWidth = 200.dp,
-                    maxWidth = 150.dp,
-                    maxHeight = 100.dp
-                )
+            modifier =
+                Modifier
+                    .sizeIn(
+                        minHeight = 150.dp,
+                        minWidth = 200.dp,
+                        maxWidth = 150.dp,
+                        maxHeight = 100.dp,
+                    ),
         )
     }
 }
