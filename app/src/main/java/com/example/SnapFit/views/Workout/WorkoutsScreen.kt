@@ -1,6 +1,7 @@
 package com.example.snapfit.views.workout
 
 import WorkoutCard
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,12 +31,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun WorkoutsScreen() {
     var homeworkout by rememberSaveable { mutableStateOf(true) }
     var gymworkout by rememberSaveable { mutableStateOf(true) }
     var outdoorworkout by rememberSaveable { mutableStateOf(true) }
-    var sliderPosition by remember { mutableFloatStateOf(0f) }
+    var sliderPosition by remember { mutableFloatStateOf(60f) }
     val backgroundColorHome = if (homeworkout) colorResource(R.color.purple_500) else colorResource(R.color.purple_200)
     val backgroundColorGym = if (gymworkout) colorResource(R.color.purple_500) else colorResource(R.color.purple_200)
     val backgroundColorOutdoor = if (outdoorworkout) colorResource(R.color.purple_500) else colorResource(R.color.purple_200)
@@ -51,6 +53,7 @@ fun WorkoutsScreen() {
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
         )
+        Text(text = "Max duration: ${sliderPosition.toInt()} minutes")
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
@@ -60,10 +63,10 @@ fun WorkoutsScreen() {
                     activeTrackColor = MaterialTheme.colorScheme.secondary,
                     inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
                 ),
-            steps = 2,
+            steps = 8,
             valueRange = 15f..60f,
         )
-        Text(text = "${sliderPosition.toInt()} minutes")
+
 
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -90,15 +93,17 @@ fun WorkoutsScreen() {
             }
         }
 
-
+        if(sliderPosition.toInt() >= 20 && (outdoorworkout))
         WorkoutCard("cardio")
+
+        if(sliderPosition.toInt() >= 30 && gymworkout)
         WorkoutCard("strength")
 
-        if(homeworkout) {
+        if(homeworkout && sliderPosition.toInt() >= 45) {
             WorkoutCard("no equipment")
         }
 
-        if(sliderPosition.toInt() > 45)
+        if(sliderPosition.toInt() >= 50 && (gymworkout || outdoorworkout || homeworkout))
         WorkoutCard("flexibility")
     }
 }
