@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,12 +55,6 @@ fun SignUpScreen(
     profileViewModel: ProfileViewModel,
 ) {
     val navController = LocalNavController.current
-    val userState = authViewModel.currentUser().collectAsState()
-
-    if (userState.value != null) {
-        profileViewModel.getProfile(userState.value!!.email)
-        navController.navigate(Routes.Main.route)
-    }
     Box(
         modifier =
             Modifier
@@ -237,11 +230,10 @@ fun SignUpScreen(
             Button(
                 onClick = {
                     authViewModel.signUp(email, password)
-                    profileViewModel.getProfile(email)
                     profileViewModel.setProfile(
                         Profile(
                             email = email,
-                            name = "email",
+                            name = username,
                             currentWeight = orignalWeight.toDouble(),
                         ),
                     )
@@ -254,7 +246,7 @@ fun SignUpScreen(
                             color = MaterialTheme.colorScheme.primary,
                             shape =
                                 MaterialTheme.shapes.medium.copy(
-                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomStart = CornerSize(16.dp),
                                     bottomEnd = CornerSize(16.dp),
                                     topStart = CornerSize(16.dp),
                                     topEnd = CornerSize(16.dp),

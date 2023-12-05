@@ -78,7 +78,7 @@ fun WorkoutCard(type: String) {
                         "strength" -> R.drawable.pushup
                         "flexibility" -> R.drawable.starfish
                         "cardio" -> R.drawable.burpees
-                        "no equipment" -> R.drawable.cobrastrech
+                        "no equipment" -> R.drawable.cobrastretch
 
                         else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
                     },

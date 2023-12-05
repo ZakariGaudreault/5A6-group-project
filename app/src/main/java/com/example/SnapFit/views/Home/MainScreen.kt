@@ -44,7 +44,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Hello ${userState.email}",
+                    text = "Hello ${userState.name}",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,

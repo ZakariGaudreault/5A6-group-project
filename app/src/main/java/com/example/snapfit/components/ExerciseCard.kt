@@ -105,7 +105,7 @@ fun ExerciseCard(type: String) {
                         "dumbbell curl" -> R.drawable.dumbbellcurl
                         "repeat" -> R.drawable.repeat
                         "repeatTwo" -> R.drawable.repeat
-                        "cobra stretch" -> R.drawable.cobrastrech
+                        "cobra stretch" -> R.drawable.cobrastretch
                         // Add more cases for other exercise types if needed
                         else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
                     },
