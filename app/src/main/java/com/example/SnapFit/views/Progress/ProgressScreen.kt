@@ -1,4 +1,4 @@
-package com.example.SnapFit.views.Upload
+package com.example.snapfit.views.Progress
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -59,7 +59,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UploadScreen() {
+fun ProgressScreen() {
     val navController = LocalNavController.current
     var sliderPosition by remember { mutableStateOf(0f) }
     val colors = MaterialTheme.colorScheme

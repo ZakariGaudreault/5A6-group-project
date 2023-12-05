@@ -112,6 +112,6 @@ class AuthViewModel(private val authRepository: IAuthRepository) : ViewModel() {
  */
 class AuthViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AuthViewModel(MyApp.appModule.IAuthRepository) as T
+        return AuthViewModel(MyApp.appModule.authRepository) as T
     }
 }

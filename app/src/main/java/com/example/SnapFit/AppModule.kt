@@ -1,10 +1,14 @@
 package com.example.snapfit
 
 import android.content.Context
+import com.example.snapfit.entities.Workout.IWorkoutRepository
+import com.example.snapfit.entities.Workout.WorkoutRepositoryFirebase
 import com.example.snapfit.entities.authentication.IAuthRepository
 import com.example.snapfit.entities.authentication.IAuthRepositoryFirebase
 import com.example.snapfit.entities.profile.IProfileRepository
+import com.example.snapfit.entities.profile.IProgressRepository
 import com.example.snapfit.entities.profile.ProfileRepositoryFirebase
+import com.example.snapfit.entities.profile.ProgressRepositoryFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -19,7 +23,13 @@ class AppModule(
     val profileRepository: IProfileRepository by lazy {
         ProfileRepositoryFirebase(firestore)
     }
-    val IAuthRepository: IAuthRepository by lazy {
+    val progressRepository: IProgressRepository by lazy {
+        ProgressRepositoryFirebase(firestore)
+    }
+    val workoutRepository: IWorkoutRepository by lazy {
+        WorkoutRepositoryFirebase(firestore)
+    }
+    val authRepository: IAuthRepository by lazy {
         IAuthRepositoryFirebase(auth) // inject Firebase auth
     }
 }
