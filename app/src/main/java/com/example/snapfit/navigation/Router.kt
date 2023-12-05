@@ -1,5 +1,6 @@
 package com.example.snapfit.navigation
 
+import AuthScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
@@ -9,7 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
-import com.example.snapfit.views.authentication.home.AuthScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
 import com.example.snapfit.views.authentication.signup.SignUpScreen
 import com.example.snapfit.views.exercise.ExercisesScreen
