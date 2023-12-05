@@ -33,6 +33,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
@@ -108,6 +109,7 @@ fun LoginScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next,
                     ),
                 placeholder = { Text("Enter UserName", color = Color.Black) },
             )
@@ -126,6 +128,7 @@ fun LoginScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
                     ),
                 visualTransformation = PasswordVisualTransformation(),
                 placeholder = { Text("Enter Password", color = Color.Black) },

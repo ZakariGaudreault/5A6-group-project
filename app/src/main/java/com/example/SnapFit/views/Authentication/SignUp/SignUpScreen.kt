@@ -33,6 +33,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
@@ -106,6 +107,7 @@ fun SignUpScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next,
                     ),
                 placeholder = { Text("Enter email", color = Color.Gray) },
             )
@@ -123,6 +125,7 @@ fun SignUpScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next,
                     ),
                 placeholder = { Text("Enter username", color = Color.Gray) },
             )
@@ -141,6 +144,7 @@ fun SignUpScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Next,
                     ),
                 visualTransformation = PasswordVisualTransformation(),
                 placeholder = { Text("Enter Password (minimum 6)", color = Color.Gray) },
@@ -160,6 +164,7 @@ fun SignUpScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Next,
                     ),
                 visualTransformation = PasswordVisualTransformation(),
                 placeholder = { Text("Confirm password", color = Color.Gray) },
@@ -179,6 +184,7 @@ fun SignUpScreen(
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Done,
                     ),
                 placeholder = { Text("current Weight", color = Color.Gray) },
             )
