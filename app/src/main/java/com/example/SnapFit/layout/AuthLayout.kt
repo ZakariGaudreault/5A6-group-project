@@ -10,7 +10,7 @@ import com.example.snapfit.navigation.Routes
 import com.example.snapfit.navigation.SharedTopBar
 
 /**
- * The main/default layout of the screen, with a top and bottom bar
+ * The auth layout of the screen with only a top bar
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -9,30 +9,21 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
-import com.example.snapfit.views.authentication.AuthViewModelFactory
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @Composable
-fun AuthScreen(authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())) {
+fun AuthScreen(authViewModel: AuthViewModel) {
     val navController = LocalNavController.current
-    val userState = authViewModel.currentUser().collectAsState()
-
-    if (userState.value != null) {
-        navController.navigate(Routes.Main.route)
-    }
-
     Column(
         modifier =
             Modifier

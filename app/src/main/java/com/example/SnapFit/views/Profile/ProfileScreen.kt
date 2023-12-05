@@ -25,25 +25,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
-import com.example.snapfit.views.authentication.AuthViewModelFactory
+import kotlinx.coroutines.runBlocking
 
 /**
  * The about screen of the app, to display the use of the app.
  */
 @Composable
 fun ProfileScreen(
-    authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory()),
-    profileViewModel: ProfileViewModel =
-        viewModel(
-            factory =
-                ProfileViewModelFactory
-                (),
-        ),
+    authViewModel: AuthViewModel,
+    profileViewModel: ProfileViewModel,
 ) {
     val navController = LocalNavController.current
     val profileState = profileViewModel.activeProfile.collectAsState()
@@ -78,8 +72,10 @@ fun ProfileScreen(
                 Text(text = "Graph")
             }
             Button(onClick = {
-                authViewModel.signOut()
-                navController.navigate(Routes.Auth.route)
+                runBlocking {
+                    authViewModel.signOut()
+                    navController.navigate(Routes.Auth.route)
+                }
             }, modifier = Modifier.padding(end = 8.dp)) {
                 Text(text = "Log out")
             }
@@ -116,26 +112,23 @@ fun generateDummyCards(): List<CardItem> {
 @Composable
 fun CardItem(card: CardItem) {
     Card(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
     ) {
         Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
         ) {
             Text(text = card.text, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null,
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(200.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
             )
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "Delete")
