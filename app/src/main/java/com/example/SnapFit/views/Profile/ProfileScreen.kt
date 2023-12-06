@@ -70,9 +70,6 @@ fun ProfileScreen(
 
         // Row composable containing buttons for uploading, viewing graphs, and logging out
         Column {
-            Button(onClick = { navController.navigate(Routes.Snap.route) }) {
-                Text(text = "Snaps")
-            }
             Button(onClick = {
                 runBlocking {
                     authViewModel.signOut()

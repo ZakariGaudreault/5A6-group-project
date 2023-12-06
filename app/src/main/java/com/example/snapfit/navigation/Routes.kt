@@ -21,6 +21,7 @@ sealed class Routes(val route: String) {
 
     object Exercises : Routes("ExercisesRoute")
 
+    object PastWorkout : Routes("PastWorkoutRoute")
 
     object Upload : Routes("UploadRoute")
 

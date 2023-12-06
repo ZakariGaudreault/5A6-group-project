@@ -9,8 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
-import com.example.snapfit.layout.AuthLayout
-import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.DeepLink.DeepLink
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.authentication.AuthViewModelFactory
@@ -25,6 +23,7 @@ import com.example.snapfit.views.profile.ProfileViewModelFactory
 import com.example.snapfit.views.progress.ProgressViewModel
 import com.example.snapfit.views.progress.ProgressViewModelFactory
 import com.example.snapfit.views.snap.SnapScreen
+import com.example.snapfit.views.workout.PastWorkoutScreen
 import com.example.snapfit.views.workout.WorkoutScreen
 import com.example.snapfit.views.workout.WorkoutViewModel
 import com.example.snapfit.views.workout.WorkoutViewModelFactory
@@ -64,6 +63,11 @@ fun Router() {
             composable(Routes.Main.route) {
                 RedirectToAuth(authViewModel) {
                     MainScreen(profileViewModel,workoutViewModel)
+                }
+            }
+            composable(Routes.PastWorkout.route) {
+                RedirectToAuth(authViewModel) {
+                    PastWorkoutScreen(profileViewModel,workoutViewModel)
                 }
             }
             composable(Routes.Snap.route) {
