@@ -21,5 +21,5 @@ sealed class Routes(val route: String) {
 
     object Upload : Routes("UploadRoute")
 
-    object deepLink : Routes("DeepLinkScreen")
+    object DeepLink : Routes("DeepLinkScreen")
 }
