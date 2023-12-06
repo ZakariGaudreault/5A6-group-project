@@ -15,11 +15,25 @@ class WorkoutViewModel(private val workoutRepository: IWorkoutRepository) : View
     // private UI state (MutableStateFlow)
     private val _activeWorkouts = MutableStateFlow<List<Workout>>(emptyList())
 
+    private val _toggledCount = MutableStateFlow(0)
+    val toggledCount: StateFlow<Int> = _toggledCount.asStateFlow()
+
     // public getter for the state (StateFlow)
     val activeWorkouts: StateFlow<List<Workout>> = _activeWorkouts.asStateFlow()
 
+    // Function to increment the counter
+    fun incrementCounter(amount: Int) {
+        _toggledCount.value += amount
+    }
+
+    // Function to reset the counter (when changing exercises)
+    fun resetCounter() {
+        _toggledCount.value = 0
+    }
+
+
     /** Retrieves the list of all workouts */
-    fun getAllWorkouts() {
+    fun getAllWorkouts(email: String) {
         viewModelScope.launch {
             workoutRepository.getAllWorkouts().collect { workouts: List<Workout> ->
                 _activeWorkouts.value = workouts
@@ -31,7 +45,6 @@ class WorkoutViewModel(private val workoutRepository: IWorkoutRepository) : View
     fun addWorkout(workout: Workout) {
         viewModelScope.launch {
             workoutRepository.saveWorkout(workout)
-            getAllWorkouts() // Refresh the list after adding a new workout
         }
     }
 }
