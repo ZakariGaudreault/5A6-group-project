@@ -48,7 +48,7 @@ fun WorkoutCard(type: String) {
             Modifier
                 .fillMaxWidth()
                 .padding(5.dp)
-                .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
+                .border(2.dp, color = Color.Black, RoundedCornerShape(16.dp))
                 .padding(5.dp)
                 .background(color = Color(0xE3FAE4EF))
                 .clickable {

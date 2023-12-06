@@ -64,7 +64,7 @@ fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutView
                 Text(
                     text = "Welcome ${userState.name}",
                     fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     color = Color.Black,
                     modifier = Modifier.padding(bottom = 16.dp),
                 )
@@ -100,7 +100,7 @@ fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutView
                                         .fillMaxWidth()
                                         .height(310.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
                                         )
@@ -160,7 +160,7 @@ fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutView
                                         .height(150.dp)
                                         .padding(bottom = 8.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
                                         ),
@@ -194,7 +194,7 @@ fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutView
                                         .fillMaxWidth()
                                         .height(150.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
                                         ),
@@ -245,7 +245,7 @@ fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutView
                             Modifier
                                 .fillMaxWidth()
                                 .padding(top = 340.dp)
-                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp))
+                                .border(2.dp, Color.Black, shape = RoundedCornerShape(16.dp))
                                 .clickable { navController.navigate(
                                     Routes.Snap.route
                                 ) },

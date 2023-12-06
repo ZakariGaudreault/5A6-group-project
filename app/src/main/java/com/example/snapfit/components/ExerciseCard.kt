@@ -49,7 +49,7 @@ fun ExerciseCard(type: String, increment: (Int) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .border(5.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
+            .border(2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
             .padding(5.dp)
             .background(if (!isToggled) Color(0xE3FAE4EF) else Color(0xE3FFADD7))
             .clickable {
