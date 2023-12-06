@@ -9,14 +9,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
-import com.example.SnapFit.views.Authentication.about.AboutScreen
-import com.example.SnapFit.views.Authentication.about.UsScreen
 import com.example.snapfit.views.DeepLink.DeepLink
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.authentication.AuthViewModelFactory
+import com.example.snapfit.views.authentication.about.AboutScreen
 import com.example.snapfit.views.authentication.home.AuthScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
 import com.example.snapfit.views.authentication.signup.SignUpScreen
+import com.example.snapfit.views.authentication.us.UsScreen
 import com.example.snapfit.views.exercise.ExercisesScreen
 import com.example.snapfit.views.home.MainScreen
 import com.example.snapfit.views.profile.ProfileScreen
@@ -46,19 +46,16 @@ fun Router() {
 
     // ViewModels for authentication and profile screens
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())
-    val profileViewModel: ProfileViewModel =
-        viewModel(
-            factory = ProfileViewModelFactory(),
-        )
-    val progressViewModel: ProgressViewModel =
-        viewModel(
-            factory = ProgressViewModelFactory(),
-        )
+    val profileViewModel: ProfileViewModel = viewModel(
+        factory = ProfileViewModelFactory(),
+    )
+    val progressViewModel: ProgressViewModel = viewModel(
+        factory = ProgressViewModelFactory(),
+    )
 
-    val workoutViewModel: WorkoutViewModel =
-        viewModel(
-            factory = WorkoutViewModelFactory(),
-        )
+    val workoutViewModel: WorkoutViewModel = viewModel(
+        factory = WorkoutViewModelFactory(),
+    )
 
     CompositionLocalProvider(
         LocalNavController provides navController,
@@ -66,12 +63,12 @@ fun Router() {
         // NavHost defines the navigation structure and sets up various composable functions for each route
         NavHost(navController = navController, startDestination = Routes.Auth.route) {
             composable(Routes.Main.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     MainScreen(profileViewModel, workoutViewModel)
                 }
             }
             composable(Routes.PastWorkout.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     PastWorkoutScreen(profileViewModel, workoutViewModel)
                 }
             }
@@ -85,14 +82,11 @@ fun Router() {
             }
 
             composable(
-                "DeepLink",
-                // Note that this navDeepLink pattern has no relation to the route itself
-                deepLinks =
-                    listOf(
-                        navDeepLink { uriPattern = "example://compose.deeplink/?id={id}" },
-                    ),
-            ) {
-                    backStackEntry ->
+                Routes.DeepLink.route,
+                deepLinks = listOf(
+                    navDeepLink { uriPattern = "example://compose.deeplink/?id={id}" },
+                ),
+            ) { backStackEntry ->
                 DeepLink(backStackEntry.arguments?.getString("id"))
             }
 
@@ -107,31 +101,31 @@ fun Router() {
                 }
             }
             composable(Routes.Profile.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     ProfileScreen(authViewModel, profileViewModel, progressViewModel)
                 }
             }
 
             composable(Routes.About.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     AboutScreen(authViewModel = authViewModel, profileViewModel = profileViewModel)
                 }
             }
             composable(Routes.Us.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     UsScreen()
                 }
             }
 
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
                 val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     ExercisesScreen(type = exerciseType, workoutViewModel, profileViewModel)
                 }
             }
 
             composable(Routes.Workouts.route) {
-                RedirectToAuth(authViewModel) {
+                RedirectToAuth(authViewModel, profileViewModel) {
                     WorkoutScreen(workoutViewModel)
                 }
             }

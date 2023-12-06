@@ -1,4 +1,4 @@
-package com.example.SnapFit.views.Authentication.about
+package com.example.snapfit.views.authentication.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

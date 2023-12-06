@@ -19,10 +19,12 @@ import com.example.snapfit.views.profile.ProfileViewModel
 @Composable
 fun RedirectToAuth(
     authViewModel: AuthViewModel,
+    profileViewModel: ProfileViewModel,
     content: @Composable () -> Unit,
 ) {
     val navController = LocalNavController.current
     val auth by authViewModel.currentUser().collectAsState()
+    profileViewModel.getProfile(auth!!.email)
     println("going to $auth")
     if (auth != null) {
         MainLayout {
