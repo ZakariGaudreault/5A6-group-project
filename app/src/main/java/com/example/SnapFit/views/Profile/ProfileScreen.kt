@@ -1,6 +1,5 @@
 package com.example.snapfit.views.profile
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,11 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.snapfit.R
+import coil.compose.AsyncImage
 import com.example.snapfit.entities.progress.Progress
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
@@ -98,7 +96,7 @@ fun ProfileScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // CardList composable to display a list of cards
-        CardList(progress.asReversed())
+        CardList(progress)
     }
 }
 
@@ -141,18 +139,10 @@ fun CardItem(card: Progress) {
         ) {
             // Text composable displaying the card text with bold font
             Text(text = card.timestamp.toDate().toString(), fontWeight = FontWeight.Bold, fontSize = 20.sp)
-            Text(text = "${card.weight.toString()} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(text = "${card.weight} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             // Spacer composable for adding vertical space between text and image
             Spacer(modifier = Modifier.height(8.dp))
-            // Image composable displaying the card image
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = null,
-                modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-            )
+            AsyncImage(model = card.url, contentDescription = "image")
             // Button composable for potential actions related to the card item
             Button(onClick = { /* TODO: Implement delete action */ }) {
                 Text(text = "Delete")
