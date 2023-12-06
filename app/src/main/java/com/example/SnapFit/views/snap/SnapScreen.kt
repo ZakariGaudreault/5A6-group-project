@@ -3,7 +3,6 @@ package com.example.snapfit.views.snap
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,25 +26,21 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 // https://github.com/dheeraj-bhadoria/android-camera-example-and-compose-capture-image-jetpack-compose
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun SnapScreen(progressViewModel: ProgressViewModel,authViewModel: AuthViewModel) {
+fun SnapScreen(snapViewModel: SnapViewModel, progressViewModel: ProgressViewModel, authViewModel: AuthViewModel) {
     val context = LocalContext.current
     val file = context.createImageFile()
+
     val uri = FileProvider.getUriForFile(
         Objects.requireNonNull(context),
         BuildConfig.APPLICATION_ID + ".provider", file
     )
 
-    var capturedImageUri by remember {
-        mutableStateOf<Uri>(Uri.EMPTY)
-    }
-
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-            capturedImageUri = uri
+            snapViewModel.setUri(uri)
         }
 
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -58,6 +53,10 @@ fun SnapScreen(progressViewModel: ProgressViewModel,authViewModel: AuthViewModel
             Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
+
 
     Column(
         Modifier
@@ -79,11 +78,11 @@ fun SnapScreen(progressViewModel: ProgressViewModel,authViewModel: AuthViewModel
         }
     }
 
-    if (capturedImageUri.path?.isNotEmpty() == true) {
+    if (snapViewModel.capturedImageUri.value.path?.isNotEmpty() == true) {
         Image(
             modifier = Modifier
                 .padding(16.dp, 8.dp),
-            painter = rememberImagePainter(capturedImageUri),
+            painter = rememberImagePainter(snapViewModel.capturedImageUri.value),
             contentDescription = "null"
         )
     }
@@ -93,10 +92,9 @@ fun Context.createImageFile(): File {
     // Create an image file name
     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_" + timeStamp + "_"
-    val image = File.createTempFile(
+    return File.createTempFile(
         imageFileName, /* prefix */
         ".jpg", /* suffix */
         externalCacheDir      /* directory */
     )
-    return image
 }

@@ -21,6 +21,7 @@ import com.example.snapfit.views.profile.ProfileViewModelFactory
 import com.example.snapfit.views.progress.ProgressViewModel
 import com.example.snapfit.views.progress.ProgressViewModelFactory
 import com.example.snapfit.views.snap.SnapScreen
+import com.example.snapfit.views.snap.SnapViewModel
 import com.example.snapfit.views.workout.WorkoutScreen
 import com.example.snapfit.views.workout.WorkoutViewModel
 import com.example.snapfit.views.workout.WorkoutViewModelFactory
@@ -52,6 +53,8 @@ fun Router() {
         factory = WorkoutViewModelFactory(),
     )
 
+    val snapViewModel = SnapViewModel()
+
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {
@@ -63,9 +66,7 @@ fun Router() {
                 }
             }
             composable(Routes.Snap.route) {
-                RedirectToAuth(authViewModel) {
-                    SnapScreen(progressViewModel,authViewModel)
-                }
+                SnapScreen(snapViewModel,progressViewModel,authViewModel)
             }
             composable(Routes.Login.route) {
                 RedirectToHome(authViewModel, profileViewModel) {
@@ -93,7 +94,6 @@ fun Router() {
                     ExercisesScreen(type = exerciseType)
                 }
             }
-
             composable(Routes.Workouts.route) {
                 RedirectToAuth(authViewModel) {
                     WorkoutScreen(workoutViewModel)

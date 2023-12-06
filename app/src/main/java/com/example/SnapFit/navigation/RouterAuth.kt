@@ -24,8 +24,7 @@ fun RedirectToAuth(
 ) {
     val navController = LocalNavController.current
     val auth by authViewModel.currentUser().collectAsState()
-
-
+    println( "going to $auth")
     if (auth != null) {
         MainLayout {
             content()
@@ -43,7 +42,7 @@ fun RedirectToHome(
 ) {
     val navController = LocalNavController.current
     val auth by authViewModel.currentUser().collectAsState()
-
+    println( "leaving $auth")
 
     if (auth != null) {
         profileViewModel.getProfile(auth!!.email)

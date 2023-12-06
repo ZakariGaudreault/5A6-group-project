@@ -30,7 +30,7 @@ class ProgressViewModel(private val progressRepository: IProgressRepository) : V
     fun addProgress(progress: Progress) {
         viewModelScope.launch {
             progressRepository.addProgress(progress)
-            getAllProgress() // Refresh the list after adding a new progress entry
+            getAllProgress()
         }
     }
 
@@ -38,7 +38,7 @@ class ProgressViewModel(private val progressRepository: IProgressRepository) : V
     fun removeProgress(progress: Progress) {
         viewModelScope.launch {
             progressRepository.removeProgress(progress)
-            getAllProgress() // Refresh the list after removing a progress entry
+            getAllProgress()
         }
     }
 }
