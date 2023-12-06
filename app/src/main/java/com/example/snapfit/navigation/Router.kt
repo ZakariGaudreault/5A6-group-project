@@ -8,15 +8,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.snapfit.layout.AuthLayout
-import com.example.snapfit.layout.MainLayout
-import com.example.snapfit.views.Progress.ProgressViewModel
-import com.example.snapfit.views.Progress.ProgressViewModelFactory
-import com.example.snapfit.views.Workout.WorkoutViewModel
-import com.example.snapfit.views.Workout.WorkoutViewModelFactory
+import com.example.snapfit.views.authentication.home.AuthScreen
+import com.example.snapfit.views.progress.ProgressViewModel
+import com.example.snapfit.views.progress.ProgressViewModelFactory
+import com.example.snapfit.views.workout.WorkoutScreen
+import com.example.snapfit.views.workout.WorkoutViewModel
+import com.example.snapfit.views.workout.WorkoutViewModelFactory
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.authentication.AuthViewModelFactory
-import com.example.snapfit.views.authentication.home.AuthScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
 import com.example.snapfit.views.authentication.signup.SignUpScreen
 import com.example.snapfit.views.exercise.ExercisesScreen
@@ -24,7 +23,6 @@ import com.example.snapfit.views.home.MainScreen
 import com.example.snapfit.views.profile.ProfileScreen
 import com.example.snapfit.views.profile.ProfileViewModel
 import com.example.snapfit.views.profile.ProfileViewModelFactory
-import com.example.snapfit.views.workout.WorkoutsScreen
 
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 
@@ -51,54 +49,40 @@ fun Router() {
     ) {
         NavHost(navController = navController, startDestination = Routes.Auth.route) {
             composable(Routes.Main.route) {
-                RedirectToAuth(authViewModel, profileViewModel) {
-                    MainLayout {
-                        MainScreen(profileViewModel)
-                    }
+                RedirectToAuth(authViewModel) {
+                    MainScreen(profileViewModel)
                 }
             }
             composable(Routes.Login.route) {
                 RedirectToHome(authViewModel, profileViewModel) {
-                    AuthLayout {
-                        LoginScreen(authViewModel, profileViewModel)
-                    }
+                    LoginScreen(authViewModel, profileViewModel)
                 }
             }
             composable(Routes.SignUp.route) {
                 RedirectToHome(authViewModel, profileViewModel) {
-                    AuthLayout {
-                        SignUpScreen(authViewModel, profileViewModel)
-                    }
+                    SignUpScreen(authViewModel, profileViewModel)
                 }
             }
             composable(Routes.Auth.route) {
                 RedirectToHome(authViewModel, profileViewModel) {
-                    AuthLayout {
-                        AuthScreen(authViewModel)
-                    }
+                    AuthScreen(profileViewModel, authViewModel)
                 }
             }
             composable(Routes.Profile.route) {
-                RedirectToAuth(authViewModel, profileViewModel) {
-                    MainLayout {
-                        ProfileScreen(authViewModel, profileViewModel)
-                    }
+                RedirectToAuth(authViewModel) {
+                    ProfileScreen(authViewModel, profileViewModel)
                 }
             }
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
                 val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
-                RedirectToAuth(authViewModel, profileViewModel) {
-                    MainLayout {
-                        ExercisesScreen(type = exerciseType)
-                    }
+                RedirectToAuth(authViewModel) {
+                    ExercisesScreen(type = exerciseType)
                 }
             }
 
             composable(Routes.Workouts.route) {
-                RedirectToAuth(authViewModel, profileViewModel) {
-                    MainLayout {
-                        WorkoutsScreen()
-                    }
+                RedirectToAuth(authViewModel) {
+                    WorkoutScreen(workoutViewModel)
                 }
             }
         }

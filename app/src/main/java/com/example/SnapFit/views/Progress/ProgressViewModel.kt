@@ -1,11 +1,11 @@
-package com.example.snapfit.views.Progress
+package com.example.snapfit.views.progress
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.snapfit.MyApp
-import com.example.snapfit.entities.Progress.IProgressRepository
-import com.example.snapfit.entities.Progress.Progress
+import com.example.snapfit.entities.progress.IProgressRepository
+import com.example.snapfit.entities.progress.Progress
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

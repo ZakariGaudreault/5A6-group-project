@@ -1,7 +1,7 @@
 package com.example.snapfit.entities.profile
 
-import com.example.snapfit.entities.Progress.IProgressRepository
-import com.example.snapfit.entities.Progress.Progress
+import com.example.snapfit.entities.progress.IProgressRepository
+import com.example.snapfit.entities.progress.Progress
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose

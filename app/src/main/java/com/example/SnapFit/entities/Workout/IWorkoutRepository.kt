@@ -1,4 +1,4 @@
-package com.example.snapfit.entities.Workout
+package com.example.snapfit.entities.workout
 
 import kotlinx.coroutines.flow.Flow
 

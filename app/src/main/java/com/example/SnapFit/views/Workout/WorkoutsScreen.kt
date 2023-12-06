@@ -1,7 +1,6 @@
 package com.example.snapfit.views.workout
 
 import WorkoutCard
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,9 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 
-@SuppressLint("SuspiciousIndentation")
 @Composable
-fun WorkoutsScreen() {
+fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
     var homeworkout by rememberSaveable { mutableStateOf(true) }
     var gymworkout by rememberSaveable { mutableStateOf(true) }
     var outdoorworkout by rememberSaveable { mutableStateOf(true) }
@@ -62,9 +60,9 @@ fun WorkoutsScreen() {
 
     Column(
         modifier =
-            Modifier
-                .padding(10.dp)
-                .verticalScroll(rememberScrollState()),
+        Modifier
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
     ) {
         Text(
             text = "Workouts",
@@ -76,18 +74,20 @@ fun WorkoutsScreen() {
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
             colors =
-                SliderDefaults.colors(
-                    thumbColor = MaterialTheme.colorScheme.secondary,
-                    activeTrackColor = MaterialTheme.colorScheme.secondary,
-                    inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-                ),
+            SliderDefaults.colors(
+                thumbColor = MaterialTheme.colorScheme.secondary,
+                activeTrackColor = MaterialTheme.colorScheme.secondary,
+                inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
             steps = 8,
             valueRange = 15f..60f,
         )
 
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(vertical = 10.dp).padding(horizontal = 42.dp),
+            modifier = Modifier
+                .padding(vertical = 10.dp)
+                .padding(horizontal = 42.dp),
         ) {
             Button(
                 onClick = { homeworkout = !homeworkout },

@@ -1,4 +1,4 @@
-package com.example.snapfit.views.Progress
+package com.example.snapfit.views.progress
 
 import android.app.DatePickerDialog
 import android.content.Context

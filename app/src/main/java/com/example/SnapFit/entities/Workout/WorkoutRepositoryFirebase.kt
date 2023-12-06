@@ -1,4 +1,4 @@
-package com.example.snapfit.entities.Workout
+package com.example.snapfit.entities.workout
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose

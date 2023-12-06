@@ -1,9 +1,9 @@
 package com.example.snapfit
 
 import android.content.Context
-import com.example.snapfit.entities.Progress.IProgressRepository
-import com.example.snapfit.entities.Workout.IWorkoutRepository
-import com.example.snapfit.entities.Workout.WorkoutRepositoryFirebase
+import com.example.snapfit.entities.progress.IProgressRepository
+import com.example.snapfit.entities.workout.IWorkoutRepository
+import com.example.snapfit.entities.workout.WorkoutRepositoryFirebase
 import com.example.snapfit.entities.authentication.IAuthRepository
 import com.example.snapfit.entities.authentication.AuthRepositoryFirebase
 import com.example.snapfit.entities.profile.IProfileRepository

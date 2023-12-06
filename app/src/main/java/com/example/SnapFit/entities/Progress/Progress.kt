@@ -1,4 +1,4 @@
-package com.example.snapfit.entities.Progress
+package com.example.snapfit.entities.progress
 
 import android.media.Image
 import com.google.firebase.Timestamp

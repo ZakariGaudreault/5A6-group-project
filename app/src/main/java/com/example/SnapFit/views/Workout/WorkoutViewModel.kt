@@ -1,11 +1,11 @@
-package com.example.snapfit.views.Workout
+package com.example.snapfit.views.workout
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.snapfit.MyApp
-import com.example.snapfit.entities.Workout.IWorkoutRepository
-import com.example.snapfit.entities.Workout.Workout
+import com.example.snapfit.entities.workout.IWorkoutRepository
+import com.example.snapfit.entities.workout.Workout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
