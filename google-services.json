@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "860941781936",
+    "project_id": "snapfitapp-71d99",
+    "storage_bucket": "snapfitapp-71d99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860941781936:android:b9bfdd628659fae4ff6475",
+        "android_client_info": {
+          "package_name": "com.example.snapfit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-yGEiZyGLb6AJG24QhOTbaQDVWtPTsDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
