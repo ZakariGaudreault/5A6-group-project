@@ -2,7 +2,6 @@ package com.example.snapfit.views.authentication.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -113,7 +112,6 @@ fun LoginScreen(
                     Modifier
                         .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 16.sp),
                 keyboardOptions =
@@ -121,7 +119,7 @@ fun LoginScreen(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next,
                     ),
-                placeholder = { Text("Enter UserName", color = Color.Black) },
+                placeholder = { Text("Enter Email", color = Color.Black) },
             )
 
             TextField(
@@ -132,7 +130,6 @@ fun LoginScreen(
                     Modifier
                         .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 16.sp),
                 keyboardOptions =
