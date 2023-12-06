@@ -62,7 +62,7 @@ fun ProfileScreen(
     ) {
         // Text composable displaying the user's name and indicating it's the profile screen
         Text(
-            text = "${profileState.value.name}'s profile",
+            text = "Hello ${profileState.value.name}",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
         )
@@ -70,7 +70,7 @@ fun ProfileScreen(
         // Row composable containing buttons for navigating to workout history and snaps
         Row {
             Button(onClick = { /* TODO: Navigate to workout history */ }, modifier = Modifier.padding(end = 8.dp)) {
-                Text(text = "History of Workouts")
+                Text(text = "Completed workouts")
             }
 
             Button(onClick = { /* TODO: Navigate to snaps */ }) {
@@ -80,14 +80,6 @@ fun ProfileScreen(
 
         // Row composable containing buttons for uploading, viewing graphs, and logging out
         Row {
-            Button(onClick = {
-                navController.navigate(Routes.Upload.route)
-            }, modifier = Modifier.padding(end = 8.dp)) {
-                Text(text = "Upload")
-            }
-            Button(onClick = { /* TODO: Navigate to graph */ }, modifier = Modifier.padding(end = 8.dp)) {
-                Text(text = "Graph")
-            }
             Button(onClick = {
                 runBlocking {
                     authViewModel.signOut()
