@@ -28,7 +28,7 @@ import com.example.snapfit.views.profile.ProfileViewModel
  * Class that showcase the features of a user profile
  */
 
-//https://medium.com/@emmanuelmuturia/how-to-add-and-retrieve-images-from-firebase-storage-using-jetpack-compose-dedda31ff66d
+// https://medium.com/@emmanuelmuturia/how-to-add-and-retrieve-images-from-firebase-storage-using-jetpack-compose-dedda31ff66d
 
 /**
  * Composable function for the profile screen of the app, displaying user information, navigation buttons,
@@ -40,7 +40,7 @@ import com.example.snapfit.views.profile.ProfileViewModel
 @Composable
 fun PastWorkoutScreen(
     profileViewModel: ProfileViewModel,
-    workoutViewModel: WorkoutViewModel
+    workoutViewModel: WorkoutViewModel,
 ) {
     // Access the navigation controller
     val navController = LocalNavController.current
@@ -84,7 +84,6 @@ fun CardList(workout: List<Workout>) {
     }
 }
 
-
 /**
  * Composable function for displaying an individual card item.
  *
@@ -92,29 +91,33 @@ fun CardList(workout: List<Workout>) {
  */
 @Composable
 fun CardItem(card: Workout) {
-val navController = LocalNavController.current
+    val navController = LocalNavController.current
     // Card composable to display a card item with text and an image
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp).clickable { navController.navigate("${Routes.Exercises.route}/${card.name}") },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(
+                    8.dp,
+                ).clickable { navController.navigate("${Routes.Exercises.route}/${card.name}") },
     ) {
         // Column composable to arrange child composables vertically within the card
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             // Text composable displaying the card text with bold font
             Text(
                 text = card.name,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 20.sp,
             )
             Text(text = "${card.date.toDate()} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             // Spacer composable for adding vertical space between text and image
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text="${card.duration}")
+            Text(text = "${card.duration}")
             // Button composable for potential actions related to the card item
         }
     }

@@ -4,5 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IWorkoutRepository {
     suspend fun saveWorkout(workout: Workout)
-    suspend fun getAllWorkouts(email:String): Flow<List<Workout>>
+
+    suspend fun getAllWorkouts(email: String): Flow<List<Workout>>
 }

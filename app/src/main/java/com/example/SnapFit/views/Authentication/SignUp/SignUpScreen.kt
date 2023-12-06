@@ -102,8 +102,7 @@ fun SignUpScreen(
 
             TextField(
                 value = email,
-                onValueChange = {if(!it.contains("\n")) email = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) email = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -119,8 +118,7 @@ fun SignUpScreen(
             )
             TextField(
                 value = username,
-                onValueChange = {if(!it.contains("\n")) username = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) username = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -137,8 +135,7 @@ fun SignUpScreen(
 
             TextField(
                 value = password,
-                onValueChange = {if(!it.contains("\n")) password = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) password = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -156,8 +153,7 @@ fun SignUpScreen(
 
             TextField(
                 value = confirmPassword,
-                onValueChange = {if(!it.contains("\n")) confirmPassword = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) confirmPassword = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -175,8 +171,7 @@ fun SignUpScreen(
 
             TextField(
                 value = orignalWeight,
-                onValueChange = {if(!it.contains("\n")) orignalWeight = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) orignalWeight = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -268,8 +263,12 @@ fun SignUpScreen(
                         ),
                 enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword && orignalWeight.length > 0 && orignalWeight.toDoubleOrNull() != null,
             ) {
-                Text("Sign Up",fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold, color = Color.White)
+                Text(
+                    "Sign Up",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                )
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")

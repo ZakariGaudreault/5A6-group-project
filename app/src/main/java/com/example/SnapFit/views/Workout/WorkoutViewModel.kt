@@ -31,7 +31,6 @@ class WorkoutViewModel(private val workoutRepository: IWorkoutRepository) : View
         _toggledCount.value = 0
     }
 
-
     /** Retrieves the list of all workouts */
     fun getAllWorkouts(email: String) {
         viewModelScope.launch {

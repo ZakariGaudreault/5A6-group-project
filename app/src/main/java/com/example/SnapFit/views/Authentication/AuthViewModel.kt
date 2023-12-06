@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 * AuthViewModel handles authentication operations and updates UI through StateFlows.
  */
 
-
 class AuthViewModel(private val authRepository: IAuthRepository) : ViewModel() {
     private val _signInResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)
     private val _signUpResult = MutableStateFlow<ResultAuth<Boolean>?>(ResultAuth.Inactive)

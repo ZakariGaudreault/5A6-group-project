@@ -8,7 +8,6 @@ import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.profile.ProfileViewModel
 
-
 /**
  * Composable function to redirect to the authentication screen if the user is not authenticated or if the
  * active profile doesn't match the authenticated user's profile.
@@ -24,7 +23,7 @@ fun RedirectToAuth(
 ) {
     val navController = LocalNavController.current
     val auth by authViewModel.currentUser().collectAsState()
-    println( "going to $auth")
+    println("going to $auth")
     if (auth != null) {
         MainLayout {
             content()
@@ -42,7 +41,7 @@ fun RedirectToHome(
 ) {
     val navController = LocalNavController.current
     val auth by authViewModel.currentUser().collectAsState()
-    println( "leaving $auth")
+    println("leaving $auth")
 
     if (auth != null) {
         profileViewModel.getProfile(auth!!.email)

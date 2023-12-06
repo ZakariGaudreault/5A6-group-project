@@ -4,6 +4,7 @@ import WorkoutCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
-import com.example.snapfit.views.profile.ProfileViewModel
 
 @Composable
 fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
@@ -34,42 +34,37 @@ fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
     var outdoorworkout by rememberSaveable { mutableStateOf(true) }
     var sliderPosition by rememberSaveable { mutableFloatStateOf(60f) }
 
-    val backgroundColorHome =
-        if (homeworkout) {
-            colorResource(R.color.purple_500)
-        } else {
-            colorResource(R.color.purple_200)
-        }
-    val backgroundColorGym =
-        if (gymworkout) {
-            colorResource(R.color.purple_500)
-        } else {
-            colorResource(R.color.purple_200)
-        }
-    val backgroundColorOutdoor =
-        if (outdoorworkout) {
-            colorResource(R.color.purple_500)
-        } else {
-            colorResource(R.color.purple_200)
-        }
+    val backgroundColorHome = if (homeworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
+    val backgroundColorGym = if (gymworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
+    val backgroundColorOutdoor = if (outdoorworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
 
     Column(
-        modifier =
-        Modifier
+        modifier = Modifier
             .padding(10.dp)
             .verticalScroll(rememberScrollState()),
     ) {
         Text(
             text = "Workouts",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
         )
         Text(text = "Max duration: ${sliderPosition.toInt()} minutes")
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
-            colors =
-            SliderDefaults.colors(
+            colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.secondary,
                 activeTrackColor = MaterialTheme.colorScheme.secondary,
                 inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -79,10 +74,8 @@ fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
         )
 
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(vertical = 10.dp)
-                .padding(horizontal = 42.dp),
+            modifier = Modifier.padding(vertical = 10.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Button(
                 onClick = { homeworkout = !homeworkout },

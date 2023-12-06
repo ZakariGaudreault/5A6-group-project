@@ -41,22 +41,29 @@ contains a title for the type, a number of reps to accomplish it and is intracta
  * ExerciseCard(type = "burpees")
  */
 @Composable
-fun ExerciseCard(type: String, increment: (Int) -> Unit) {
+fun ExerciseCard(
+    type: String,
+    increment: (Int) -> Unit,
+) {
     val navController = LocalNavController.current
     var isToggled by rememberSaveable { mutableStateOf(false) }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp)
-            .border(2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
-            .padding(5.dp)
-            .background(if (!isToggled) Color(0xE3FAE4EF) else Color(0xE3FFADD7))
-            .clickable {
-                isToggled = !isToggled;
-                if (!isToggled) increment(-1)
-                else increment(+1)
-            },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(5.dp)
+                .border(2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
+                .padding(5.dp)
+                .background(if (!isToggled) Color(0xE3FAE4EF) else Color(0xE3FFADD7))
+                .clickable {
+                    isToggled = !isToggled
+                    if (!isToggled) {
+                        increment(-1)
+                    } else {
+                        increment(+1)
+                    }
+                },
     ) {
         Column(
             modifier = Modifier.weight(1f),
@@ -69,35 +76,37 @@ fun ExerciseCard(type: String, increment: (Int) -> Unit) {
                 fontWeight = FontWeight.SemiBold,
             )
 
-            val description = when (type) {
-                "Jogging" -> "\n 1km jogging"
-                "burpees" -> "\n10 reps"
-                "crunch" -> "\n30 reps"
-                "rest" -> "\n30 seconds"
-                "starfish" -> "\n60 seconds"
-                "push up" -> "\n15 reps"
-                "dumbbell curl" -> "\n20 reps"
-                "repeat" -> "\n repeat 3 times"
-                "repeatTwo" -> "\n repeat 2 times"
-                "cobra stretch" -> "\n 45 seconds static hold"
-                else -> "16 exercises\n45 minutes"
-            }
+            val description =
+                when (type) {
+                    "Jogging" -> "\n 1km jogging"
+                    "burpees" -> "\n10 reps"
+                    "crunch" -> "\n30 reps"
+                    "rest" -> "\n30 seconds"
+                    "starfish" -> "\n60 seconds"
+                    "push up" -> "\n15 reps"
+                    "dumbbell curl" -> "\n20 reps"
+                    "repeat" -> "\n repeat 3 times"
+                    "repeatTwo" -> "\n repeat 2 times"
+                    "cobra stretch" -> "\n 45 seconds static hold"
+                    else -> "16 exercises\n45 minutes"
+                }
 
             Text(text = description)
         }
 
-        val imageResourceId = when (type) {
-            "push up" -> R.drawable.pushup
-            "burpees" -> R.drawable.burpees
-            "crunch" -> R.drawable.crounch
-            "rest" -> R.drawable.rest
-            "Jogging" -> R.drawable.highheels
-            "starfish" -> R.drawable.starfish
-            "dumbbell curl" -> R.drawable.dumbbellcurl
-            "repeat", "repeatTwo" -> R.drawable.repeat
-            "cobra stretch" -> R.drawable.cobrastretch
-            else -> R.drawable.chocolate
-        }
+        val imageResourceId =
+            when (type) {
+                "push up" -> R.drawable.pushup
+                "burpees" -> R.drawable.burpees
+                "crunch" -> R.drawable.crounch
+                "rest" -> R.drawable.rest
+                "Jogging" -> R.drawable.highheels
+                "starfish" -> R.drawable.starfish
+                "dumbbell curl" -> R.drawable.dumbbellcurl
+                "repeat", "repeatTwo" -> R.drawable.repeat
+                "cobra stretch" -> R.drawable.cobrastretch
+                else -> R.drawable.chocolate
+            }
 
         val painter = painterResource(id = imageResourceId)
 
@@ -105,7 +114,8 @@ fun ExerciseCard(type: String, increment: (Int) -> Unit) {
             painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Fit,
-            modifier = Modifier.sizeIn(
+            modifier =
+                Modifier.sizeIn(
                     minHeight = 150.dp,
                     minWidth = 200.dp,
                     maxWidth = 150.dp,
@@ -114,5 +124,3 @@ fun ExerciseCard(type: String, increment: (Int) -> Unit) {
         )
     }
 }
-
-

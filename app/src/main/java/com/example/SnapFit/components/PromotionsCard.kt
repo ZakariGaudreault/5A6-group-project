@@ -28,26 +28,27 @@ import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 
 @Composable
-fun PromotionsCard(email:String?) {
+fun PromotionsCard(email: String?) {
     val localContext = LocalContext.current
     val activity = localContext as ComponentActivity
     val navController = LocalNavController.current
     Column {
         Row(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(5.dp)
-                .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
-                .padding(5.dp)
-                .clickable {
-                    val resultIntent = activity.intent
-                    resultIntent.putExtra(
-                        "resultData", "the offer has been claimed by $email"
-                    ) // Set the value to return as a result
-                    localContext.setResult(Activity.RESULT_OK, resultIntent)
-                    localContext.finish() // Finish the activity
-                },
+                Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
+                    .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
+                    .padding(5.dp)
+                    .clickable {
+                        val resultIntent = activity.intent
+                        resultIntent.putExtra(
+                            "resultData",
+                            "the offer has been claimed by $email",
+                        ) // Set the value to return as a result
+                        localContext.setResult(Activity.RESULT_OK, resultIntent)
+                        localContext.finish() // Finish the activity
+                    },
         ) {
             Column(
                 modifier = Modifier.weight(1f),
@@ -59,7 +60,6 @@ fun PromotionsCard(email:String?) {
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                 )
-
             }
             Image(
                 painter = painterResource(id = R.drawable.fifty),
@@ -68,9 +68,8 @@ fun PromotionsCard(email:String?) {
                 modifier = Modifier.weight(1f),
             )
         }
-        Button(onClick = {navController.navigate(Routes.Auth.route)}) {
+        Button(onClick = { navController.navigate(Routes.Auth.route) }) {
             Text(text = "Log in")
         }
     }
-    
 }

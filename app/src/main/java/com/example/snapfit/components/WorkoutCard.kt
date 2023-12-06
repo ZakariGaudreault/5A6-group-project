@@ -23,12 +23,10 @@ import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 
-
 /**
 Composable function for rendering a workout card, displaying details about a specific type of workout.
 
  */
-
 
 /**
 * This function generates a visually appealing card with information about the workout type,

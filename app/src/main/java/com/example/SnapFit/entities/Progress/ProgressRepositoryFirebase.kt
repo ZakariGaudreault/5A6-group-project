@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
-//https://github.com/alexmamo/CloudStorageJetpackCompose/blob/master/app/src/main/java/ro/alexmamo/cloudstoragejetpackcompose/data/repository/ProfileImageRepositoryImpl.kt
+// https://github.com/alexmamo/CloudStorageJetpackCompose/blob/master/app/src/main/java/ro/alexmamo/cloudstoragejetpackcompose/data/repository/ProfileImageRepositoryImpl.kt
 class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: FirebaseStorage) :
     IProgressRepository {
     private val dbProgress = db.collection("Progress")
@@ -20,9 +20,10 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
     // firestore
     override suspend fun addProgress(progress: Progress): Boolean {
         try {
-            val downloadUrl = storage.reference.child(progress.email).child(progress.uri)
-                .putFile(Uri.parse(progress.uri)).await()
-                .storage.downloadUrl.await()
+            val downloadUrl =
+                storage.reference.child(progress.email).child(progress.uri)
+                    .putFile(Uri.parse(progress.uri)).await()
+                    .storage.downloadUrl.await()
 
             progress.url = downloadUrl.toString()
             dbProgress.document().set(progress)
@@ -49,7 +50,7 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
         callbackFlow {
             // Listen for changes on entire collection
             val subscription =
-                dbProgress.whereEqualTo("email", email).addSnapshotListener() { snapshot, error ->
+                dbProgress.whereEqualTo("email", email).addSnapshotListener { snapshot, error ->
                     if (error != null) {
                         // An error occurred
                         println("Listen failed: $error")
@@ -63,7 +64,9 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
                             trySend(progress)
                         } else {
                             println("Progress has become null")
-                            trySend(listOf<Progress>()) // If there is no saved profile, then send a default object
+                            trySend(
+                                listOf<Progress>(),
+                            ) // If there is no saved profile, then send a default object
                         }
                     } else {
                         // The user document does not exist or has no data

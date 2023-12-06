@@ -31,7 +31,7 @@ import kotlinx.coroutines.runBlocking
  * Class that showcase the features of a user profile
  */
 
-//https://medium.com/@emmanuelmuturia/how-to-add-and-retrieve-images-from-firebase-storage-using-jetpack-compose-dedda31ff66d
+// https://medium.com/@emmanuelmuturia/how-to-add-and-retrieve-images-from-firebase-storage-using-jetpack-compose-dedda31ff66d
 
 /**
  * Composable function for the profile screen of the app, displaying user information, navigation buttons,
@@ -44,7 +44,7 @@ import kotlinx.coroutines.runBlocking
 fun ProfileScreen(
     authViewModel: AuthViewModel,
     profileViewModel: ProfileViewModel,
-    progressViewModel: ProgressViewModel
+    progressViewModel: ProgressViewModel,
 ) {
     // Access the navigation controller
     val navController = LocalNavController.current
@@ -102,7 +102,6 @@ fun CardList(progress: List<Progress>) {
     }
 }
 
-
 /**
  * Composable function for displaying an individual card item.
  *
@@ -110,24 +109,25 @@ fun CardList(progress: List<Progress>) {
  */
 @Composable
 fun CardItem(card: Progress) {
-
     // Card composable to display a card item with text and an image
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
     ) {
         // Column composable to arrange child composables vertically within the card
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             // Text composable displaying the card text with bold font
             Text(
                 text = card.timestamp.toDate().toString(),
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 20.sp,
             )
             Text(text = "${card.weight} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             // Spacer composable for adding vertical space between text and image

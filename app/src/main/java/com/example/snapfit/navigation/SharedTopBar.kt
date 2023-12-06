@@ -42,7 +42,7 @@ fun SharedTopBar(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 40.sp,
                 fontFamily = FontFamily.Cursive,
-                modifier = Modifier.clickable {    navController.navigate(Routes.About.route)}
+                modifier = Modifier.clickable { navController.navigate(Routes.About.route) },
             )
         },
         // Logic for showing/hiding the back button
@@ -54,9 +54,11 @@ fun SharedTopBar(
                         contentDescription = "Go Back",
                     )
                 }
-
             }
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor =  MaterialTheme.colorScheme.background)
+        colors =
+            TopAppBarDefaults.smallTopAppBarColors(
+                containerColor = MaterialTheme.colorScheme.background,
+            ),
     )
 }

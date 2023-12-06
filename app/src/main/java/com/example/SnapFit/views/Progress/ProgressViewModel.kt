@@ -18,7 +18,7 @@ class ProgressViewModel(private val progressRepository: IProgressRepository) : V
     val activeProgress: StateFlow<List<Progress>> = _activeProgress.asStateFlow()
 
     /** Retrieves the list of all progress entries */
-    fun getAllProgress(email:String) {
+    fun getAllProgress(email: String) {
         viewModelScope.launch {
             progressRepository.getAllProgress(email).collect { progress: List<Progress> ->
                 _activeProgress.value = progress

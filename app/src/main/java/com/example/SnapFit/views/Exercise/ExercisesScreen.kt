@@ -29,47 +29,52 @@ import com.example.snapfit.views.workout.WorkoutViewModel
  */
 @Composable
 fun ExercisesScreen(
-    type: String, workoutViewModel: WorkoutViewModel, profileViewModel: ProfileViewModel
+    type: String,
+    workoutViewModel: WorkoutViewModel,
+    profileViewModel: ProfileViewModel,
 ) {
     val counter by workoutViewModel.toggledCount.collectAsState()
     val profile by profileViewModel.activeProfile.collectAsState()
     val navController = LocalNavController.current
 
-
     LaunchedEffect(true) {
         workoutViewModel.resetCounter()
     }
     Column(
-        modifier = Modifier
-            .padding(10.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = type,
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
         )
 
         // Ideally, instead of hardcoding, we would have either a local storage, or database online
-        val exerciseList = when (type) {
-            "strength" -> listOf("push up", "burpees", "rest", "crunch", "dumbbell curl")
-            "cardio" -> listOf("Jogging", "burpees", "crunch", "starfish")
-            "no equipment" -> listOf("push up", "burpees", "rest", "crunch")
-            "flexibility" -> listOf("crunch", "cobra stretch", "starfish", "rest")
-            else -> listOf("pushup") // failsafe
-        }
+        val exerciseList =
+            when (type) {
+                "strength" -> listOf("push up", "burpees", "rest", "crunch", "dumbbell curl")
+                "cardio" -> listOf("Jogging", "burpees", "crunch", "starfish")
+                "no equipment" -> listOf("push up", "burpees", "rest", "crunch")
+                "flexibility" -> listOf("crunch", "cobra stretch", "starfish", "rest")
+                else -> listOf("pushup") // failsafe
+            }
 
-        val duration: Double = when (type) {
-            "strength" -> 30.0
-            "cardio" -> 20.0
-            "no equipment" -> 45.0
-            "flexibility" -> 50.0
-            else -> 0.0
-        }
+        val duration: Double =
+            when (type) {
+                "strength" -> 30.0
+                "cardio" -> 20.0
+                "no equipment" -> 45.0
+                "flexibility" -> 50.0
+                else -> 0.0
+            }
 
         exerciseList.forEach { exercise ->
             ExerciseCard(exercise, workoutViewModel::incrementCounter)
@@ -77,15 +82,20 @@ fun ExercisesScreen(
 
         Button(
             onClick = {
-                val workout = Workout(
-                    profile.email, type, duration, exerciseList
-                );workoutViewModel.addWorkout(
-                workout
-            )
+                val workout =
+                    Workout(
+                        profile.email,
+                        type,
+                        duration,
+                        exerciseList,
+                    )
+                ;workoutViewModel.addWorkout(
+                    workout,
+                )
                 navController.popBackStack()
             },
             modifier = Modifier.padding(horizontal = 125.dp, vertical = 8.dp),
-            enabled = counter == exerciseList.size
+            enabled = counter == exerciseList.size,
         ) {
             Text(text = "Complete")
         }

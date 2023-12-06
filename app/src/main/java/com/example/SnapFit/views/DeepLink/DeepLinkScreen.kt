@@ -15,12 +15,12 @@ import androidx.compose.ui.unit.sp
 import com.example.SnapFit.components.PromotionsCard
 
 @Composable
-fun DeepLink(email:String?) {
+fun DeepLink(email: String?) {
     Column(
         modifier =
-        Modifier
-            .padding(10.dp)
-            .verticalScroll(rememberScrollState()),
+            Modifier
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState()),
     ) {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -30,7 +30,6 @@ fun DeepLink(email:String?) {
             )
 
             PromotionsCard(email)
-
         }
     }
 }

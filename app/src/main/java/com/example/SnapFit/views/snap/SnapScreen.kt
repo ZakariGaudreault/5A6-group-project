@@ -55,7 +55,7 @@ import java.util.Objects
 fun SnapScreen(
     progressViewModel: ProgressViewModel,
     authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel
+    profileViewModel: ProfileViewModel,
 ) {
     val context = LocalContext.current
     val file = context.createImageFile()
@@ -65,29 +65,35 @@ fun SnapScreen(
     val auth by authViewModel.currentUser().collectAsState()
     val navController = LocalNavController.current
 
-    val uri = FileProvider.getUriForFile(
-        Objects.requireNonNull(context), BuildConfig.APPLICATION_ID + ".provider", file
-    )
+    val uri =
+        FileProvider.getUriForFile(
+            Objects.requireNonNull(context),
+            BuildConfig.APPLICATION_ID + ".provider",
+            file,
+        )
 
-    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-        capturedImageUri = uri
-    }
-
-    val permissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) {
-        if (it) {
-            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-            cameraLauncher.launch(uri)
-        } else {
-            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+    val cameraLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
+            capturedImageUri = uri
         }
-    }
+
+    val permissionLauncher =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestPermission(),
+        ) {
+            if (it) {
+                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+                cameraLauncher.launch(uri)
+            } else {
+                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     Column(
         Modifier
             .fillMaxSize()
-            .padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally
+            .padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(onClick = {
             val permissionCheckResult =
@@ -106,22 +112,24 @@ fun SnapScreen(
             Image(
                 modifier = Modifier.padding(16.dp, 8.dp),
                 painter = rememberImagePainter(capturedImageUri),
-                contentDescription = "null"
+                contentDescription = "null",
             )
         }
 
         TextField(
             value = weight,
             onValueChange = { if (!it.contains("\n")) weight = it },
-            modifier = Modifier
-                .size(325.dp, 90.dp)
-                .padding(8.dp)
-                .padding(8.dp),
+            modifier =
+                Modifier
+                    .size(325.dp, 90.dp)
+                    .padding(8.dp)
+                    .padding(8.dp),
             textStyle = TextStyle(fontSize = 14.sp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done,
-            ),
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done,
+                ),
             placeholder = { Text("Current Weight (lb)", color = Color.Gray) },
         )
 
@@ -132,9 +140,10 @@ fun SnapScreen(
                 Text(text = "Cancel")
             }
             Button(onClick = {
-                val progress = Progress(auth!!.email, weight.toDouble(), capturedImageUri.toString())
+                val progress =
+                    Progress(auth!!.email, weight.toDouble(), capturedImageUri.toString())
                 progressViewModel.addProgress(progress)
-                profile.currentWeight = weight.toDouble() //Sets the new current weight
+                profile.currentWeight = weight.toDouble() // Sets the new current weight
                 profileViewModel.setProfile(profile) // saves it in the db
                 navController.navigate(Routes.Profile.route)
             }, enabled = weight.isNotEmpty()) {
@@ -149,8 +158,8 @@ fun Context.createImageFile(): File {
     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_" + timeStamp + "_"
     return File.createTempFile(
-        imageFileName, /* prefix */
-        ".jpg", /* suffix */
-        externalCacheDir      /* directory */
+        imageFileName, // prefix
+        ".jpg", // suffix
+        externalCacheDir, // directory
     )
 }

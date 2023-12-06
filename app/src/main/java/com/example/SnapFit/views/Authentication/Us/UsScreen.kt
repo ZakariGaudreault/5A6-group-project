@@ -2,7 +2,6 @@ package com.example.SnapFit.views.Authentication.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,9 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,9 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
-import com.example.snapfit.navigation.Routes
-import com.example.snapfit.views.authentication.AuthViewModel
-import com.example.snapfit.views.profile.ProfileViewModel
 
 /**
  * Sign up screen for when a user creates an account
@@ -45,13 +39,12 @@ import com.example.snapfit.views.profile.ProfileViewModel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(
-    authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel,
-) {
+fun UsScreen() {
     val navController = LocalNavController.current
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         // Background Image
         Image(
@@ -65,12 +58,14 @@ fun AboutScreen(
             contentScale = ContentScale.Crop,
         )
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier =
+                Modifier
+                    .fillMaxSize(),
             // Add top padding of 16dp
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "How to use",
+                text = "Motivation",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -84,11 +79,10 @@ fun AboutScreen(
                             .fillMaxWidth()
                             .height(520.dp)
                             .border(
-                                2.dp,
+                                3.dp,
                                 Color.Black,
                                 shape = RoundedCornerShape(16.dp),
-                            )
-                            .clickable { navController.navigate(Routes.Us.route) },
+                            ),
                     colors =
                         CardDefaults.cardColors(
                             containerColor = Color.White,
@@ -97,15 +91,9 @@ fun AboutScreen(
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.verticalScroll(rememberScrollState())
                     ) {
                         Text(
-                            text = "There are three screens:\n\n" +
-                                "Home screen is where you can see your stats. Click on your number of workouts to see your past workouts." +
-                                "Click on the motivation and use the camera to take a snap to keep track of your shape and weight.\n\n" +
-                                "Workout screen is where all the workouts are available, filter them by the ones you want to do." +
-                                "Click on one, and you have the list of exercises. Click on each exercises, to complete them, at the end, you'll be able to complete the workout" +
-                                "\n\nThe final page is your user page, with all the snaps you have",
+                            text = "SnapFit fitness app project created by passion to make an application we can be proud to demonstrate. Something unique that will be able to help people by making a positive impact on the lives of individuals. In today's busy world, maintaining a consistent fitness regimen can be challenging. This is why we want to create an application that will help people stay active without complicating how to stay in shape.",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             modifier =
@@ -117,7 +105,7 @@ fun AboutScreen(
                         Spacer(modifier = Modifier.height(20.dp))
 
                         Text(
-                            text = "Click anywhere in the box to see why we crated this app.",
+                            text = "Contact us: Snapfit@hotmail.com \n 514-123-456",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             modifier =

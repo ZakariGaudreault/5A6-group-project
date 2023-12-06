@@ -17,6 +17,6 @@ class MyApp : Application() {
     // Called only once at beginning of application's lifetime
     override fun onCreate() {
         super.onCreate()
-        appModule = AppModule(this, Firebase.auth, FirebaseFirestore.getInstance(),Firebase.storage)
+        appModule = AppModule(this, Firebase.auth, FirebaseFirestore.getInstance(), Firebase.storage)
     }
 }

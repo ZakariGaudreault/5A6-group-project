@@ -16,31 +16,34 @@ class WorkoutRepositoryFirebase(db: FirebaseFirestore) : IWorkoutRepository {
         }
     }
 
-    override suspend fun getAllWorkouts(email: String): Flow<List<Workout>> = callbackFlow {
-        // Listen for changes on the entire collection
-        val subscription =
-            dbWorkouts.whereEqualTo("email", email).addSnapshotListener { snapshot, error ->
-                if (error != null) {
-                    // An error occurred
-                    println("Listen failed: $error")
-                    return@addSnapshotListener
-                }
-                if (snapshot != null) {
-                    // The collection has documents, so convert them all to Workout objects
-                    val workouts = snapshot.toObjects(Workout::class.java)
-                    if (workouts != null) {
-                        println("Real-time update to workouts")
-                        trySend(workouts)
-                    } else {
-                        println("Workouts have become null")
-                        trySend(listOf<Workout>()) // If there are no saved workouts, then send a default object
+    override suspend fun getAllWorkouts(email: String): Flow<List<Workout>> =
+        callbackFlow {
+            // Listen for changes on the entire collection
+            val subscription =
+                dbWorkouts.whereEqualTo("email", email).addSnapshotListener { snapshot, error ->
+                    if (error != null) {
+                        // An error occurred
+                        println("Listen failed: $error")
+                        return@addSnapshotListener
                     }
-                } else {
-                    // The workouts collection does not exist or has no data
-                    println("Workouts collection does not exist")
-                    trySend(listOf<Workout>()) // Send default object
+                    if (snapshot != null) {
+                        // The collection has documents, so convert them all to Workout objects
+                        val workouts = snapshot.toObjects(Workout::class.java)
+                        if (workouts != null) {
+                            println("Real-time update to workouts")
+                            trySend(workouts)
+                        } else {
+                            println("Workouts have become null")
+                            trySend(
+                                listOf<Workout>(),
+                            ) // If there are no saved workouts, then send a default object
+                        }
+                    } else {
+                        // The workouts collection does not exist or has no data
+                        println("Workouts collection does not exist")
+                        trySend(listOf<Workout>()) // Send default object
+                    }
                 }
-            }
-        awaitClose { subscription.remove() }
-    }
+            awaitClose { subscription.remove() }
+        }
 }
