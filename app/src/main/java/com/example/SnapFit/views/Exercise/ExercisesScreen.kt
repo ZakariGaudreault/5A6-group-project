@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.snapfit.entities.workout.Workout
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.views.profile.ProfileViewModel
 import com.example.snapfit.views.workout.WorkoutViewModel
 
 /**
@@ -25,10 +28,15 @@ import com.example.snapfit.views.workout.WorkoutViewModel
  * @param type The type of exercises to display (e.g., "strength", "cardio", "no equipment", "flexibility").
  */
 @Composable
-fun ExercisesScreen(type: String, workoutViewModel: WorkoutViewModel) {
+fun ExercisesScreen(
+    type: String, workoutViewModel: WorkoutViewModel, profileViewModel: ProfileViewModel
+) {
     val counter by workoutViewModel.toggledCount.collectAsState()
+    val profile by profileViewModel.activeProfile.collectAsState()
+    val navController = LocalNavController.current
 
-    LaunchedEffect(true){
+
+    LaunchedEffect(true) {
         workoutViewModel.resetCounter()
     }
     Column(
@@ -55,14 +63,28 @@ fun ExercisesScreen(type: String, workoutViewModel: WorkoutViewModel) {
             else -> listOf("pushup") // failsafe
         }
 
+        val duration: Double = when (type) {
+            "strength" -> 30.0
+            "cardio" -> 20.0
+            "no equipment" -> 45.0
+            "flexibility" -> 50.0
+            else -> 0.0
+        }
+
         exerciseList.forEach { exercise ->
-            ExerciseCard(exercise,workoutViewModel::incrementCounter)
+            ExerciseCard(exercise, workoutViewModel::incrementCounter)
         }
 
         Button(
-            onClick = { /* Handle button click here */ },
-            modifier = Modifier
-                .padding(horizontal = 125.dp, vertical = 8.dp),
+            onClick = {
+                val workout = Workout(
+                    profile.email, type, duration, exerciseList
+                );workoutViewModel.addWorkout(
+                workout
+            )
+                navController.popBackStack()
+            },
+            modifier = Modifier.padding(horizontal = 125.dp, vertical = 8.dp),
             enabled = counter == exerciseList.size
         ) {
             Text(text = "Complete")

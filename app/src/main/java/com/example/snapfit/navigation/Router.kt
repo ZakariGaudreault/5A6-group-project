@@ -88,7 +88,7 @@ fun Router() {
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
                 val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
                 RedirectToAuth(authViewModel) {
-                    ExercisesScreen(type = exerciseType,workoutViewModel)
+                    ExercisesScreen(type = exerciseType,workoutViewModel,profileViewModel)
                 }
             }
             composable(Routes.Workouts.route) {
