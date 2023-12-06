@@ -8,8 +8,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
+import com.example.snapfit.views.DeepLink.DeepLink
 import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.authentication.AuthViewModelFactory
 import com.example.snapfit.views.authentication.home.AuthScreen
@@ -62,6 +64,15 @@ fun Router() {
                     }
                 }
             }
+
+            composable("DeepLink",
+                // Note that this navDeepLink pattern has no relation to the route itself
+                deepLinks = listOf(navDeepLink { uriPattern = "example://compose.deeplink/?id={id}" })
+            ) {
+                    backStackEntry ->DeepLink(backStackEntry.arguments?.getString("id"))
+            }
+
+
             composable(Routes.SignUp.route) {
                 RedirectToHome(authViewModel, profileViewModel) {
                     AuthLayout {
@@ -91,6 +102,10 @@ fun Router() {
                     }
                 }
             }
+
+
+
+
 
             composable(Routes.Workouts.route) {
                 RedirectToAuth(authViewModel, profileViewModel) {
