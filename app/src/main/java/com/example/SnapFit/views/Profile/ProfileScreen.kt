@@ -144,9 +144,6 @@ fun CardItem(card: Progress) {
             Spacer(modifier = Modifier.height(8.dp))
             AsyncImage(model = card.url, contentDescription = "image")
             // Button composable for potential actions related to the card item
-            Button(onClick = { /* TODO: Implement delete action */ }) {
-                Text(text = "Delete")
-            }
         }
     }
 }
