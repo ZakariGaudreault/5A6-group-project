@@ -165,7 +165,8 @@ fun LoginScreen(
                                 ),
                         ),
             ) {
-                Text("Login")
+                Text("Login",fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,)
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")

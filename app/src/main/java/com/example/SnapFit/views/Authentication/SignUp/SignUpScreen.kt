@@ -273,7 +273,8 @@ fun SignUpScreen(
                         ),
                 enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword && orignalWeight.length > 0 && orignalWeight.toDoubleOrNull() != null,
             ) {
-                Text("Sign Up")
+                Text("Sign Up",fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold, color = Color.White)
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")
