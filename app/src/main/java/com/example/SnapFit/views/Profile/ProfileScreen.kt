@@ -73,7 +73,7 @@ fun ProfileScreen(
                 Text(text = "Completed workouts")
             }
 
-            Button(onClick = { /* TODO: Navigate to snaps */ }) {
+            Button(onClick = { navController.navigate(Routes.Snap.route) }) {
                 Text(text = "Snaps")
             }
         }

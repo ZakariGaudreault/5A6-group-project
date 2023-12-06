@@ -5,6 +5,8 @@ package com.example.snapfit.navigation
  * @param route The "address" of the route
  */
 sealed class Routes(val route: String) {
+    object Snap : Routes("SnapScreenRoute")
+
     object Main : Routes("MainScreenRoute")
 
     object Auth : Routes("AuthRoute")
@@ -19,5 +21,4 @@ sealed class Routes(val route: String) {
 
     object Exercises : Routes("ExercisesRoute")
 
-    object Upload : Routes("UploadRoute")
 }
