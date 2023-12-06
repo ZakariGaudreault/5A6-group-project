@@ -15,8 +15,8 @@ import com.example.snapfit.views.authentication.AuthViewModelFactory
 import com.example.snapfit.views.authentication.about.AboutScreen
 import com.example.snapfit.views.authentication.home.AuthScreen
 import com.example.snapfit.views.authentication.login.LoginScreen
+import com.example.snapfit.views.authentication.motivation.MotivationScreen
 import com.example.snapfit.views.authentication.signup.SignUpScreen
-import com.example.snapfit.views.authentication.us.UsScreen
 import com.example.snapfit.views.exercise.ExercisesScreen
 import com.example.snapfit.views.home.MainScreen
 import com.example.snapfit.views.profile.ProfileScreen
@@ -111,9 +111,9 @@ fun Router() {
                     AboutScreen(authViewModel = authViewModel, profileViewModel = profileViewModel)
                 }
             }
-            composable(Routes.Us.route) {
+            composable(Routes.Motivation.route) {
                 RedirectToAuth(authViewModel, profileViewModel) {
-                    UsScreen()
+                    MotivationScreen()
                 }
             }
 

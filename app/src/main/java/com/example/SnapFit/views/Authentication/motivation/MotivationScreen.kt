@@ -1,4 +1,4 @@
-package com.example.snapfit.views.authentication.us
+package com.example.snapfit.views.authentication.motivation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -43,7 +43,7 @@ import com.example.snapfit.navigation.LocalNavController
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UsScreen() {
+fun MotivationScreen() {
     val navController = LocalNavController.current
     val logo: Painter = painterResource(id = R.drawable.logo)
     Box(

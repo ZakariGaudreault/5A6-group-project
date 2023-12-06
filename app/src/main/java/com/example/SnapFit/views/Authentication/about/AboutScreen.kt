@@ -88,7 +88,7 @@ fun AboutScreen(
                                 Color.Black,
                                 shape = RoundedCornerShape(16.dp),
                             )
-                            .clickable { navController.navigate(Routes.Us.route) },
+                            .clickable { navController.navigate(Routes.Motivation.route) },
                     colors =
                         CardDefaults.cardColors(
                             containerColor = Color.White,
