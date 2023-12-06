@@ -1,7 +1,6 @@
 package com.example.snapfit.views.snap
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -10,6 +9,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,16 +21,17 @@ import androidx.core.content.FileProvider
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.snapfit.BuildConfig
+import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.progress.ProgressViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.compose.material3.Button as Button1
 
+
+// https://github.com/dheeraj-bhadoria/android-camera-example-and-compose-capture-image-jetpack-compose
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun SnapScreen(progressViewModel: ProgressViewModel) {
-
+fun SnapScreen(progressViewModel: ProgressViewModel,authViewModel: AuthViewModel) {
     val context = LocalContext.current
     val file = context.createImageFile()
     val uri = FileProvider.getUriForFile(
@@ -64,7 +65,7 @@ fun SnapScreen(progressViewModel: ProgressViewModel) {
             .padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button1(onClick = {
+        Button(onClick = {
             val permissionCheckResult =
                 ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
             if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
@@ -79,24 +80,23 @@ fun SnapScreen(progressViewModel: ProgressViewModel) {
     }
 
     if (capturedImageUri.path?.isNotEmpty() == true) {
-        println(capturedImageUri)
         Image(
             modifier = Modifier
                 .padding(16.dp, 8.dp),
-            painter = rememberImagePainter(capturedImageUri.path),
-            contentDescription = null
+            painter = rememberImagePainter(capturedImageUri),
+            contentDescription = "null"
         )
     }
 }
 
-@SuppressLint("SimpleDateFormat")
 fun Context.createImageFile(): File {
     // Create an image file name
     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_" + timeStamp + "_"
-    return File.createTempFile(
+    val image = File.createTempFile(
         imageFileName, /* prefix */
         ".jpg", /* suffix */
         externalCacheDir      /* directory */
     )
+    return image
 }
