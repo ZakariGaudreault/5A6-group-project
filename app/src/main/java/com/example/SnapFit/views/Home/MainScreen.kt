@@ -191,7 +191,7 @@ fun MainScreen(
                                         append(" pounds so far")
                                     },
                                     modifier = Modifier.padding(16.dp),
-                                    fontSize = 21.sp,
+                                    fontSize = 18.sp,
                                 )
                             }
 
@@ -218,10 +218,10 @@ fun MainScreen(
                                         }
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                                             append(
-                                                "\u200E \u200E \u200E \u200E ${workout.sumOf{it.duration}}",
+                                                "${workout.sumOf{it.duration}} minutes",
                                             )
                                         }
-                                        append(" minutes ")
+
                                     },
                                     modifier = Modifier.padding(4.dp),
                                     fontSize = 20.sp,
