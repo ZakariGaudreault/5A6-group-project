@@ -1,6 +1,11 @@
 package com.example.snapfit.ui.theme
 import androidx.compose.ui.graphics.Color
 
+
+
+/*
+*makes the color pallette of the app
+ */
 val md_theme_light_primary = Color(0xFF6F19FF)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFA173F7)

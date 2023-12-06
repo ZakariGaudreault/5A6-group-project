@@ -32,6 +32,16 @@ import androidx.compose.ui.unit.sp
 import com.example.snapfit.views.profile.ProfileViewModel
 import kotlin.math.absoluteValue
 
+
+/**
+ * Home page of the application
+ */
+
+/**
+ * Composable function for the main screen of the app, displaying user information and activity details.
+ *
+ * @param profileViewModel ViewModel for accessing user profile data.
+ */
 @Composable
 fun MainScreen(profileViewModel: ProfileViewModel) {
     val userState by profileViewModel.activeProfile.collectAsState()
@@ -165,7 +175,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                         append(" pounds so far")
                                     },
                                     modifier = Modifier.padding(16.dp),
-                                    fontSize = 24.sp,
+                                    fontSize = 21.sp,
                                 )
                             }
 

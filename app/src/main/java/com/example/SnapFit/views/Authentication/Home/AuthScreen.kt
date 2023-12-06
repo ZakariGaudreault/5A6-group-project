@@ -26,6 +26,16 @@ import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
 
+/**
+ * Screen for Authentication which is the first page the user will see when opening the app
+ */
+
+/**
+ * Composable function representing the authentication screen of the SnapFit application.
+ * This screen includes a wavy gradient background, the SnapFit logo, and buttons for login and signup.
+ *
+ * @param authViewModel The authentication ViewModel responsible for managing user authentication state.
+ */
 @Composable
 fun AuthScreen(authViewModel: AuthViewModel) {
     val navController = LocalNavController.current
@@ -43,7 +53,7 @@ fun AuthScreen(authViewModel: AuthViewModel) {
     ) {
         Image(
             painter = backgroundPainter,
-            contentDescription = null, // Set to null if it's a decorative image
+            contentDescription = null,
             modifier =
                 Modifier
                     .fillMaxSize()
@@ -91,7 +101,7 @@ fun AuthScreen(authViewModel: AuthViewModel) {
                             color = MaterialTheme.colorScheme.primary,
                             shape =
                                 MaterialTheme.shapes.medium.copy(
-                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomStart = CornerSize(16.dp),
                                     bottomEnd = CornerSize(16.dp),
                                     topStart = CornerSize(16.dp),
                                     topEnd = CornerSize(16.dp),
@@ -127,7 +137,13 @@ fun AuthScreen(authViewModel: AuthViewModel) {
         }
     }
 }
-
+/**
+ * Function to get a horizontal gradient brush for the authentication screen background in case the image does not work.
+ *
+ * Usage Example:
+ * val gradientBrush: Brush = getGradientBrush()
+ * @return A Brush representing the horizontal gradient.
+ */
 @Composable
 fun getGradientBrush(): Brush {
     return Brush.horizontalGradient(

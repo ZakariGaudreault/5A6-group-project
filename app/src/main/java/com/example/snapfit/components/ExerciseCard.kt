@@ -26,11 +26,28 @@ import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 
+/**
+Outputs an exercise card depending of the type of exercise. An exercise cards
+ contains a title for the type, a number of reps to accomplish it and is intractable
+ */
+
+/** This function generates a visually appealing card with information about the exercise type,
+* including the number of reps or duration. It is also intractable, changing color upon click.
+*
+* @param type The type of exercise (e.g., "Jogging", "burpees", "crunch", "rest", etc).
+*
+* Usage Example:
+* ExerciseCard(type = "burpees")
+*/
 @Composable
 fun ExerciseCard(type: String) {
+
+    // current location on the app
     val navController = LocalNavController.current
+    //keep the state of the card which changes color upon click
     var isToggled by remember { mutableStateOf(false) }
 
+    //puts the whole content in a row
     Row(
         modifier =
             Modifier
@@ -53,9 +70,10 @@ fun ExerciseCard(type: String) {
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
             )
+            //depending of the title, a description will be outputed for the card
             when (type) {
-                "high heels" -> {
-                    Text(text = "\n 40 seconds")
+                "Jogging" -> {
+                    Text(text = "\n 1km jogging")
                 }
                 "burpees" -> {
                     Text(text = "\n10 reps")
@@ -90,8 +108,8 @@ fun ExerciseCard(type: String) {
                 }
             }
         }
-        val exerciseType: String = "pushup" // This should be dynamically set based on your logic
 
+        //outputs an image depending of the name of the exercise
         val painter =
             painterResource(
                 id =
@@ -100,17 +118,16 @@ fun ExerciseCard(type: String) {
                         "burpees" -> R.drawable.burpees
                         "crunch" -> R.drawable.crounch
                         "rest" -> R.drawable.rest
-                        "high heels" -> R.drawable.highheels
+                        "Jogging" -> R.drawable.highheels
                         "starfish" -> R.drawable.starfish
                         "dumbbell curl" -> R.drawable.dumbbellcurl
                         "repeat" -> R.drawable.repeat
                         "repeatTwo" -> R.drawable.repeat
                         "cobra stretch" -> R.drawable.cobrastretch
-                        // Add more cases for other exercise types if needed
-                        else -> R.drawable.chocolate // Provide a default resource ID or handle it as needed
+                        else -> R.drawable.chocolate
                     },
             )
-
+        //defines the dimension of an image
         Image(
             painter = painter,
             contentDescription = "Placeholder",

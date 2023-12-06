@@ -47,7 +47,15 @@ import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.profile.ProfileViewModel
 
 /**
- * The about screen of the app, to display the use of the app.
+ * Sign up screen for when a user creates an account
+ */
+
+/**
+ * Composable function representing the sign-up screen of the SnapFit application.
+ * This screen includes a background image, text inputs for email, username, password, and current weight, and buttons for sign-up and navigation to the login screen.
+ *
+ * @param authViewModel The authentication ViewModel responsible for managing user authentication state.
+ * @param profileViewModel The profile ViewModel responsible for managing user profiles.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
