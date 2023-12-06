@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -32,28 +31,23 @@ fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
     var homeworkout by rememberSaveable { mutableStateOf(true) }
     var gymworkout by rememberSaveable { mutableStateOf(true) }
     var outdoorworkout by rememberSaveable { mutableStateOf(true) }
-    var sliderPosition by remember { mutableFloatStateOf(60f) }
+    var sliderPosition by rememberSaveable { mutableFloatStateOf(60f) }
+
     val backgroundColorHome =
         if (homeworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
+            colorResource(R.color.purple_500)
         } else {
             colorResource(R.color.purple_200)
         }
     val backgroundColorGym =
         if (gymworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
+            colorResource(R.color.purple_500)
         } else {
             colorResource(R.color.purple_200)
         }
     val backgroundColorOutdoor =
         if (outdoorworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
+            colorResource(R.color.purple_500)
         } else {
             colorResource(R.color.purple_200)
         }
