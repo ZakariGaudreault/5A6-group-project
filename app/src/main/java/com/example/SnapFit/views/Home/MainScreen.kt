@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.profile.ProfileViewModel
 import kotlin.math.absoluteValue
 
@@ -44,6 +47,7 @@ import kotlin.math.absoluteValue
  */
 @Composable
 fun MainScreen(profileViewModel: ProfileViewModel) {
+    val navController = LocalNavController.current
     val userState by profileViewModel.activeProfile.collectAsState()
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -257,7 +261,10 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                 text = randomQuote,
                                 fontSize = 16.sp,
                             )
+
                         }
+
+
                     }
                 }
             }

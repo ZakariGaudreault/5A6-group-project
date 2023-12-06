@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
+import com.example.SnapFit.views.Authentication.about.AboutScreen
 import com.example.snapfit.layout.AuthLayout
 import com.example.snapfit.layout.MainLayout
 import com.example.snapfit.views.DeepLink.DeepLink
@@ -98,6 +99,13 @@ fun Router() {
                     ProfileScreen(authViewModel, profileViewModel,progressViewModel)
                 }
             }
+
+            composable(Routes.About.route) {
+                RedirectToAuth(authViewModel) {
+                    AboutScreen(authViewModel = authViewModel, profileViewModel = profileViewModel)
+                }
+            }
+
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->
                 val exerciseType = backStackEntry.arguments?.getString("exerciseType") ?: ""
                 RedirectToAuth(authViewModel) {
