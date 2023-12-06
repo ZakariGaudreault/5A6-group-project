@@ -7,25 +7,43 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
 
-class ProgressRepositoryFirebase(db: FirebaseFirestore, storage: FirebaseStorage) : IProgressRepository {
+//https://github.com/alexmamo/CloudStorageJetpackCompose/blob/master/app/src/main/java/ro/alexmamo/cloudstoragejetpackcompose/data/repository/ProfileImageRepositoryImpl.kt
+class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: FirebaseStorage) : IProgressRepository {
     private val dbProgress = db.collection("Progress")
+    private val storage = firebaseStorage
 
-    override suspend fun addProgress(progress: Progress) {
-        dbProgress.document(progress.date.toString()).set(progress)
-            .addOnSuccessListener {
-                println("Progress added.")
-            }
-            .addOnFailureListener { e ->
-                println("Error adding progress: $e")
-            }
+    // creates download url from storage, then add it to the progress passed in, then saves the progress in the
+    // firestore
+    override suspend fun addProgress(progress: Progress):Boolean {
+        try{
+            val downloadUrl = storage.reference.child(progress.email).child(progress.uri.toString())
+                .putFile(progress.uri).await()
+                .storage.downloadUrl.await()
+
+            progress.url = downloadUrl.path.toString();
+            println(progress.url)
+            println(progress.uri.toString())
+            dbProgress.document(progress.uri.toString()).set(progress)
+                .addOnSuccessListener {
+                    println("Progress added.")
+                }
+                .addOnFailureListener { e ->
+                    println("Error adding progress: $e")
+                }
+            return true
+        }
+        catch (e:Exception){
+            return false
+        }
     }
 
     override suspend fun removeProgress(progress: Progress) {
-        dbProgress.document(progress.date.toString())
+        dbProgress.document(progress.uri.toString())
             .delete()
-            .addOnSuccessListener { println("Profile successfully deleted!") }
-            .addOnFailureListener { error -> println("Error deleting profile: $error") }
+            .addOnSuccessListener { println("Progress successfully deleted!") }
+            .addOnFailureListener { error -> println("Error deleting Progress: $error") }
     }
 
     override suspend fun getAllProgress(): Flow<List<Progress>> =

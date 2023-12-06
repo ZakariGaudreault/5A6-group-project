@@ -1,11 +1,12 @@
 package com.example.snapfit.entities.progress
 
-import android.media.Image
+import android.net.Uri
 import com.google.firebase.Timestamp
 
 data class Progress(
-    var email: String = "Not available",
-    var weight: Double = 0.0,
-    var date: Timestamp = Timestamp.now(), //used as the id
-    var image: Image
+    var email: String,
+    var weight: Double,
+    var uri: Uri, //used as the id
+    var url: String = "",
+    var timestamp: Timestamp = Timestamp.now(),
 )
