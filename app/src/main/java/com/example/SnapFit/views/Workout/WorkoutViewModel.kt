@@ -35,7 +35,7 @@ class WorkoutViewModel(private val workoutRepository: IWorkoutRepository) : View
     /** Retrieves the list of all workouts */
     fun getAllWorkouts(email: String) {
         viewModelScope.launch {
-            workoutRepository.getAllWorkouts().collect { workouts: List<Workout> ->
+            workoutRepository.getAllWorkouts(email).collect { workouts: List<Workout> ->
                 _activeWorkouts.value = workouts
             }
         }

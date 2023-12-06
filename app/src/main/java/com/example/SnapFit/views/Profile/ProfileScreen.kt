@@ -2,7 +2,6 @@ package com.example.snapfit.views.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -69,19 +68,11 @@ fun ProfileScreen(
             fontWeight = FontWeight.Bold,
         )
 
-        // Row composable containing buttons for navigating to workout history and snaps
-        Row {
-            Button(onClick = { /* TODO: Navigate to workout history */ }, modifier = Modifier.padding(end = 8.dp)) {
-                Text(text = "Completed workouts")
-            }
-
+        // Row composable containing buttons for uploading, viewing graphs, and logging out
+        Column {
             Button(onClick = { navController.navigate(Routes.Snap.route) }) {
                 Text(text = "Snaps")
             }
-        }
-
-        // Row composable containing buttons for uploading, viewing graphs, and logging out
-        Row {
             Button(onClick = {
                 runBlocking {
                     authViewModel.signOut()
@@ -104,7 +95,7 @@ fun ProfileScreen(
  * Composable function for displaying a list of cards.
  */
 @Composable
-fun CardList(progress:List<Progress>) {
+fun CardList(progress: List<Progress>) {
     // LazyColumn composable to efficiently display a scrollable list of items
     LazyColumn {
         // Iterate through the list of cards and display CardItem for each card
@@ -125,20 +116,22 @@ fun CardItem(card: Progress) {
 
     // Card composable to display a card item with text and an image
     Card(
-        modifier =
-        Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
     ) {
         // Column composable to arrange child composables vertically within the card
         Column(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
             // Text composable displaying the card text with bold font
-            Text(text = card.timestamp.toDate().toString(), fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(
+                text = card.timestamp.toDate().toString(),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
             Text(text = "${card.weight} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             // Spacer composable for adding vertical space between text and image
             Spacer(modifier = Modifier.height(8.dp))

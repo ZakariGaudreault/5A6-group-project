@@ -1,6 +1,7 @@
 package com.example.snapfit.views.home
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.profile.ProfileViewModel
+import com.example.snapfit.views.workout.WorkoutViewModel
 import kotlin.math.absoluteValue
 
 
@@ -43,8 +47,12 @@ import kotlin.math.absoluteValue
  * @param profileViewModel ViewModel for accessing user profile data.
  */
 @Composable
-fun MainScreen(profileViewModel: ProfileViewModel) {
+fun MainScreen(profileViewModel: ProfileViewModel, workoutViewModel: WorkoutViewModel) {
     val userState by profileViewModel.activeProfile.collectAsState()
+    val workout by workoutViewModel.activeWorkouts.collectAsState()
+    val navController = LocalNavController.current
+
+    workoutViewModel.getAllWorkouts(userState.email)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -70,9 +78,9 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
 
                 Box(
                     modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
+                    Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
                 ) {
                     Row(
                         modifier =
@@ -95,7 +103,8 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                             3.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
-                                        ),
+                                        )
+                                        .clickable { navController.navigate(Routes.PastWorkout.route) },
                                 colors =
                                     CardDefaults.cardColors(
                                         containerColor = Color.White,
@@ -115,7 +124,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                     )
 
                                     Text(
-                                        text = "${userState.amountWorkoutDone}",
+                                        text = "${workout.size}",
                                         fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
                                         modifier =
@@ -201,9 +210,9 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                             append("⏱️ Time Spent \n\n\n")
                                         }
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("\u200E \u200E \u200E \u200E 0")
+                                            append("\u200E \u200E \u200E \u200E ${workout.sumOf{it.duration}}")
                                         }
-                                        append(" hours ")
+                                        append(" minutes ")
                                     },
                                     modifier = Modifier.padding(4.dp),
                                     fontSize = 20.sp,
@@ -236,7 +245,10 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                             Modifier
                                 .fillMaxWidth()
                                 .padding(top = 340.dp)
-                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp))
+                                .clickable { navController.navigate(
+                                    Routes.Snap.route
+                                ) },
                         colors =
                             CardDefaults.cardColors(
                                 containerColor = Color.White,
@@ -246,6 +258,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier.padding(16.dp),
+
                         ) {
                             Text(
                                 text = "Motivation quote",
@@ -254,7 +267,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                             )
 
                             Text(
-                                text = randomQuote,
+                                text = "'$randomQuote'",
                                 fontSize = 16.sp,
                             )
                         }
