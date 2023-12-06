@@ -5,7 +5,7 @@ import com.example.snapfit.entities.Progress.IProgressRepository
 import com.example.snapfit.entities.Workout.IWorkoutRepository
 import com.example.snapfit.entities.Workout.WorkoutRepositoryFirebase
 import com.example.snapfit.entities.authentication.IAuthRepository
-import com.example.snapfit.entities.authentication.IAuthRepositoryFirebase
+import com.example.snapfit.entities.authentication.AuthRepositoryFirebase
 import com.example.snapfit.entities.profile.IProfileRepository
 import com.example.snapfit.entities.profile.ProfileRepositoryFirebase
 import com.example.snapfit.entities.profile.ProgressRepositoryFirebase
@@ -32,6 +32,6 @@ class AppModule(
         WorkoutRepositoryFirebase(firestore)
     }
     val authRepository: IAuthRepository by lazy {
-        IAuthRepositoryFirebase(auth) // inject Firebase auth
+        AuthRepositoryFirebase(auth) // inject Firebase auth
     }
 }
