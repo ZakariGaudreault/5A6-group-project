@@ -27,4 +27,6 @@ sealed class Routes(val route: String) {
 
     object DeepLink : Routes("DeepLinkScreen")
 
+    object About : Routes("aboutScreen")
+
 }
