@@ -106,7 +106,7 @@ fun AboutScreen(
                                 "Workout screen is where all the workouts are available, filter them by the ones you want to do." +
                                 "Click on one, and you have the list of exercises. Click on each exercises, to complete them, at the end, you'll be able to complete the workout" +
                                 "\n\nThe final page is your user page, with all the snaps you have",
-                            fontSize = 20.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
                             modifier =
                                 Modifier
@@ -118,7 +118,7 @@ fun AboutScreen(
 
                         Text(
                             text = "Click anywhere in the box to see why we crated this app.",
-                            fontSize = 20.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
                             modifier =
                                 Modifier
