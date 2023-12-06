@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -20,13 +16,31 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Assignment3"
-            android:screenOrientation="portrait">
+            android:theme="@style/Theme.Assignment3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:autoVerify="true">  <!-- autoVerify is needed for an App Link -->
+                <!--below line is to set the action to our intent to view. This is so the intent filter can be reached from Google Search-->
+                <action android:name="android.intent.action.VIEW" />
+
+                <!--Default category allows your app to respond to implicit intents.
+                       Without this, the activity can be started only if the intent specifies your app component name-->
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!--on below line we are adding a category to make our app browsable.  This is so the intent filter can be accessible from a web browser.-->
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!--on below line we are specifying the host name and scheme type from which we will be calling our app.
+                       Here, accepts URIs that begin with "example://compose.deeplink"-->
+                <data
+                    android:scheme="example"
+                    android:host="compose.deeplink" />
+
+            </intent-filter>
+
         </activity>
     </application>
 
