@@ -11,7 +11,7 @@ without complicating how to stay in shape.
 1. Open the project on Android Studio.
 2. Download the Google service file found on the GitHub root level.
 3. Install the Google service file and place it at the following path `/app/src/main/java/com/example/SnapFit/`.
-   To avoid any errors, it is recommended to also add the file to `5A6-group-project/app/src/main/debug/`.
+   To avoid any errors, it is recommended to also add the file to `app/src/main/debug/`.
 4. Once the file is installed, press on the green arrow to start the application.
 5. If you are using the application for the first time, select SignUp.
    Otherwise, you can log in by clicking on the login button.
