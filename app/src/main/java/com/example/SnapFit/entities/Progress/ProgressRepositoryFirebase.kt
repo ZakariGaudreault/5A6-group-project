@@ -23,9 +23,7 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
                 .putFile(progress.uri).await()
                 .storage.downloadUrl.await()
 
-            progress.url = downloadUrl.path.toString();
-            println(progress.url)
-            println(progress.uri.toString())
+            progress.url = downloadUrl.toString()
             dbProgress.document().set(progress)
                 .addOnSuccessListener {
                     println("Progress added.")
