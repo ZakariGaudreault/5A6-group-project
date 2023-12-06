@@ -82,7 +82,7 @@ fun Router() {
             }
             composable(Routes.Profile.route) {
                 RedirectToAuth(authViewModel) {
-                    ProfileScreen(authViewModel, profileViewModel)
+                    ProfileScreen(authViewModel, profileViewModel,progressViewModel)
                 }
             }
             composable("${Routes.Exercises.route}/{exerciseType}") { backStackEntry ->

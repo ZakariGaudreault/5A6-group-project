@@ -1,5 +1,6 @@
 package com.example.snapfit.entities.profile
 
+import android.net.Uri
 import com.example.snapfit.entities.progress.IProgressRepository
 import com.example.snapfit.entities.progress.Progress
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,8 +20,8 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
     // firestore
     override suspend fun addProgress(progress: Progress): Boolean {
         try {
-            val downloadUrl = storage.reference.child(progress.email).child(progress.uri.toString())
-                .putFile(progress.uri).await()
+            val downloadUrl = storage.reference.child(progress.email).child(progress.uri)
+                .putFile(Uri.parse(progress.uri)).await()
                 .storage.downloadUrl.await()
 
             progress.url = downloadUrl.toString()

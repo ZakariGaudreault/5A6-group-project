@@ -16,9 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,15 +23,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
+import com.example.snapfit.entities.progress.Progress
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
+import com.example.snapfit.views.progress.ProgressViewModel
 import kotlinx.coroutines.runBlocking
 
 /**
  * Class that showcase the features of a user profile
  */
 
+//https://medium.com/@emmanuelmuturia/how-to-add-and-retrieve-images-from-firebase-storage-using-jetpack-compose-dedda31ff66d
 
 /**
  * Composable function for the profile screen of the app, displaying user information, navigation buttons,
@@ -47,12 +47,16 @@ import kotlinx.coroutines.runBlocking
 fun ProfileScreen(
     authViewModel: AuthViewModel,
     profileViewModel: ProfileViewModel,
+    progressViewModel: ProgressViewModel
 ) {
     // Access the navigation controller
     val navController = LocalNavController.current
 
     // Collect the active profile state using StateFlow
     val profileState = profileViewModel.activeProfile.collectAsState()
+    val progress = progressViewModel.activeProgress.collectAsState().value
+    progressViewModel.getAllProgress(profileState.value.email)
+//    val allProgress = rememberMutableStateListOf<List<Progress>>(progress)
 
     // Column composable to arrange child composables vertically
     Column(
@@ -94,7 +98,7 @@ fun ProfileScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // CardList composable to display a list of cards
-        CardList()
+        CardList(progress.asReversed())
     }
 }
 
@@ -102,38 +106,16 @@ fun ProfileScreen(
  * Composable function for displaying a list of cards.
  */
 @Composable
-fun CardList() {
-    // Generate a list of dummy cards
-    val cards by remember { mutableStateOf(generateDummyCards()) }
-
+fun CardList(progress:List<Progress>) {
     // LazyColumn composable to efficiently display a scrollable list of items
     LazyColumn {
         // Iterate through the list of cards and display CardItem for each card
-        items(cards) { card ->
-            CardItem(card = card)
+        items(progress) { singleProgress ->
+            CardItem(card = singleProgress)
         }
     }
 }
 
-/**
- * Data class representing an item in the card list.
- *
- * @param text Text content of the card.
- * @param imageUrl URL for the image of the card.
- */
-data class CardItem(val text: String, val imageUrl: String)
-
-/**
- * Function to generate a list of dummy cards.
- */
-fun generateDummyCards(): List<CardItem> {
-    return List(5) { index ->
-        CardItem(
-            text = "Card $index",
-            imageUrl = "https://dummyimage.com/200x200/000/fff",
-        )
-    }
-}
 
 /**
  * Composable function for displaying an individual card item.
@@ -141,7 +123,8 @@ fun generateDummyCards(): List<CardItem> {
  * @param card CardItem representing the content and image URL of the card.
  */
 @Composable
-fun CardItem(card: CardItem) {
+fun CardItem(card: Progress) {
+
     // Card composable to display a card item with text and an image
     Card(
         modifier =
@@ -157,7 +140,8 @@ fun CardItem(card: CardItem) {
                 .padding(16.dp),
         ) {
             // Text composable displaying the card text with bold font
-            Text(text = card.text, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(text = card.timestamp.toDate().toString(), fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(text = "${card.weight.toString()} lb", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             // Spacer composable for adding vertical space between text and image
             Spacer(modifier = Modifier.height(8.dp))
             // Image composable displaying the card image

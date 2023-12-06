@@ -52,7 +52,11 @@ import java.util.Objects
 // https://github.com/dheeraj-bhadoria/android-camera-example-and-compose-capture-image-jetpack-compose
 @OptIn(ExperimentalCoilApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewModel,profileViewModel: ProfileViewModel) {
+fun SnapScreen(
+    progressViewModel: ProgressViewModel,
+    authViewModel: AuthViewModel,
+    profileViewModel: ProfileViewModel
+) {
     val context = LocalContext.current
     val file = context.createImageFile()
     var capturedImageUri by rememberSaveable { mutableStateOf<Uri>(Uri.EMPTY) }
@@ -62,14 +66,12 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
     val navController = LocalNavController.current
 
     val uri = FileProvider.getUriForFile(
-        Objects.requireNonNull(context),
-        BuildConfig.APPLICATION_ID + ".provider", file
+        Objects.requireNonNull(context), BuildConfig.APPLICATION_ID + ".provider", file
     )
 
-    val cameraLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-            capturedImageUri = uri
-        }
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
+        capturedImageUri = uri
+    }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -85,8 +87,7 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
     Column(
         Modifier
             .fillMaxSize()
-            .padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(onClick = {
             val permissionCheckResult =
@@ -103,8 +104,7 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
 
         if (capturedImageUri.path?.isNotEmpty() == true) {
             Image(
-                modifier = Modifier
-                    .padding(16.dp, 8.dp),
+                modifier = Modifier.padding(16.dp, 8.dp),
                 painter = rememberImagePainter(capturedImageUri),
                 contentDescription = "null"
             )
@@ -113,14 +113,12 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
         TextField(
             value = weight,
             onValueChange = { if (!it.contains("\n")) weight = it },
-            modifier =
-            Modifier
+            modifier = Modifier
                 .size(325.dp, 90.dp)
                 .padding(8.dp)
                 .padding(8.dp),
             textStyle = TextStyle(fontSize = 14.sp),
-            keyboardOptions =
-            KeyboardOptions.Default.copy(
+            keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done,
             ),
@@ -134,12 +132,12 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
                 Text(text = "Cancel")
             }
             Button(onClick = {
-                val progress = Progress(auth!!.email, weight.toDouble(), capturedImageUri)
+                val progress = Progress(auth!!.email, weight.toDouble(), capturedImageUri.toString())
                 progressViewModel.addProgress(progress)
                 profile.currentWeight = weight.toDouble() //Sets the new current weight
                 profileViewModel.setProfile(profile) // saves it in the db
                 navController.navigate(Routes.Profile.route)
-            }) {
+            }, enabled = weight.isNotEmpty()) {
                 Text(text = "Save")
             }
         }
