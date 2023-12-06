@@ -59,7 +59,7 @@ fun Router() {
         NavHost(navController = navController, startDestination = Routes.Auth.route) {
             composable(Routes.Main.route) {
                 RedirectToAuth(authViewModel) {
-                    MainScreen(profileViewModel)
+                    MainScreen(profileViewModel,workoutViewModel)
                 }
             }
             composable(Routes.Snap.route) {

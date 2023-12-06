@@ -9,19 +9,17 @@ class WorkoutRepositoryFirebase(db: FirebaseFirestore) : IWorkoutRepository {
     private val dbWorkouts = db.collection("Workouts")
 
     override suspend fun saveWorkout(workout: Workout) {
-        dbWorkouts.document(workout.date.toString()).set(workout)
-            .addOnSuccessListener {
-                println("Workout saved.")
-            }
-            .addOnFailureListener { e ->
-                println("Error saving workout: $e")
-            }
+        dbWorkouts.document(workout.date.toString()).set(workout).addOnSuccessListener {
+            println("Workout saved.")
+        }.addOnFailureListener { e ->
+            println("Error saving workout: $e")
+        }
     }
 
-    override suspend fun getAllWorkouts(): Flow<List<Workout>> =
-        callbackFlow {
-            // Listen for changes on the entire collection
-            val subscription = dbWorkouts.addSnapshotListener { snapshot, error ->
+    override suspend fun getAllWorkouts(email: String): Flow<List<Workout>> = callbackFlow {
+        // Listen for changes on the entire collection
+        val subscription =
+            dbWorkouts.whereEqualTo("email", email).addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     // An error occurred
                     println("Listen failed: $error")
@@ -43,6 +41,6 @@ class WorkoutRepositoryFirebase(db: FirebaseFirestore) : IWorkoutRepository {
                     trySend(listOf<Workout>()) // Send default object
                 }
             }
-            awaitClose { subscription.remove() }
-        }
+        awaitClose { subscription.remove() }
+    }
 }
