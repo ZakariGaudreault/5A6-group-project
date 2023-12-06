@@ -16,7 +16,7 @@ import com.example.snapfit.navigation.SharedTopBar
 @Composable
 fun MainLayout(content: @Composable () -> Unit) {
     Scaffold(
-        topBar = { SharedTopBar("snapfit") },
+        topBar = { SharedTopBar("SnapFit") },
         bottomBar = { SharedBottomBar() },
     ) {
         Column(modifier = Modifier.padding(it)) {

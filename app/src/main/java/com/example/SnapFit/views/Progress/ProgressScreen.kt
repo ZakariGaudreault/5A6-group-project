@@ -57,6 +57,15 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+
+/**
+ * Class that showcase the features of a user profile
+ */
+
+
+/**
+ * Composable function for the upload class which allows user to upload photos on their profile with date and weigth
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProgressScreen() {

@@ -45,7 +45,16 @@ import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.profile.ProfileViewModel
 
 /**
- * The about screen of the app, to display the use of the app.
+ * Sign up screen for when a user logins to an existing account
+ */
+
+
+/**
+ * Composable function representing the login screen of the SnapFit application.
+ * This screen includes a background image, text inputs for email and password, and buttons for login and navigation to the signup screen.
+ *
+ * @param authViewModel The authentication ViewModel responsible for managing user authentication state.
+ * @param profileViewModel The profile ViewModel responsible for managing user profiles.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,6 +64,7 @@ fun LoginScreen(
 ) {
     val navController = LocalNavController.current
     val userState = authViewModel.currentUser().collectAsState()
+    // Check if the user is already authenticated, if yes, navigate to the main screen
     if (userState.value != null) {
         profileViewModel.getProfile(userState.value!!.email)
         navController.navigate(Routes.Main.route)
@@ -109,7 +119,7 @@ fun LoginScreen(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next,
                     ),
-                placeholder = { Text("Enter email", color = Color.Black) },
+                placeholder = { Text("Enter Email", color = Color.Black) },
             )
 
             TextField(
@@ -145,14 +155,15 @@ fun LoginScreen(
                             color = MaterialTheme.colorScheme.primary,
                             shape =
                                 MaterialTheme.shapes.medium.copy(
-                                    bottomStart = CornerSize(16.dp), // Adjust the radius as needed
+                                    bottomStart = CornerSize(16.dp),
                                     bottomEnd = CornerSize(16.dp),
                                     topStart = CornerSize(16.dp),
                                     topEnd = CornerSize(16.dp),
                                 ),
                         ),
             ) {
-                Text("Login")
+                Text("Login",fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,)
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")

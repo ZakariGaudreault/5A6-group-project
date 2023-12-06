@@ -1,10 +1,11 @@
 package com.example.snapfit.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+
+//light and dark colors of the app
 
 private val LightColors =
     lightColorScheme(
@@ -74,7 +75,7 @@ private val DarkColors =
 
 @Composable
 fun AppTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    useDarkTheme: Boolean = false,
     content:
         @Composable()
         () -> Unit,

@@ -15,6 +15,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * Shows all the exercises of a specific workout filled with exercise card
+ */
+
+/**
+ * Composable function to display a list of exercises based on the specified type.
+ *
+ * @param type The type of exercises to display (e.g., "strength", "cardio", "no equipment", "flexibility").
+ */
 @Composable
 fun ExercisesScreen(type: String) {
     Column(
@@ -30,59 +39,64 @@ fun ExercisesScreen(type: String) {
                 fontWeight = FontWeight.Bold,
             )
         }
-
-        if (type == "strength") {
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard(type = "dumbbell curl")
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard(type = "dumbbell curl")
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard(type = "dumbbell curl")
-        } else if (type == "cardio") {
-            ExerciseCard("high heels")
-            ExerciseCard("burpees")
-            ExerciseCard("crunch")
-            ExerciseCard("starfish")
-            ExerciseCard("burpees")
-            ExerciseCard("high heels")
-            ExerciseCard("high heels")
-            ExerciseCard("burpees")
-        } else if (type == "no equipment") {
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-            ExerciseCard("push up")
-            ExerciseCard("burpees")
-        } else if (type == "flexibility") {
-            ExerciseCard("crunch")
-            ExerciseCard("cobra stretch")
-            ExerciseCard("starfish")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard("cobra stretch")
-            ExerciseCard("starfish")
-            ExerciseCard("rest")
-            ExerciseCard("crunch")
-            ExerciseCard("cobra stretch")
-            ExerciseCard("starfish")
-            ExerciseCard("rest")
-        } else {
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
-            ExerciseCard("pushup")
+        // Display exercises based on the specified type
+        when (type) {
+            "strength" -> {
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard(type = "dumbbell curl")
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard(type = "dumbbell curl")
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard(type = "dumbbell curl")
+            }
+            "cardio" -> {
+                ExerciseCard("Jogging")
+                ExerciseCard("burpees")
+                ExerciseCard("crunch")
+                ExerciseCard("starfish")
+                ExerciseCard("burpees")
+                ExerciseCard("Jogging")
+                ExerciseCard("burpees")
+            }
+            "no equipment" -> {
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+                ExerciseCard("push up")
+                ExerciseCard("burpees")
+            }
+            "flexibility" -> {
+                ExerciseCard("crunch")
+                ExerciseCard("cobra stretch")
+                ExerciseCard("starfish")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard("cobra stretch")
+                ExerciseCard("starfish")
+                ExerciseCard("rest")
+                ExerciseCard("crunch")
+                ExerciseCard("cobra stretch")
+                ExerciseCard("starfish")
+                ExerciseCard("rest")
+            }
+            else -> {
+                ExerciseCard("pushup")
+                ExerciseCard("pushup")
+                ExerciseCard("pushup")
+                ExerciseCard("pushup")
+            }
         }
 
         Button(
