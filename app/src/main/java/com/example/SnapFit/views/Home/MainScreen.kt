@@ -201,7 +201,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                             append("⏱️ Time Spent \n\n\n")
                                         }
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("\u200E \u200E \u200E \u200E 27.3")
+                                            append("\u200E \u200E \u200E \u200E 0")
                                         }
                                         append(" hours ")
                                     },
