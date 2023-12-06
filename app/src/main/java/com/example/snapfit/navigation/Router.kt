@@ -25,19 +25,28 @@ import com.example.snapfit.views.workout.WorkoutsScreen
 val LocalNavController = compositionLocalOf<NavController> { error("No NavController found!") }
 
 /**
- * The router used to navigate the different routes. Defaults to the MainScreen
+ * Jetpack Compose navigation router for the application.
+ *
+ * This router defines the navigation structure of the application using Jetpack Compose and the Navigation
+ * component. It sets up various destinations and their corresponding composable functions.
+ * @Composable The main entry point for the navigation. It sets up the NavHost and defines various routes.
  */
 @Composable
 fun Router() {
+    // Create a NavController to handle navigation
     val navController = rememberNavController()
+
+    // ViewModels for authentication and profile screens
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory())
     val profileViewModel: ProfileViewModel =
         viewModel(
             factory = ProfileViewModelFactory(),
         )
+    // CompositionLocalProvider to provide access to NavController throughout the composition
     CompositionLocalProvider(
         LocalNavController provides navController,
     ) {
+        // NavHost defines the navigation structure and sets up various composable functions for each route
         NavHost(navController = navController, startDestination = Routes.Auth.route) {
             composable(Routes.Main.route) {
                 RedirectToAuth(authViewModel, profileViewModel) {

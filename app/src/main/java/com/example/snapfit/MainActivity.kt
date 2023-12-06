@@ -11,6 +11,11 @@ import com.example.snapfit.navigation.Router
 import com.example.snapfit.ui.theme.AppTheme
 import com.google.firebase.FirebaseApp
 
+/**
+ * The main activity of the application, responsible for initializing Firebase and setting up
+ * the content using Jetpack Compose.
+ */
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

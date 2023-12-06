@@ -28,6 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 
+
+/**
+ * Composable function for the workouts screen, allowing  users to select workout types
+ * based on duration and location preferences.
+ */
+
+
+/**
+ * outputs all the workouts together on the page
+ */
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun WorkoutsScreen() {

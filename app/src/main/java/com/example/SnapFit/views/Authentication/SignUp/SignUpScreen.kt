@@ -3,7 +3,6 @@ package com.example.snapfit.views.authentication.signup
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +32,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
@@ -46,7 +46,15 @@ import com.example.snapfit.views.authentication.AuthViewModel
 import com.example.snapfit.views.profile.ProfileViewModel
 
 /**
- * The about screen of the app, to display the use of the app.
+ * Sign up screen for when a user creates an account
+ */
+
+/**
+ * Composable function representing the sign-up screen of the SnapFit application.
+ * This screen includes a background image, text inputs for email, username, password, and current weight, and buttons for sign-up and navigation to the login screen.
+ *
+ * @param authViewModel The authentication ViewModel responsible for managing user authentication state.
+ * @param profileViewModel The profile ViewModel responsible for managing user profiles.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -94,50 +102,53 @@ fun SignUpScreen(
 
             TextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = {if(!it.contains("\n")) email = it }
+                ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next,
                     ),
                 placeholder = { Text("Enter email", color = Color.Gray) },
             )
             TextField(
                 value = username,
-                onValueChange = { username = it },
+                onValueChange = {if(!it.contains("\n")) username = it }
+                ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next,
                     ),
                 placeholder = { Text("Enter username", color = Color.Gray) },
             )
 
             TextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {if(!it.contains("\n")) password = it }
+                ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Next,
                     ),
                 visualTransformation = PasswordVisualTransformation(),
                 placeholder = { Text("Enter Password (minimum 6)", color = Color.Gray) },
@@ -145,17 +156,18 @@ fun SignUpScreen(
 
             TextField(
                 value = confirmPassword,
-                onValueChange = { confirmPassword = it },
+                onValueChange = {if(!it.contains("\n")) confirmPassword = it }
+                ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Next,
                     ),
                 visualTransformation = PasswordVisualTransformation(),
                 placeholder = { Text("Confirm password", color = Color.Gray) },
@@ -163,19 +175,20 @@ fun SignUpScreen(
 
             TextField(
                 value = orignalWeight,
-                onValueChange = { orignalWeight = it },
+                onValueChange = {if(!it.contains("\n")) orignalWeight = it }
+                ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
                     KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Password,
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Done,
                     ),
-                placeholder = { Text("current Weight", color = Color.Gray) },
+                placeholder = { Text("Current Weight (lb)", color = Color.Gray) },
             )
 
             Text(
@@ -254,7 +267,8 @@ fun SignUpScreen(
                         ),
                 enabled = email.isNotEmpty() && password.length >= 6 && password == confirmPassword && orignalWeight.length > 0 && orignalWeight.toDoubleOrNull() != null,
             ) {
-                Text("Sign Up")
+                Text("Sign Up",fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold, color = Color.White)
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")

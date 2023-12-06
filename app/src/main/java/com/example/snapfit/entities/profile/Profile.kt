@@ -1,5 +1,9 @@
 package com.example.snapfit.entities.profile
 
+/**
+ * Defines the properties that a user should have on the app
+ */
+
 data class Profile(
     var email: String = "Not available",
     var name: String = "Not available",

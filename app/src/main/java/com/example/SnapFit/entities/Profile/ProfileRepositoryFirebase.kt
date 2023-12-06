@@ -5,6 +5,9 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
+/**
+ * Gets and save the profile of a user into the firebase
+ */
 class ProfileRepositoryFirebase(db: FirebaseFirestore) : IProfileRepository {
     private val dbProfile = db.collection("Profiles")
 

@@ -23,6 +23,23 @@ import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 
+
+/**
+Composable function for rendering a workout card, displaying details about a specific type of workout.
+
+ */
+
+
+/**
+* This function generates a visually appealing card with information about the workout type,
+* including the number of exercises and the estimated duration. It also provides a clickable
+* area to navigate to the exercises screen for the specified workout type.
+*
+* @param type The type of workout (e.g., "cardio", "flexibility", "no equipment", "strength").
+*
+* Usage Example:
+* WorkoutCard(type = "cardio")
+*/
 @Composable
 fun WorkoutCard(type: String) {
     val navController = LocalNavController.current

@@ -6,17 +6,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.snapfit.navigation.Routes
-import com.example.snapfit.navigation.SharedTopBar
 
 /**
- * The auth layout of the screen with only a top bar
+ * This layout provides a common structure for authentication screens, such as login and signup.
+ *
+ * @param content The content of the authentication screen, specified as a composable lambda.
+ * It represents the body of the authentication screen
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthLayout(content: @Composable () -> Unit) {
     Scaffold(
-        topBar = { SharedTopBar("", Routes.Auth.route) },
     ) {
         Column(modifier = Modifier.padding(it)) {
             content()
