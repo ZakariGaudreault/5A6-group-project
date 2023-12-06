@@ -10,14 +10,15 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 //https://github.com/alexmamo/CloudStorageJetpackCompose/blob/master/app/src/main/java/ro/alexmamo/cloudstoragejetpackcompose/data/repository/ProfileImageRepositoryImpl.kt
-class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: FirebaseStorage) : IProgressRepository {
+class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: FirebaseStorage) :
+    IProgressRepository {
     private val dbProgress = db.collection("Progress")
     private val storage = firebaseStorage
 
     // creates download url from storage, then add it to the progress passed in, then saves the progress in the
     // firestore
-    override suspend fun addProgress(progress: Progress):Boolean {
-        try{
+    override suspend fun addProgress(progress: Progress): Boolean {
+        try {
             val downloadUrl = storage.reference.child(progress.email).child(progress.uri.toString())
                 .putFile(progress.uri).await()
                 .storage.downloadUrl.await()
@@ -25,7 +26,7 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
             progress.url = downloadUrl.path.toString();
             println(progress.url)
             println(progress.uri.toString())
-            dbProgress.document(progress.uri.toString()).set(progress)
+            dbProgress.document().set(progress)
                 .addOnSuccessListener {
                     println("Progress added.")
                 }
@@ -33,8 +34,7 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
                     println("Error adding progress: $e")
                 }
             return true
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             return false
         }
     }
@@ -46,31 +46,32 @@ class ProgressRepositoryFirebase(db: FirebaseFirestore, firebaseStorage: Firebas
             .addOnFailureListener { error -> println("Error deleting Progress: $error") }
     }
 
-    override suspend fun getAllProgress(): Flow<List<Progress>> =
+    override suspend fun getAllProgress(email: String): Flow<List<Progress>> =
         callbackFlow {
             // Listen for changes on entire collection
-            val subscription = dbProgress.addSnapshotListener{ snapshot, error ->
-                if (error != null) {
-                    // An error occurred
-                    println("Listen failed: $error")
-                    return@addSnapshotListener
-                }
-                if (snapshot != null) {
-                    // The collection has documents, so convert them all to ProfileData objects
-                    val progress = snapshot.toObjects(Progress::class.java)
-                    if (progress != null) {
-                        println("Real-time update to progress")
-                        trySend(progress)
-                    } else {
-                        println("Progress has become null")
-                        trySend(listOf<Progress>()) // If there is no saved profile, then send a default object
+            val subscription =
+                dbProgress.whereEqualTo("email", email).addSnapshotListener() { snapshot, error ->
+                    if (error != null) {
+                        // An error occurred
+                        println("Listen failed: $error")
+                        return@addSnapshotListener
                     }
-                } else {
-                    // The user document does not exist or has no data
-                    println("Progress collection does not exist")
-                    trySend(listOf<Progress>()) // send default object
+                    if (snapshot != null) {
+                        // The collection has documents, so convert them all to ProfileData objects
+                        val progress = snapshot.toObjects(Progress::class.java)
+                        if (progress != null) {
+                            println("Real-time update to progress")
+                            trySend(progress)
+                        } else {
+                            println("Progress has become null")
+                            trySend(listOf<Progress>()) // If there is no saved profile, then send a default object
+                        }
+                    } else {
+                        // The user document does not exist or has no data
+                        println("Progress collection does not exist")
+                        trySend(listOf<Progress>()) // send default object
+                    }
                 }
-            }
             awaitClose { subscription.remove() }
         }
 }
