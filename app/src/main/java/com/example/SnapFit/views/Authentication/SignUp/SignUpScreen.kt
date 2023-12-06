@@ -3,7 +3,6 @@ package com.example.snapfit.views.authentication.signup
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -107,9 +106,8 @@ fun SignUpScreen(
                 ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
@@ -125,9 +123,8 @@ fun SignUpScreen(
                 ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
@@ -144,9 +141,8 @@ fun SignUpScreen(
                 ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
@@ -164,9 +160,8 @@ fun SignUpScreen(
                 ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
@@ -184,9 +179,8 @@ fun SignUpScreen(
                 ,
                 modifier =
                     Modifier
-                        .size(300.dp, 90.dp)
+                        .size(325.dp, 90.dp)
                         .padding(8.dp)
-                        .border(3.dp, Color.Black)
                         .padding(8.dp),
                 textStyle = TextStyle(fontSize = 14.sp),
                 keyboardOptions =
@@ -194,7 +188,7 @@ fun SignUpScreen(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Done,
                     ),
-                placeholder = { Text("current Weight", color = Color.Gray) },
+                placeholder = { Text("Current Weight (lb)", color = Color.Gray) },
             )
 
             Text(
