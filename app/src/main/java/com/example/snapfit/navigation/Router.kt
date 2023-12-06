@@ -63,7 +63,7 @@ fun Router() {
                 }
             }
             composable(Routes.Snap.route) {
-                SnapScreen(progressViewModel,authViewModel)
+                SnapScreen(progressViewModel,authViewModel, profileViewModel )
             }
             composable(Routes.Login.route) {
                 RedirectToHome(authViewModel, profileViewModel) {

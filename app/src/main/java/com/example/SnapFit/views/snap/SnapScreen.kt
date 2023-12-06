@@ -42,6 +42,7 @@ import com.example.snapfit.entities.progress.Progress
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
+import com.example.snapfit.views.profile.ProfileViewModel
 import com.example.snapfit.views.progress.ProgressViewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -51,11 +52,12 @@ import java.util.Objects
 // https://github.com/dheeraj-bhadoria/android-camera-example-and-compose-capture-image-jetpack-compose
 @OptIn(ExperimentalCoilApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewModel) {
+fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewModel,profileViewModel: ProfileViewModel) {
     val context = LocalContext.current
     val file = context.createImageFile()
     var capturedImageUri by rememberSaveable { mutableStateOf<Uri>(Uri.EMPTY) }
-    var originalWeight by rememberSaveable { mutableStateOf("") }
+    val profile by profileViewModel.activeProfile.collectAsState()
+    var weight by rememberSaveable { mutableStateOf("") }
     val auth by authViewModel.currentUser().collectAsState()
     val navController = LocalNavController.current
 
@@ -109,8 +111,8 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
         }
 
         TextField(
-            value = originalWeight,
-            onValueChange = { if (!it.contains("\n")) originalWeight = it },
+            value = weight,
+            onValueChange = { if (!it.contains("\n")) weight = it },
             modifier =
             Modifier
                 .size(325.dp, 90.dp)
@@ -132,8 +134,11 @@ fun SnapScreen(progressViewModel: ProgressViewModel, authViewModel: AuthViewMode
                 Text(text = "Cancel")
             }
             Button(onClick = {
-                val progress = Progress(auth!!.email, originalWeight.toDouble(), capturedImageUri)
+                val progress = Progress(auth!!.email, weight.toDouble(), capturedImageUri)
                 progressViewModel.addProgress(progress)
+                profile.currentWeight = weight.toDouble() //Sets the new current weight
+                profileViewModel.setProfile(profile) // saves it in the db
+                navController.navigate(Routes.Profile.route)
             }) {
                 Text(text = "Save")
             }

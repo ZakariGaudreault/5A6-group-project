@@ -248,6 +248,7 @@ fun SignUpScreen(
                             email = email,
                             name = username,
                             currentWeight = orignalWeight.toDouble(),
+                            originalWeight = orignalWeight.toDouble(),
                         ),
                     )
                 },
