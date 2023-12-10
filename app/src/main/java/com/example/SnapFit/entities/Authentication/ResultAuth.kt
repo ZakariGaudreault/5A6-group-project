@@ -1,6 +1,5 @@
 package com.example.snapfit.entities.authentication
 
-
 /**
 * Class for result of authentication
 **/

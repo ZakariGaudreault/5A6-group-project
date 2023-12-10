@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +32,7 @@ import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.authentication.AuthViewModel
+import com.example.snapfit.views.profile.ProfileViewModel
 
 /**
  * Screen for Authentication which is the first page the user will see when opening the app
@@ -42,7 +45,10 @@ import com.example.snapfit.views.authentication.AuthViewModel
  * @param authViewModel The authentication ViewModel responsible for managing user authentication state.
  */
 @Composable
-fun AuthScreen(authViewModel: AuthViewModel) {
+fun AuthScreen(
+    profileViewModel: ProfileViewModel,
+    authViewModel: AuthViewModel,
+) {
     val navController = LocalNavController.current
 
     // Gradient background with wavy shape
@@ -51,25 +57,25 @@ fun AuthScreen(authViewModel: AuthViewModel) {
 
     Box(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = Color.Transparent),
+            Modifier
+                .fillMaxSize()
+                .background(color = Color.Transparent),
         // Set the background color to transparent
     ) {
         Image(
             painter = backgroundPainter,
             contentDescription = null,
             modifier =
-            Modifier
-                .fillMaxSize()
-                .clip(MaterialTheme.shapes.medium),
+                Modifier
+                    .fillMaxSize()
+                    .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop,
         )
         Column(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(top = 90.dp),
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 90.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
@@ -84,12 +90,12 @@ fun AuthScreen(authViewModel: AuthViewModel) {
                 painter = logo,
                 contentDescription = null,
                 modifier =
-                Modifier
-                    .clip(MaterialTheme.shapes.medium)
-                    .sizeIn(
-                        maxWidth = 200.dp,
-                        maxHeight = 200.dp,
-                    ),
+                    Modifier
+                        .clip(MaterialTheme.shapes.medium)
+                        .sizeIn(
+                            maxWidth = 200.dp,
+                            maxHeight = 200.dp,
+                        ),
                 contentScale = ContentScale.Crop,
             )
             Spacer(modifier = Modifier.height(150.dp))
@@ -141,6 +147,7 @@ fun AuthScreen(authViewModel: AuthViewModel) {
         }
     }
 }
+
 /**
  * Function to get a horizontal gradient brush for the authentication screen background in case the image does not work.
  *

@@ -23,12 +23,10 @@ import com.example.snapfit.R
 import com.example.snapfit.navigation.LocalNavController
 import com.example.snapfit.navigation.Routes
 
-
 /**
 Composable function for rendering a workout card, displaying details about a specific type of workout.
 
  */
-
 
 /**
 * This function generates a visually appealing card with information about the workout type,
@@ -48,7 +46,7 @@ fun WorkoutCard(type: String) {
             Modifier
                 .fillMaxWidth()
                 .padding(5.dp)
-                .border(5.dp, color = Color.Black, RoundedCornerShape(16.dp))
+                .border(2.dp, color = Color.Black, RoundedCornerShape(16.dp))
                 .padding(5.dp)
                 .background(color = Color(0xE3FAE4EF))
                 .clickable {

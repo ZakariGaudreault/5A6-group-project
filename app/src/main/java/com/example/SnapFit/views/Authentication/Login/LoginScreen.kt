@@ -48,7 +48,6 @@ import com.example.snapfit.views.profile.ProfileViewModel
  * Sign up screen for when a user logins to an existing account
  */
 
-
 /**
  * Composable function representing the login screen of the SnapFit application.
  * This screen includes a background image, text inputs for email and password, and buttons for login and navigation to the signup screen.
@@ -107,7 +106,7 @@ fun LoginScreen(
 
             TextField(
                 value = email,
-                onValueChange = {if(!it.contains("\n")) email = it },
+                onValueChange = { if (!it.contains("\n")) email = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -124,8 +123,7 @@ fun LoginScreen(
 
             TextField(
                 value = password,
-                onValueChange = {if(!it.contains("\n")) password = it }
-                ,
+                onValueChange = { if (!it.contains("\n")) password = it },
                 modifier =
                     Modifier
                         .size(325.dp, 90.dp)
@@ -162,8 +160,11 @@ fun LoginScreen(
                                 ),
                         ),
             ) {
-                Text("Login",fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,)
+                Text(
+                    "Login",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                )
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text("━━━━━━━━━ OR ━━━━━━━━━")

@@ -1,5 +1,6 @@
 package com.example.snapfit.navigation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -40,6 +42,7 @@ fun SharedTopBar(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 40.sp,
                 fontFamily = FontFamily.Cursive,
+                modifier = Modifier.clickable { navController.navigate(Routes.About.route) },
             )
         },
         // Logic for showing/hiding the back button
@@ -51,9 +54,11 @@ fun SharedTopBar(
                         contentDescription = "Go Back",
                     )
                 }
-
             }
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor =  MaterialTheme.colorScheme.background)
+        colors =
+            TopAppBarDefaults.smallTopAppBarColors(
+                containerColor = MaterialTheme.colorScheme.background,
+            ),
     )
 }

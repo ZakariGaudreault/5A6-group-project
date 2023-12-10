@@ -1,4 +1,4 @@
-package com.example.SnapFit.views.Upload
+package com.example.snapfit.views.progress
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -57,18 +57,16 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-
 /**
  * Class that showcase the features of a user profile
  */
-
 
 /**
  * Composable function for the upload class which allows user to upload photos on their profile with date and weigth
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UploadScreen() {
+fun ProgressScreen() {
     val navController = LocalNavController.current
     var sliderPosition by remember { mutableStateOf(0f) }
     val colors = MaterialTheme.colorScheme

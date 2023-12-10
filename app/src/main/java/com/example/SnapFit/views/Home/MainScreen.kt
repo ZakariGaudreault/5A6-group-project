@@ -1,6 +1,7 @@
 package com.example.snapfit.views.home
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,9 +30,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.snapfit.navigation.LocalNavController
+import com.example.snapfit.navigation.Routes
 import com.example.snapfit.views.profile.ProfileViewModel
+import com.example.snapfit.views.workout.WorkoutViewModel
 import kotlin.math.absoluteValue
-
 
 /**
  * Home page of the application
@@ -43,8 +46,15 @@ import kotlin.math.absoluteValue
  * @param profileViewModel ViewModel for accessing user profile data.
  */
 @Composable
-fun MainScreen(profileViewModel: ProfileViewModel) {
+fun MainScreen(
+    profileViewModel: ProfileViewModel,
+    workoutViewModel: WorkoutViewModel,
+) {
     val userState by profileViewModel.activeProfile.collectAsState()
+    val workout by workoutViewModel.activeWorkouts.collectAsState()
+    val navController = LocalNavController.current
+
+    workoutViewModel.getAllWorkouts(userState.email)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -52,11 +62,12 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
         Box {
             Column(
                 verticalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(10.dp)
             ) {
                 Text(
-                    text = "Hello ${userState.name}",
+                    text = "Welcome ${userState.name}",
                     fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     color = Color.Black,
                     modifier = Modifier.padding(bottom = 16.dp),
                 )
@@ -92,10 +103,15 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                         .fillMaxWidth()
                                         .height(310.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
-                                        ),
+                                        )
+                                        .clickable {
+                                            navController.navigate(
+                                                Routes.PastWorkout.route,
+                                            )
+                                        },
                                 colors =
                                     CardDefaults.cardColors(
                                         containerColor = Color.White,
@@ -115,7 +131,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                     )
 
                                     Text(
-                                        text = "${userState.amountWorkoutDone}",
+                                        text = "${workout.size}",
                                         fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
                                         modifier =
@@ -151,7 +167,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                         .height(150.dp)
                                         .padding(bottom = 8.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
                                         ),
@@ -175,7 +191,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                         append(" pounds so far")
                                     },
                                     modifier = Modifier.padding(16.dp),
-                                    fontSize = 21.sp,
+                                    fontSize = 18.sp,
                                 )
                             }
 
@@ -185,7 +201,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                         .fillMaxWidth()
                                         .height(150.dp)
                                         .border(
-                                            3.dp,
+                                            2.dp,
                                             Color.Black,
                                             shape = RoundedCornerShape(16.dp),
                                         ),
@@ -201,9 +217,11 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                                             append("⏱️ Time Spent \n\n\n")
                                         }
                                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                            append("\u200E \u200E \u200E \u200E 27.3")
+                                            append(
+                                                "${workout.sumOf{it.duration}} minutes",
+                                            )
                                         }
-                                        append(" hours ")
+
                                     },
                                     modifier = Modifier.padding(4.dp),
                                     fontSize = 20.sp,
@@ -236,7 +254,12 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                             Modifier
                                 .fillMaxWidth()
                                 .padding(top = 340.dp)
-                                .border(3.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+                                .border(2.dp, Color.Black, shape = RoundedCornerShape(16.dp))
+                                .clickable {
+                                    navController.navigate(
+                                        Routes.Snap.route,
+                                    )
+                                },
                         colors =
                             CardDefaults.cardColors(
                                 containerColor = Color.White,
@@ -254,7 +277,7 @@ fun MainScreen(profileViewModel: ProfileViewModel) {
                             )
 
                             Text(
-                                text = randomQuote,
+                                text = "'$randomQuote'",
                                 fontSize = 16.sp,
                             )
                         }

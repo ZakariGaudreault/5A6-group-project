@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
  */
 
 interface IAuthRepository {
-
     fun currentUser(): StateFlow<User?>
 
     suspend fun signUp(

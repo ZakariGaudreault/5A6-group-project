@@ -55,6 +55,5 @@ fun SharedBottomBar() {
                 onClick = { navController.navigate(item.route) },
             )
         }
-
     }
 }

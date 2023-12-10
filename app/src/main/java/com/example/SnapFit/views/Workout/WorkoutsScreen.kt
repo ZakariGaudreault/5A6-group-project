@@ -1,10 +1,10 @@
 package com.example.snapfit.views.workout
 
 import WorkoutCard
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -28,76 +27,55 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.snapfit.R
 
-
-/**
- * Composable function for the workouts screen, allowing  users to select workout types
- * based on duration and location preferences.
- */
-
-
-/**
- * outputs all the workouts together on the page
- */
-@SuppressLint("SuspiciousIndentation")
 @Composable
-fun WorkoutsScreen() {
+fun WorkoutScreen(workoutViewModel: WorkoutViewModel) {
     var homeworkout by rememberSaveable { mutableStateOf(true) }
     var gymworkout by rememberSaveable { mutableStateOf(true) }
     var outdoorworkout by rememberSaveable { mutableStateOf(true) }
-    var sliderPosition by remember { mutableFloatStateOf(60f) }
-    val backgroundColorHome =
-        if (homeworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
-        } else {
-            colorResource(R.color.purple_200)
-        }
-    val backgroundColorGym =
-        if (gymworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
-        } else {
-            colorResource(R.color.purple_200)
-        }
-    val backgroundColorOutdoor =
-        if (outdoorworkout) {
-            colorResource(
-                R.color.purple_500,
-            )
-        } else {
-            colorResource(R.color.purple_200)
-        }
+    var sliderPosition by rememberSaveable { mutableFloatStateOf(60f) }
+
+    val backgroundColorHome = if (homeworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
+    val backgroundColorGym = if (gymworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
+    val backgroundColorOutdoor = if (outdoorworkout) {
+        colorResource(R.color.purple_500)
+    } else {
+        colorResource(R.color.purple_200)
+    }
 
     Column(
-        modifier =
-            Modifier
-                .padding(10.dp)
-                .verticalScroll(rememberScrollState()),
+        modifier = Modifier
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
     ) {
         Text(
             text = "Workouts",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
         )
         Text(text = "Max duration: ${sliderPosition.toInt()} minutes")
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
-            colors =
-                SliderDefaults.colors(
-                    thumbColor = MaterialTheme.colorScheme.secondary,
-                    activeTrackColor = MaterialTheme.colorScheme.secondary,
-                    inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-                ),
+            colors = SliderDefaults.colors(
+                thumbColor = MaterialTheme.colorScheme.secondary,
+                activeTrackColor = MaterialTheme.colorScheme.secondary,
+                inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
             steps = 8,
             valueRange = 15f..60f,
         )
 
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(vertical = 10.dp).padding(horizontal = 42.dp),
+            modifier = Modifier.padding(vertical = 10.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Button(
                 onClick = { homeworkout = !homeworkout },
